@@ -1,11 +1,18 @@
+import Botoes from "./components/Botoes";
+import InputPersonalizado from "./components/InputPersonalizado";
+
 function Login () {
     return ( 
-    <div className="items-center flex" >
-            <div>
+    <div className="justify-center flex" >
+
+        <div>
             <h1> Login </h1>
             <hr/>
-            <p> <label > E-mail </label> <br/> <input placeholder=" Digite o seu email..." /> </p>
-            <p> <label > Senha </label> <br/> <input type="password" placeholder=" Digite a sua senha..." /> </p>
+            
+            <InputPersonalizado label=" E-mail" placeholder="Digite seu email: " />
+            <InputPersonalizado label=" Senha " placeholder="Digite sua senha: " />
+            
+            
             <a href="#"> Esqueceu a sua senha? </a>
 
            <br/>
@@ -14,12 +21,11 @@ function Login () {
 
            <br/>
 
-           <form> 
-               <button> Entrar </button>
-           </form>
+           <Botoes/>
 
            <p> Não tem uma conta? <a href="./cadastro.html"> Cadastra-se </a> </p>
-            </div>
+           
+        </div>
             
 
       </div>
