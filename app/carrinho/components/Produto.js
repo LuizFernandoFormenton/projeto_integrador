@@ -2,8 +2,8 @@ function Produto() {
     return ( 
 
         
-        <div class="centralizar">
-    <img src="https://placehold.co/120"/> 
+        <div>
+    <img src="https://placehold.co/200"/> 
   
         <h2>CROPPED RAGLAN ITALIC</h2>
         <p>Tamanho: <strong>G</strong></p>

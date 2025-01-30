@@ -1,5 +1,6 @@
 import Produto from "./components/Produto";
 import Quantidade from "./components/Quantidade";
+import "./carrinho.css"
 
 function carrinho(){
     return(
@@ -7,9 +8,11 @@ function carrinho(){
         <div>
             <h1>Carrinho:</h1>
 <hr/>
+
+     <div className="quadrado">
     <Produto/>
     <Quantidade/>
-
+    </div>
 
 <p><strong>Total ValorR$99,99</strong></p>    
 
