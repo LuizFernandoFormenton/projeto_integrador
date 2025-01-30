@@ -1,25 +1,18 @@
-function usuário () {
+
+import Perfil from "./components/Perfil";
+import Login from "../login/page";
+
+function components () {
     return ( 
     <div>
-        <div className="bg-gray-300 box">
-            <h1 className="text-red-600 text-3xl text-align: center;">Meu Perfil</h1>
-            <p><strong>Dados do Usuário</strong></p>
-            <hr/>
-            <img width="50" height="50" src="https://placehold.co/500"></img>
-            <br/>
-        </div>
+        <Perfil/>
+        <Login/>
        
-    
-    
-        <h1>Login*</h1>
-        <input type="email" placeholder="Digite seu email"></input>
-        <button>Alterar sua senha</button>
-        <br/>
 
 
         <p><strong>Nome*</strong></p>
         <input type="text" placeholder="Digite seu nome"></input>
-        <input readonly type="datetime-local" placeholder=""></input>
+        <input readOnly type="datetime-local" placeholder=""></input>
         <br/>
 
         <p><strong>Telefone*</strong></p>
@@ -42,4 +35,4 @@ function usuário () {
      );
 }
 
-export default usuário ;
+export default components ;
