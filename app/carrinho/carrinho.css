@@ -1,0 +1,40 @@
+body{
+    font-family:"Rubik", sans-serif;
+}
+
+body{
+    margin: 0;
+}
+
+.imagemQuadrada{
+    border-radius: 100%;
+    border: 3px solid #673AB7;
+    margin-top: 30px;
+margin-bottom: 30px;
+
+}
+
+p{
+    color:#0f0f0f;
+  }
+
+.quadrado{
+    background-color: rgb(180, 177, 177);
+    width: 300px;
+    text-align: center;
+    box-shadow: 1px       2px      3px        grey;
+    margin-top: center ;
+    text-align: center;
+    margin-top: 50px; /* Espaço por FORA */
+    padding: 50px; /* Espaço Por Dentro*/
+    border-radius: 15px;
+   
+}
+
+.centralizar{
+    display: flex; /*Um na frente do outro*/
+    gap: 30px; /* Espaça os elementos*/
+    justify-content: space-between ; /*Organiza as posições */
+    text-align: center; /*Usado apenas <p> ou <h1> ou <h2>*/
+    align-items: center;
+}
