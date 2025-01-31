@@ -3,17 +3,18 @@ import InputPersonalizado from "./components/InputPersonalizado";
 
 function Login () {
     return ( 
-    <div className="justify-center flex" >
+    <div className=" flex items-center justify-center h-screen  " >
 
-        <div>
-            <h1> Login </h1>
+        <div className=" rounded-lg p-10 shadow-[0px_0px_30px] shadow-gray-200"  >
+            <h1 className="text-center" > Login </h1>
+
             <hr/>
             
-            <InputPersonalizado label=" E-mail" placeholder="Digite seu email: " />
-            <InputPersonalizado label=" Senha " placeholder="Digite sua senha: " />
+            <InputPersonalizado label=" E-mail" />
+            <InputPersonalizado label=" Senha " />
             
             
-            <a href="#"> Esqueceu a sua senha? </a>
+            <a  href="#" > Esqueceu sua senha? </a>
 
            <br/>
 
@@ -21,9 +22,9 @@ function Login () {
 
            <br/>
 
-           <Botoes/>
+           <Botoes botoes="Entrar" />
 
-           <p> Não tem uma conta? <a href="./cadastro.html"> Cadastra-se </a> </p>
+           <p className="text-center" > Não tem uma conta? <a href="./cadastro.html"> Cadastra-se </a> </p>
            
         </div>
             
