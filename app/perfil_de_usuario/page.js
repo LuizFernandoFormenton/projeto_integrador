@@ -1,7 +1,7 @@
 function components () {
     return ( 
     <div className=" justify-center flex my-24">
-        <div className="justify-items-center w-48 rounded-xl shadow-md p-8 ring-red-1000 ">
+        <div className="justify-items-center w-48 rounded-xl shadow-md p-8 ">
 
     
             <h1 className="text-red-600 text-3xl">Meu Perfil</h1>
