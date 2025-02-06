@@ -4,26 +4,28 @@ function Rodape() {
     <div className="bg-black text-white p-2 flex justify-center">
 
         <div className="text-center px-12 ">
-            <p> Produtos</p>
+            <p> PRODUTOS</p>
             <br/>
-                <p className="pb-2">Camisas</p>
-                <p className="pb-2">Acessórios</p>
+                <p className="pb-2">CAMISAS</p>
+                <p className="pb-2">ACESSORIOS</p>
         </div>
 
         <div className="text-center px-12">
-            <p>Atendimento e Suporte</p>
+            <p>ATENDIMENTO E SUPORTE</p>
             <br/>
-                <p className="pb-2">Central de atendimento</p>
-                <p className="pb-2">Dúvidas sobre produto</p>
+                <p className="pb-2">CENTRAL DE ATENDIMENTO</p>
+                <p className="pb-2">DÚVIDAS SOBRE O PRODUTO</p>
                 <p className="pb-2">FAQ</p>
 
         </div>
     
         <div className="text-center px-12">
-        <p> Institucional</p>
+        <p> INSTITUCIONAL</p>
         <br/>
-            <p className="pb-2">Sobre</p>
-            <p className="pb-2">Investidores</p>
+            <p className="pb-2">SOBRE</p>
+            <p className="pb-2">INVESTIDORES</p>
+            <p className="pb-2">A EQUIPE</p>
+
         </div>
 
     </div> 
