@@ -19,3 +19,22 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html, body{
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+footer{ /* rodapé*/
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  flex: 1; 
+  background-color: #fff; 
+}

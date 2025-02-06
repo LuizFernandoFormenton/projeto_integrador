@@ -1,18 +1,18 @@
 function Cabecalho () {
     return (
-    <div>
-        <div className="flex justify-center bg-red-500 w-full gap-20 items-center text-white fixed">
-        <img className="w-20 justify-start" src="https://placehold.co/200"/>
-        <p> <a href="#"> Camisetas Femininas </a></p>
-        <p> <a  href="#"> Camisetas Masculinas </a></p>
-        <p> <a  href="#"> Camisetas Unisex </a></p>
-        <p> <a  href="#"> Lançamentos </a></p>
-        <p> <a  href="#"> Promoções </a></p>
+    <main>
+        <div style={{ background: "linear-gradient(to right, white, #e5e5e5)"}} className="flex  h-20 w-full items-center fixed gap-20 px-8 text-[13px]">
+        <img className="w-20" src="./imagens/logo.png"/>
+        <p> CAMISETAS FEMININAS</p>
+        <p> CAMISETAS MASCULINAS </p>
+        <p> CAMISETAS UNISEX </p>
+        <p> LANÇAMENTOS </p>
+        <p> PROMOÇÕES </p>
         <label>
-            <input className="w-300 rounded-lg p-5" type="text" placeholder="🔍 O que você está procurando?"/>           
+            <input className="rounded-xl p-2" type="text" placeholder="🔍 O que você está procurando?"/>           
         </label>
     </div>
-    </div>
+    </main>
 
       );
 }

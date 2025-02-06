@@ -6,27 +6,7 @@ export default function Home() {
   return (
     <div>
 
-      <Cabecalho/>
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
       
-
-      <Rodape/>
 
     </div>
   );

@@ -1,0 +1,16 @@
+.centralizar{
+    display: flex;               
+    gap: 50px;                  
+    justify-content: left;   
+    align-items: start;
+    margin-bottom: 5px;
+}
+
+.valor{
+    display: flex;               
+    gap: 50px;                  
+    justify-content: center;
+    align-items: start;
+    margin-bottom: 5px;
+}
+
