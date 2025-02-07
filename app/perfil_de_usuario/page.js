@@ -1,6 +1,19 @@
+'use client'
+
+import { useState } from "react"
+
 function components () {
 
+    const [ historico, historicoCompras ] = useState( true );
     
+    function mostrarHistorico(){
+
+        if( historico ==  true ){
+            mostrarHistorico( false )
+        }else{   
+            mostrarHistorico( true )
+        }
+    }
 
 
 
@@ -31,12 +44,25 @@ function components () {
                 <br/>
                 <input type="number" placeholder="Digite seu CPF"></input>
                 <br/>
-                <input className="" type="email" placeholder="Digite seu email"></input>
+                <input className="mt-3" type="email" placeholder="Digite seu email"></input>
                 <br/>
                 <div className="justify-between rounded-xl">
-                    <button className="bg-green-500 transition delay-100 duration-100 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500">Salvar</button>
-                    <button className="ml-3">Mostrar histórico</button>
-                    <button className="mx-9 mt-3">Alterar dados</button>
+                    <button className="bg-green-500 transition delay-100 duration-100 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 mt-3">Salvar</button>
+                    <button onClick={()=>mostrarHistorico()}  className={`mt-3 ${historico == true ? `bg-green-500` : `bg-red-500`} ml-3`}>{ historico == true ? <span>Mostrar histórico</span> : <span></span> }.</button>
+                    
+                    { 
+                    historico == true ?
+                        <div>
+                            <h2 className="">Histórico</h2>
+                            <img width="200" height="200" src="https://placehold.co/1000" className="rounded-xl "></img>
+                            <br/>
+                        </div>
+                    :
+                    <div></div>
+                            
+
+}
+                    
                 </div>
             
                 <br/>
@@ -48,3 +74,5 @@ function components () {
 }
 
 export default components ;
+
+
