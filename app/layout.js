@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
         className={`antialiased`} 
       >
         <Cabecalho/>
+        <div className="mt-32" ></div>
         {children}
         <Rodape/>
       </body>

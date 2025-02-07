@@ -8,9 +8,17 @@ function Login () {
     const [email, AlteraEmail] = useState("")
     const [senha, AlteraSenha] = useState("")
 
+    const [erroSenha, alteraErroSenha] = useState(false);
+
     function salvar(){
         console.log("Email:" + email)
         console.log("Senha:" + senha)
+        
+        if( senha == "" ){
+            alteraErroSenha(true);
+        }else{
+            alteraErroSenha(false)
+        }
     }
 
 
@@ -23,6 +31,16 @@ function Login () {
             <hr/>
             
             <InputPersonalizado label=" E-mail" AlteraValor={AlteraEmail} />
+            {
+                erroSenha == true ?
+
+                <div className="bg-red-500 texg-white" >
+                  <p> Por favor digite sua senha </p>
+                </div>
+                :
+                    
+                    <div></div>
+            }
             <InputPersonalizado label=" Senha " AlteraValor={AlteraSenha}/>
             
             
