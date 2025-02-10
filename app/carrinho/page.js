@@ -3,21 +3,24 @@ import Quantidade from "./components/Quantidade";
 import "./carrinho.css"
 
 function carrinho(){
+    
     return(
 
         <div>
+
             <h1>Carrinho:</h1>
-<hr/>
 
-     <div className="quadrado">
-    <Produto/>
-    <Quantidade/>
-    </div>
+            <hr/>
 
-<p><strong>Total ValorR$99,99</strong></p>    
+            <div className="quadrado">
+                <Produto/>
+                <Quantidade/>
+            </div>
 
-<button class="buttonfinalizarcompras"> Finalizar Compra </button>            
-<hr/>
+            <p><strong>Total ValorR$ 99,99</strong></p>    
+
+            <button class="buttonfinalizarcompras"> Finalizar Compra </button>            
+            <hr/>
 
         </div>
     );
