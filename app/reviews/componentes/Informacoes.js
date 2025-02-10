@@ -1,14 +1,23 @@
+'use client'
+import { useState } from "react";
+
 function Informacoes() {
+
+    const [ nome, alteraNome ] = useState("CAMISETA NEW OVER KIDS BASIC LOG");
+    const [ preco, alteraPreco] = useState(149.00);
+    const [desconto, alteraDesconto] = useState (50);
+    
+
     return (  
         <div>
-            <div className="centralizar">
-                    <img width="400" height="400" src="http://placehold.co/80" />
-                    <p><b> CAMISETA NEW OVER KIDS BASIC LOG </b></p>
+            <div >
+                    <img width="400" height="400" src="http://placehold.co/50" />
+                    <p><b> { nome } </b></p>
             </div>
 
-            <div className="valor">
-                    <p><del> R$ 149,00 </del></p>
-                    <p> R$ 69,00 <strong> 53% OFF </strong></p>
+            <div >
+                    <p><del> R$ {preco} </del></p>
+                    <p>R$ {(preco - preco*desconto/100 ).toFixed(2)} <strong>{desconto}% OFF</strong></p>
             </div>
 
             <p>Tamanho</p>
