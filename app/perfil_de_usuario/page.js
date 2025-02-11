@@ -4,9 +4,14 @@ import { useState } from "react"
 
 function components () {
 
-    const [ nome, alteraNome ] = useState("Helena");
-    const [ email, alteraEmail ] = useState( "helenasiqueira48@gmail.com" )
-    const [ telefone, alteraTeelfone ] = useState( "(16) 9 9324-5129" )
+    // const [ nome, alteraNome ] = useState("Helena");
+    // const [ email, alteraEmail ] = useState( "helenasiqueira48@gmail.com" )
+    // const [ telefone, alteraTeelfone ] = useState( "(16) 9 9324-5129" )
+    const [ usuario, alteraUsuario ] = useState({
+        nome:"Helena",
+        email:"helenasiqueira48@gmail.com",
+        telefone:"(16) 9 9324-5129"
+    })
 
     const [ editando, alteraEditando ] = useState(false);
     const [ editando2, alteraEditando2 ] = useState(false);
@@ -21,6 +26,38 @@ function components () {
             alteraEditando(false)
         }
     }
+
+    function alteraNome( pnome ){
+         const u  = {
+            nome: pnome,
+            email: usuario.email,
+            telefone: usuario.telefone
+        }
+
+        alteraUsuario(u) 
+    }
+
+    function alteraEmail( pemail ){
+        const u  = {
+           nome: usuario.nome,
+           email: pemail,
+           telefone: usuario.telefone
+       }
+        
+       alteraUsuario(u) 
+   }
+
+   function alteraTelefone( ptelefone ){
+    const u  = {
+       nome: usuario.nome,
+       email: usuario.email,
+       telefone: ptelefone
+   }
+    
+   alteraUsuario(u) 
+}
+
+
 
 
     function manipulaEdicao2(){
@@ -74,7 +111,7 @@ function components () {
                     editando == true ?
                     <input type="text" placeholder="Digite seu nome"></input>
                     :
-                    <p><strong>{ nome }</strong></p>
+                    <p><strong>{ usuario.nome }</strong></p>
                     
                 }
 
@@ -84,7 +121,7 @@ function components () {
                     editando2 == true ?
                     <input type="number" placeholder="Digite seu telefone"></input> 
                     :
-                    <p><strong>{ telefone }</strong></p>
+                    <p><strong>{ usuario.telefone }</strong></p>
                     
                 }
 
@@ -94,7 +131,7 @@ function components () {
                     editando3 == true ?
                     <input className="mt-3" type="email" placeholder="Digite seu email"></input>
                     :
-                    <p><strong>{ email }</strong></p>
+                    <p><strong>{ usuario.email }</strong></p>
                 }
                 
                 <button onClick={()=>manipulaEdicao3(true)}  className={`m-5 ${editando3 == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando3 == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
