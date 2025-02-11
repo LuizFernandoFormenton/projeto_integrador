@@ -3,21 +3,56 @@ import { useState } from "react";
 
 function Informacoes() {
 
-    const [ nome, alteraNome ] = useState("CAMISETA NEW OVER KIDS BASIC LOG");
-    const [ preco, alteraPreco] = useState(149.00);
-    const [desconto, alteraDesconto] = useState (50);
-    
+    //const [ nome, alteraNome ] = useState("CAMISETA NEW OVER KIDS BASIC LOG");
+    //const [ preco, alteraPreco] = useState(149.00);
+    //const [desconto, alteraDesconto] = useState (50);
+    const [produto, alteraProduto ] = useState ({
+        nome: "CAMISETA NEW OVER KIDS BASIC LOG", 
+        preco: 149.00,
+        desconto: 50
+    }) //Objeto anonimo vazio
+
+    function alteraNome(pnome){
+        const u = {
+            nome: pnome,
+            preco: produto.preco,
+            desconto: produto.desconto
+        }
+
+        alteraProduto(u)
+    }
+
+
+    function alteraPreco(ppreco){
+        const u = {
+            preco: ppreco,
+            nome: produto.nome,
+            desconto: produto.desconto
+        }
+
+        alteraProduto(u)
+    }
+
+    function alteraDesconto(pdesconto){
+        const u = {
+            desconto: pdesconto,
+            nome: produto.nome,
+            preco: produto.preco
+        }
+
+        alteraDesconto(u)
+    }
 
     return (  
         <div>
             <div >
                     <img width="400" height="400" src="http://placehold.co/50" />
-                    <p><b> { nome } </b></p>
+                    <p><b> { produto.nome } </b></p>
             </div>
 
             <div >
-                    <p><del> R$ {preco} </del></p>
-                    <p>R$ {(preco - preco*desconto/100 ).toFixed(2)} <strong>{desconto}% OFF</strong></p>
+                    <p><del> R$ { produto.preco } </del></p>
+                    <p>R$ {( produto.preco - produto.preco*produto.desconto/100 ).toFixed(2)} <strong>{ produto.desconto }% OFF</strong></p>
             </div>
 
             <p>Tamanho</p>

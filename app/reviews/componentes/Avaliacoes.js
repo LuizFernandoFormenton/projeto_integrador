@@ -5,6 +5,7 @@ import { useState } from "react";
 function Avaliacoes() {
 
     const [estrelas, alteraEstrelas] = useState(0);
+    
 
     return ( 
         <div>
