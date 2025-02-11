@@ -5,29 +5,137 @@ import InputPersonalizado from "../login/components/InputPersonalizado";
 
 function Cadrasto () {
 
-    const [nome, AlteraNome] = useState("")
-    const [dataNascimento, AlteraDataNascimento] = useState("")
-    const [sexo, AlteraSexo] = useState("")
-    const [email, AlteraEmail] = useState("")
-    const [senha, AlteraSenha] = useState("")
-    const [cpf, AlteraCpf] = useState("")
-    const [telefone, AlteraTelefone] = useState("")
-    const [cep, AlteraCep] = useState("")
+    // const [nome, AlteraNome] = useState("")
+    // const [dataNascimento, AlteraDataNascimento] = useState("")
+    // const [sexo, AlteraSexo] = useState("")
+    // const [email, AlteraEmail] = useState("")
+    // const [senha, AlteraSenha] = useState("")
+    // const [cpf, AlteraCpf] = useState("")
+    // const [telefone, AlteraTelefone] = useState("")
+    // const [cep, AlteraCep] = useState("")
+
+    const [usuario, AlteraUsuario] = useState({
+        nome: "",
+        dataNascimento: "",
+        sexo: "",
+        email: "",
+        senha: "",
+        telefone: "",
+        cep: ""
+    })
+
+    function AlteraNome(pnome){
+        const u = {
+            nome: pnome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
+
+        AlteraUsuario(u)
+    }
+    
+    function AlteraSenha(pdatanascimento){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: pdatanascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
+
+        AlteraUsuario(u)
+    }
+
+    function AlteraNome(psexo){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: psexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
+
+        AlteraUsuario(u)
+    }
+
+    function AlteraNome(pemail){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: pemail,
+            senha: usuario.senha,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
+
+        AlteraUsuario(u)
+    }
+
+    function AlteraNome(psenha){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: psenha,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
+
+        AlteraUsuario(u)
+    }
+
+    function AlteraNome(ptelefone){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            telefone: ptelefone,
+            cep: usuario.cep
+        }
+
+        AlteraUsuario(u)
+    }
+
+    function AlteraNome(pcep){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            telefone: usuario.telefone,
+            cep: pcep
+        }
+
+        AlteraUsuario(u)
+    }
 
     const [erroNome, alteraErroNome] = useState(false);
 
     function salvar(){
 
-        console.log("O nome cadastrado é:" + nome)
-        console.log("Sua data de nascimento é:" + dataNascimento)
-        console.log("Seu sexo:" + sexo)
-        console.log("Email:" + email)
-        console.log("Senha:" + senha)
-        console.log("CPF:" + cpf)
-        console.log("Telefone:" + telefone)
-        console.log("CEP:" + cep)
+        console.log("O nome cadastrado é:" + usuario.nome)
+        console.log("Sua data de nascimento é:" + usuario.dataNascimento)
+        console.log("Seu sexo:" + usuario.sexo)
+        console.log("Email:" + usuario.email)
+        console.log("Senha:" + usuario.senha)
+        console.log("CPF:" + usuario.cpf)
+        console.log("Telefone:" + usuario.telefone)
+        console.log("CEP:" + usuario.cep)
 
-        if( nome.length < 5 ){
+        if( usuario.nome.length < 5 ){
             alteraErroNome(true);
         }else{
             alteraErroNome(false)
