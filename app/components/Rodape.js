@@ -21,7 +21,7 @@ function Rodape() {
     
         <div className="text-center px-12">
         <p> INSTITUCIONAL</p>
-        <br/>
+            <br/>
             <p className="pb-2">SOBRE</p>
             <p className="pb-2">INVESTIDORES</p>
             <p className="pb-2">A EQUIPE</p>

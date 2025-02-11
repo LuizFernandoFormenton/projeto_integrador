@@ -4,17 +4,54 @@ import { useState } from "react"
 
 function components () {
 
-    const [ historico, historicoCompras ] = useState( true );
-    
-    function mostrarHistorico(){
+    const [ nome, alteraNome ] = useState("Helena");
+    const [ email, alteraEmail ] = useState( "helenasiqueira48@gmail.com" )
+    const [ telefone, alteraTeelfone ] = useState( "(16) 9 9324-5129" )
 
-        if( historico ==  true ){
-            mostrarHistorico( false )
+    const [ editando, alteraEditando ] = useState(false);
+    const [ editando2, alteraEditando2 ] = useState(false);
+    const [ editando3, alteraEditando3 ] = useState(false);
+    const [ historico, historicoCompras ] = useState(false);
+
+    function manipulaEdicao(){
+
+        if( editando == false ){
+            alteraEditando(true)
         }else{   
-            mostrarHistorico( true )
+            alteraEditando(false)
         }
     }
 
+
+    function manipulaEdicao2(){
+
+        if( editando2 == false ){
+            alteraEditando2(true)
+        }else{   
+            alteraEditando2(false)
+        }
+    }
+
+
+    function manipulaEdicao3(){
+
+        if( editando3 == false ){
+            alteraEditando3(true)
+        }else{   
+            alteraEditando3(false)
+        }
+    }
+
+    
+    
+    function mostrarHistorico(){
+
+        if( historico ==  false ){
+            historicoCompras( true )
+        }else{   
+            historicoCompras( false )
+        }
+    }
 
 
     return ( 
@@ -32,25 +69,47 @@ function components () {
                     
             <div className="text-center">
 
-                <p><strong>Nome</strong></p>
-                <input type="text" placeholder="Digite seu nome"></input>
+
+                {
+                    editando == true ?
+                    <input type="text" placeholder="Digite seu nome"></input>
+                    :
+                    <p><strong>{ nome }</strong></p>
+                    
+                }
+
+                <button onClick={()=>manipulaEdicao(true)}  className={`mt-5 ${editando == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
+
+                {
+                    editando2 == true ?
+                    <input type="number" placeholder="Digite seu telefone"></input> 
+                    :
+                    <p><strong>{ telefone }</strong></p>
+                    
+                }
+
+                <button onClick={()=>manipulaEdicao2(true)}  className={`mt-5 ${editando2 == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando2 == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
+
+                {
+                    editando3 == true ?
+                    <input className="mt-3" type="email" placeholder="Digite seu email"></input>
+                    :
+                    <p><strong>{ email }</strong></p>
+                }
+                
+                <button onClick={()=>manipulaEdicao3(true)}  className={`m-5 ${editando3 == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando3 == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
+                
             </div>
-            
 
+                
+                
 
-                <p><strong>Telefone</strong></p>
-                <input type="number" placeholder="Digite seu telefone"></input>
-                <br/>
-                <br/>
-                <input type="number" placeholder="Digite seu CPF"></input>
-                <br/>
-                <input className="mt-3" type="email" placeholder="Digite seu email"></input>
-                <br/>
                 <div className="justify-between rounded-xl">
                     <button className="bg-green-500 transition delay-100 duration-100 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 mt-3">Salvar</button>
-                    <button onClick={()=>mostrarHistorico()}  className={`mt-3 ${historico == true ? `bg-green-500` : `bg-red-500`} ml-3`}>{ historico == true ? <span>Mostrar histórico</span> : <span></span> }.</button>
+                    <button onClick={()=>mostrarHistorico(true)}  className={`mt-3 ${historico == true ? `bg-green-500` : `bg-red-500`} ml-3`}>{ historico == true ? <span>Concluído</span> : <span>Mostrar histórico</span> }.</button>
                     
                     { 
+
                     historico == true ?
                         <div>
                             <h2 className="">Histórico</h2>
@@ -58,10 +117,9 @@ function components () {
                             <br/>
                         </div>
                     :
-                    <div></div>
-                            
+                    <div></div>                         
 
-}
+                    }
                     
                 </div>
             
@@ -74,5 +132,7 @@ function components () {
 }
 
 export default components ;
+
+
 
 
