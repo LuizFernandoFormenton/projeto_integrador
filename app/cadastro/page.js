@@ -20,6 +20,7 @@ function Cadrasto () {
         sexo: "",
         email: "",
         senha: "",
+        cpf: "",
         telefone: "",
         cep: ""
     })
@@ -31,6 +32,7 @@ function Cadrasto () {
             sexo: usuario.sexo,
             email: usuario.email,
             senha: usuario.senha,
+            cpf: usuario.cpf,
             telefone: usuario.telefone,
             cep: usuario.cep
         }
@@ -38,13 +40,14 @@ function Cadrasto () {
         AlteraUsuario(u)
     }
     
-    function AlteraSenha(pdatanascimento){
+    function AlteraDataNascimento(pdatanascimento){
         const u = {
             nome: usuario.nome,
             dataNascimento: pdatanascimento,
             sexo: usuario.sexo,
             email: usuario.email,
             senha: usuario.senha,
+            cpf: usuario.cpf,
             telefone: usuario.telefone,
             cep: usuario.cep
         }
@@ -52,13 +55,14 @@ function Cadrasto () {
         AlteraUsuario(u)
     }
 
-    function AlteraNome(psexo){
+    function AlteraSexo(psexo){
         const u = {
             nome: usuario.nome,
             dataNascimento: usuario.dataNascimento,
             sexo: psexo,
             email: usuario.email,
             senha: usuario.senha,
+            cpf: usuario.cpf,
             telefone: usuario.telefone,
             cep: usuario.cep
         }
@@ -66,13 +70,14 @@ function Cadrasto () {
         AlteraUsuario(u)
     }
 
-    function AlteraNome(pemail){
+    function AlteraEmail(pemail){
         const u = {
             nome: usuario.nome,
             dataNascimento: usuario.dataNascimento,
             sexo: usuario.sexo,
             email: pemail,
             senha: usuario.senha,
+            cpf: usuario.cpf,
             telefone: usuario.telefone,
             cep: usuario.cep
         }
@@ -80,13 +85,14 @@ function Cadrasto () {
         AlteraUsuario(u)
     }
 
-    function AlteraNome(psenha){
+    function AlteraSenha(psenha){
         const u = {
             nome: usuario.nome,
             dataNascimento: usuario.dataNascimento,
             sexo: usuario.sexo,
             email: usuario.email,
             senha: psenha,
+            cpf: usuario.cpf,
             telefone: usuario.telefone,
             cep: usuario.cep
         }
@@ -94,13 +100,14 @@ function Cadrasto () {
         AlteraUsuario(u)
     }
 
-    function AlteraNome(ptelefone){
+    function AlteraTelefone(ptelefone){
         const u = {
             nome: usuario.nome,
             dataNascimento: usuario.dataNascimento,
             sexo: usuario.sexo,
             email: usuario.email,
             senha: usuario.senha,
+            cpf: usuario.cpf,
             telefone: ptelefone,
             cep: usuario.cep
         }
@@ -108,15 +115,30 @@ function Cadrasto () {
         AlteraUsuario(u)
     }
 
-    function AlteraNome(pcep){
+    function AlteraCep(pcep){
         const u = {
             nome: usuario.nome,
             dataNascimento: usuario.dataNascimento,
             sexo: usuario.sexo,
             email: usuario.email,
             senha: usuario.senha,
+            cpf: usuario.cpf,
             telefone: usuario.telefone,
             cep: pcep
+        }
+
+        AlteraUsuario(u)
+    }
+    function AlteraCpf(pcpf){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: pcpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
         }
 
         AlteraUsuario(u)
@@ -125,21 +147,22 @@ function Cadrasto () {
     const [erroNome, alteraErroNome] = useState(false);
 
     function salvar(){
-
-        console.log("O nome cadastrado é:" + usuario.nome)
-        console.log("Sua data de nascimento é:" + usuario.dataNascimento)
-        console.log("Seu sexo:" + usuario.sexo)
-        console.log("Email:" + usuario.email)
-        console.log("Senha:" + usuario.senha)
-        console.log("CPF:" + usuario.cpf)
-        console.log("Telefone:" + usuario.telefone)
-        console.log("CEP:" + usuario.cep)
+        
+        console.log("O nome cadastrado é: " + usuario.nome)
+        console.log("Sua data de nascimento é: " + usuario.dataNascimento)
+        console.log("Seu sexo: " + usuario.sexo)
+        console.log("Email: " + usuario.email)
+        console.log("Senha: " + usuario.senha)
+        console.log("CPF: " + usuario.cpf)
+        console.log("Telefone: " + usuario.telefone)
+        console.log("CEP: " + usuario.cep)
 
         if( usuario.nome.length < 5 ){
             alteraErroNome(true);
         }else{
             alteraErroNome(false)
         }
+
     }
 
 
@@ -168,14 +191,14 @@ function Cadrasto () {
                     
 
                     
-                    <InputPersonalizado label= "Nome completo" AlteraValor={AlteraNome} />
-                    <InputPersonalizado label= "Data de nascimento" AlteraValor={AlteraDataNascimento} />
-                    <InputPersonalizado label= "Sexo" AlteraValor={AlteraSexo} />
-                    <InputPersonalizado label= "E-mail" AlteraValor={AlteraEmail}/>
-                    <InputPersonalizado label= "Senha" AlteraValor={AlteraSenha}/>
-                    <InputPersonalizado label= "CPF" AlteraValor={AlteraCpf}/>
-                    <InputPersonalizado label= "Telefone" AlteraValor={AlteraTelefone} />    
-                    <InputPersonalizado label= "CEP" AlteraValor={AlteraCep} />
+                    <InputPersonalizado label= "Nome completo" AlteraValor = {AlteraNome} />
+                    <InputPersonalizado label= "Data de nascimento" AlteraValor = {AlteraDataNascimento} />
+                    <InputPersonalizado label= "Sexo" AlteraValor = {AlteraSexo} />
+                    <InputPersonalizado label= "E-mail" AlteraValor = {AlteraEmail}/>
+                    <InputPersonalizado label= "Senha" AlteraValor = {AlteraSenha}/>
+                    <InputPersonalizado label= "CPF" AlteraValor = {AlteraCpf}/>
+                    <InputPersonalizado label= "Telefone" AlteraValor = {AlteraTelefone} />    
+                    <InputPersonalizado label= "CEP" AlteraValor = {AlteraCep} />
                     
                     
                     {/* <button onClick={()=>salvar()} className="p-3 mt-5 bg-lime-500 text-white" > Salvar </button> */}
