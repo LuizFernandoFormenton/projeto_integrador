@@ -174,7 +174,7 @@ function Cadrasto () {
             
             <div className=" rounded-lg p-10 shadow-[0px_0px_30px] shadow-gray-200 " >     
             {/* <div className="rounded-lg p-10 outline-outline-gray-100 border-red-500 shadow-[3px_3px_5px] shadow-[#CCC] mt-10"/>      */}
-                    <h1 className=" text-center " > Cadastre-se </h1>
+                    <h1 className=" text-center font-sans text-red-500 " > Cadastre-se </h1>
 
                     <hr/>
 
@@ -191,7 +191,7 @@ function Cadrasto () {
                     
 
                     
-                    <InputPersonalizado label= "Nome completo" AlteraValor = {AlteraNome} />
+                    <InputPersonalizado label = "Nome completo" AlteraValor = {AlteraNome} />
                     <InputPersonalizado label= "Data de nascimento" AlteraValor = {AlteraDataNascimento} />
                     <InputPersonalizado label= "Sexo" AlteraValor = {AlteraSexo} />
                     <InputPersonalizado label= "E-mail" AlteraValor = {AlteraEmail}/>
@@ -201,7 +201,7 @@ function Cadrasto () {
                     <InputPersonalizado label= "CEP" AlteraValor = {AlteraCep} />
                     
                     
-                    {/* <button onClick={()=>salvar()} className="p-3 mt-5 bg-lime-500 text-white" > Salvar </button> */}
+                    {/* <button onClick={()=>salvar()} className=" duration-300 ease-in-out p-3 mt-5 bg-lime-500 text-white" > Salvar </button> */}
                      <Botoes botoes = "Concluído" Salvar={salvar} /> 
             </div>
             

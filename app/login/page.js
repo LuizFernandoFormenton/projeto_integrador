@@ -26,7 +26,7 @@ function Login () {
     <div className=" flex items-center justify-center h-screen  " >
 
         <div className=" rounded-lg p-10 shadow-[0px_0px_30px] shadow-gray-200"  >
-            <h1 className="text-center" > Login </h1>
+            <h1 className="text-center font-sans text-red-500 " > Login </h1>
 
             <hr/>
             
