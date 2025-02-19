@@ -1,66 +1,44 @@
 'use client'
+import Produto from "@/app/carrinho/components/Produto";
 import { useState } from "react";
 
-function Informacoes() {
-
-    //const [ nome, alteraNome ] = useState("CAMISETA NEW OVER KIDS BASIC LOG");
-    //const [ preco, alteraPreco] = useState(149.00);
-    //const [desconto, alteraDesconto] = useState (50);
-    const [produto, alteraProduto ] = useState ({
-        nome: "CAMISETA NEW OVER KIDS BASIC LOG", 
-        preco: 149.00,
-        desconto: 50
-    }) //Objeto anonimo vazio
-
-    function alteraNome(pnome){
-        const u = {
-            nome: pnome,
-            preco: produto.preco,
-            desconto: produto.desconto
-        }
-
-        alteraProduto(u)
-    }
-
-
-    function alteraPreco(ppreco){
-        const u = {
-            preco: ppreco,
-            nome: produto.nome,
-            desconto: produto.desconto
-        }
-
-        alteraProduto(u)
-    }
-
-    function alteraDesconto(pdesconto){
-        const u = {
-            desconto: pdesconto,
-            nome: produto.nome,
-            preco: produto.preco
-        }
-
-        alteraDesconto(u)
-    }
+function Informacoes(attr) {
 
     return (  
         <div>
             <div >
                     <img width="400" height="400" src="http://placehold.co/50" />
-                    <p><b> { produto.nome } </b></p>
+                    <p><b> { attr.nome } </b></p>
             </div>
 
             <div >
-                    <p><del> R$ { produto.preco } </del></p>
-                    <p>R$ {( produto.preco - produto.preco*produto.desconto/100 ).toFixed(2)} <strong>{ produto.desconto }% OFF</strong></p>
+                
+                    <p><del> R$ { attr.preco } </del></p>
+                    <p>R$ {( attr.preco - attr.preco*attr.desconto/100 ).toFixed(2)} <strong>{ attr.desconto }% OFF</strong></p>
+
+                    <ul> 
+                        {attr.cor.map((i) =>
+
+                                <li>
+                                    <p> {i}  </p>
+                                </li>
+                        )}
+                    </ul>    
+
+
             </div>
 
-            <p>Tamanho</p>
-            <button>10</button>
-            <button>12</button>
-            <button><strong>04</strong></button>
-            <button>06</button>
-            <button>08</button>
+            
+            <ul>
+                {attr.tamanho.map((i) => 
+
+                    <li>
+
+                        <p>{i}</p>
+                        
+                    </li>
+                )}
+            </ul>
 
             <p><button>ADICIONAR À SACOLA</button></p>
 
