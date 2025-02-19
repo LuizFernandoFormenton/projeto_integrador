@@ -182,124 +182,124 @@ function Cadrasto () {
         }
     ]);
     
-    // function AlteraNome(pnome){
-    //     const u = {
-    //         nome: pnome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: usuario.sexo,
-    //         email: usuario.email,
-    //         senha: usuario.senha,
-    //         cpf: usuario.cpf,
-    //         telefone: usuario.telefone,
-    //         cep: usuario.cep
-    //     }
+    function AlteraNome(pnome){
+        const u = {
+            nome: pnome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: usuario.cpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
     
-    // function AlteraDataNascimento(pdatanascimento){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: pdatanascimento,
-    //         sexo: usuario.sexo,
-    //         email: usuario.email,
-    //         senha: usuario.senha,
-    //         cpf: usuario.cpf,
-    //         telefone: usuario.telefone,
-    //         cep: usuario.cep
-    //     }
+    function AlteraDataNascimento(pdatanascimento){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: pdatanascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: usuario.cpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
 
-    // function AlteraSexo(psexo){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: psexo,
-    //         email: usuario.email,
-    //         senha: usuario.senha,
-    //         cpf: usuario.cpf,
-    //         telefone: usuario.telefone,
-    //         cep: usuario.cep
-    //     }
+    function AlteraSexo(psexo){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: psexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: usuario.cpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
 
-    // function AlteraEmail(pemail){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: usuario.sexo,
-    //         email: pemail,
-    //         senha: usuario.senha,
-    //         cpf: usuario.cpf,
-    //         telefone: usuario.telefone,
-    //         cep: usuario.cep
-    //     }
+    function AlteraEmail(pemail){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: pemail,
+            senha: usuario.senha,
+            cpf: usuario.cpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
 
-    // function AlteraSenha(psenha){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: usuario.sexo,
-    //         email: usuario.email,
-    //         senha: psenha,
-    //         cpf: usuario.cpf,
-    //         telefone: usuario.telefone,
-    //         cep: usuario.cep
-    //     }
+    function AlteraSenha(psenha){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: psenha,
+            cpf: usuario.cpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
 
-    // function AlteraTelefone(ptelefone){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: usuario.sexo,
-    //         email: usuario.email,
-    //         senha: usuario.senha,
-    //         cpf: usuario.cpf,
-    //         telefone: ptelefone,
-    //         cep: usuario.cep
-    //     }
+    function AlteraTelefone(ptelefone){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: usuario.cpf,
+            telefone: ptelefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
 
-    // function AlteraCep(pcep){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: usuario.sexo,
-    //         email: usuario.email,
-    //         senha: usuario.senha,
-    //         cpf: usuario.cpf,
-    //         telefone: usuario.telefone,
-    //         cep: pcep
-    //     }
+    function AlteraCep(pcep){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: usuario.cpf,
+            telefone: usuario.telefone,
+            cep: pcep
+        }
 
-    //     AlteraUsuario(u)
-    // }
-    // function AlteraCpf(pcpf){
-    //     const u = {
-    //         nome: usuario.nome,
-    //         dataNascimento: usuario.dataNascimento,
-    //         sexo: usuario.sexo,
-    //         email: usuario.email,
-    //         senha: usuario.senha,
-    //         cpf: pcpf,
-    //         telefone: usuario.telefone,
-    //         cep: usuario.cep
-    //     }
+        AlteraUsuario(u)
+    }
+    function AlteraCpf(pcpf){
+        const u = {
+            nome: usuario.nome,
+            dataNascimento: usuario.dataNascimento,
+            sexo: usuario.sexo,
+            email: usuario.email,
+            senha: usuario.senha,
+            cpf: pcpf,
+            telefone: usuario.telefone,
+            cep: usuario.cep
+        }
 
-    //     AlteraUsuario(u)
-    // }
+        AlteraUsuario(u)
+    }
 
     const [erroNome, alteraErroNome] = useState(false);
 
@@ -358,8 +358,8 @@ function Cadrasto () {
                     <InputPersonalizado label= "CEP" AlteraValor = {AlteraCep} />
                     
                     
-                    <button onClick={()=>salvar()} className="crescer bg-blue-500 transition duration-300 ease-in-out hover:bg-indigo-500" > Salvar </button>
-                     {/* <Botoes botoes = "Concluído" Salvar={salvar} />  */}
+                    {/* <button onClick={()=>salvar()} className="crescer bg-blue-500 transition duration-300 ease-in-out hover:bg-indigo-500" > Salvar </button> */}
+                     <Botoes botoes = "Concluído" Salvar={salvar} /> 
             </div>
             
 
