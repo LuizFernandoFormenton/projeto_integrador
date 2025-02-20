@@ -1,15 +1,23 @@
 function Produtos (attr) {
+
+function redirecionar (){
+    window.location.href="produto/"+attr.id
+}
+
 return ( 
-    <div>
-    
-        <div className=" border bg-red-700 w-fit text-center text-white p-2 mt-32 ml-12 rounded-lg  ">
-            <img className="w-[300px]" src={"imagens/imagens_tela_inicial/"+attr.img}/>
-             <h3 className="">{attr.nome}</h3>
-            <p>R$ {attr.preco}</p>
-             <button className="bg-white text-black w-full p-6 font-bold text-base border-none"> ADICIONAR AO CARRINHO</button>
-        </div>
-            
+<div>
+    <img onClick={()=>redirecionar()}  className="w-[300px] bg-[#E8E8E8] mr-6 cursor-pointer -mb-3" src={"imagens/imagens_tela_inicial/"+attr.img}/>
+
+    <div className="text-gray-700 ">
+      <p className="uppercase text-sm font-light tracking-tighter  tracking-wide">
+        {attr.nome}
+      </p>
+      <p className="font-bold text-xs">
+        {attr.preco}
+      </p>
     </div>
+    
+</div>
 );
 }
 

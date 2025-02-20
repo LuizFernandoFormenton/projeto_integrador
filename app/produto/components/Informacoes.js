@@ -7,7 +7,7 @@ function Informacoes(attr) {
     return (  
         <div>
             <div >
-                    <img width="400" height="400" src="http://placehold.co/50" />
+                    <img width="300" height="450" src="https://bawclothing.vtexassets.com/arquivos/ids/336819-1240-1860/0094002035_01.jpg?v=638663473337600000" />
                     <p><b> { attr.nome } </b></p>
             </div>
 

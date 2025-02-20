@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import BarraLateral from "./BarraLateral";
 
 function Cabecalho () {
     const [pesquisa, alteraPesquisa] = useState("")
@@ -13,15 +14,14 @@ function Cabecalho () {
     return (
 
     <main>
-        <div style={{ background: "linear-gradient(to right, white, #e5e5e5)"}} className="flex h-20 w-screen items-center fixed gap-20 px-8 text-[15px]">
+        <BarraLateral/>
+        <div style={{ background: "linear-gradient(to right, white, #e5e5e5)"}} className="flex h-20 w-full items-center fixed gap-20 px-8 text-[15px]">
         <img className="w-20" src="./imagens/logo.png"/>
         <p> CAMISETAS FEMININAS</p>
         <p> CAMISETAS MASCULINAS </p>
         <p> CAMISETAS UNISEX </p>
         <p> LANÇAMENTOS </p>
         <p> PROMOÇÕES </p>
-       
-       
 
         <form onSubmit={(e)=>pesquisar(e)}>
         <label>
