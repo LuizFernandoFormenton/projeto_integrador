@@ -63,11 +63,11 @@ export default function Home() {
 
 
   return (
-    <div className="flex ">
+    <div className="flex ml-4">
 
         {
           produtos.map( (i)=> (
-          <Produtos nome={i.nome} preco={i.preco} tamanho={i.tamanho} cor={i.cor} img={i.img} avaliacao={i.avaliacao}/>
+          <Produtos id={i.id}  nome={i.nome} preco={i.preco} tamanho={i.tamanho} cor={i.cor} img={i.img} avaliacao={i.avaliacao}/>
         ))
         }
 
