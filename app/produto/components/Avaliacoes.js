@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-function Avaliacoes() {
+function Avaliacoes(attr) {
 
     const [estrelas, alteraEstrelas] = useState(0);
     
@@ -19,7 +19,7 @@ function Avaliacoes() {
             <button onClick={()=> alteraEstrelas (5)}> ⭐ </button>
             
 
-            <p> Classificação Média: {estrelas} (0 avaliações) </p>
+            <p> Classificação Média: {estrelas} ({attr.avaliacoes} avaliações) </p>
             <p><strong> Nenhuma Avaliação </strong></p>
             <p>Seja o primeiro a avaliar este produto</p>
             <button><strong> FAÇA LOGIN PARA ESCREVER UMA AVALIAÇÃO </strong></button>
