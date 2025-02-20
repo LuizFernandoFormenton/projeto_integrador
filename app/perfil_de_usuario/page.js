@@ -1,22 +1,34 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Compra from "./Compra";
 
 function components () {
 
-    const [ usuario, alteraUsuario ] = useState({
-        id: 0,
-        nome:"Helena",
-        email:"helenasiqueira48@gmail.com",
-        telefone:"(16) 9 9324-5129"
-    })
+    const [usuario, alteraUsuario] = useState({})
+    
+    useEffect(()=> {
+        const dados = JSON.parse( localStorage.getItem("usuario") );
+        alteraUsuario(dados);
+    }, [])
 
-  
+    const [novoNome, alteraNovoNome] = useState(usuario.nome);
+    const [novoEmail, alteraNovoEmail] = useState(usuario.email);
+    const [novoTelefone, alteraNovoTelefone] = useState(usuario.telefone);
+
+    const [nomeOriginal, alteraNomeOriginal] = useState(usuario.nome);
+    const [emailOriginal, alteraEmailOriginal] = useState(usuario.email);
+    const [telefoneOriginal, alteraTelefoneOriginal] = useState(usuario.telefone);
+
+    const [editandoNome, alteraEditandoNome] = useState(false);
+    const [editandoEmail, alteraEditandoEmail] = useState(false);
+    const [editandoTelefone, alteraEditandoTelefone] = useState(false);
+    const [historico, alteraHistorico] = useState(false);
+
     const [ compras, alteraCompras ] = useState([
         {
             id: 0,
-            imagem: "https://www.hmloja.com.br/camisetas/camiseta-preta-malha-pv-manga-curta-gola-redonda",
+            imagem: <img width="100" height="100" src="https://placehold.co/1000"/>,
             nome: "camisa",
             tipo: "manga longa",
             preco: "19,90",
@@ -25,7 +37,7 @@ function components () {
         },
         {
             id: 1,
-            imagem: "https://www.hmloja.com.br/camisetas/camiseta-preta-malha-pv-manga-curta-gola-redonda",
+            imagem: <img width="100" height="100" src="https://placehold.co/1000"/>,
             nome: "calça",
             tipo: "jeans",
             preco: "59,90",
@@ -34,7 +46,7 @@ function components () {
         },
         {
             id: 2,
-            imagem: "https://www.hmloja.com.br/camisetas/camiseta-preta-malha-pv-manga-curta-gola-redonda",
+            imagem: <img width="100" height="100" src="https://placehold.co/1000"/>,
             nome: "jaqueta",
             tipo: "couro",
             preco: "199,00",
@@ -43,7 +55,7 @@ function components () {
         },
         {
             id: 3,
-            imagem: "https://www.hmloja.com.br/camisetas/camiseta-preta-malha-pv-manga-curta-gola-redonda",
+            imagem: <img width="100" height="100" src="https://placehold.co/1000"/>,
             nome: "tênis",
             tipo: "esportivo",
             preco: "159,90",
@@ -52,7 +64,7 @@ function components () {
         },
         {
             id: 4,
-            imagem: "https://www.hmloja.com.br/camisetas/camiseta-preta-malha-pv-manga-curta-gola-redonda",
+            imagem: <img width="100" height="100" src="https://placehold.co/1000"/>,
             nome: "mochila",
             tipo: "backpack",
             preco: "79,90",
@@ -61,7 +73,7 @@ function components () {
         },
         {
             id: 5,
-            imagem: "",
+            imagem: <img width="100" height="100" src="https://placehold.co/1000"/>,
             nome: "óculos de sol",
             tipo: "aviador",
             preco: "89,90",
@@ -141,183 +153,194 @@ function components () {
             data_da_compra: "18/02/2025"
         }
     ]);
-    
-
-    const [ editando, alteraEditando ] = useState(false);
-    const [ editando2, alteraEditando2 ] = useState(false);
-    const [ editando3, alteraEditando3 ] = useState(false);
-    const [ historico, historicoCompras ] = useState(false);
-
-    function manipulaEdicao(){
-
-        if( editando == false ){
-            alteraEditando(true)
-        }else{   
-            alteraEditando(false)
-        }
-    }
-
-    function alteraNome( pnome ){
-         const u  = {
-            nome: pnome,
-            email: usuario.email,
-            telefone: usuario.telefone
-        }
-
-        alteraUsuario(u) 
-    }
-
-    function alteraEmail( pemail ){
-        const u  = {
-           nome: usuario.nome,
-           email: pemail,
-           telefone: usuario.telefone
-       }
-        
-       alteraUsuario(u) 
-   }
-
-   function alteraTelefone( ptelefone ){
-    const u  = {
-       nome: usuario.nome,
-       email: usuario.email,
-       telefone: ptelefone
-   }
-    
-   alteraUsuario(u) 
-}
-
-
-
-
-    function manipulaEdicao2(){
-
-        if( editando2 == false ){
-            alteraEditando2(true)
-        }else{   
-            alteraEditando2(false)
-        }
-    }
-
-
-    function manipulaEdicao3(){
-
-        if( editando3 == false ){
-            alteraEditando3(true)
-        }else{   
-            alteraEditando3(false)
-        }
-    }
 
     
-    
-    function mostrarHistorico(){
 
-        if( historico ==  false ){
-            historicoCompras( true )
-        }else{   
-            historicoCompras( false )
+
+    function manipulaEdicaoNome() {
+        alteraEditandoNome(!editandoNome);
+        if (editandoNome) { 
+            alteraNomeOriginal(usuario.nome);
         }
     }
 
-    function salvar(e){
+    function manipulaEdicaoEmail() {
+        alteraEditandoEmail(!editandoEmail);
+        if (editandoEmail) {
+            alteraEmailOriginal(usuario.email);
+        }
+    }
+
+    function manipulaEdicaoTelefone() {
+        alteraEditandoTelefone(!editandoTelefone);
+        if (editandoTelefone) {
+            alteraTelefoneOriginal(usuario.telefone);
+        }
+    }
+
+    function salvarNome(e) {
+        e.preventDefault();   
+        alteraUsuario({
+            ...usuario, 
+            nome: novoNome
+        });
+        alteraEditandoNome(false);
+    }
+
+    function salvarEmail(e) {
         e.preventDefault();
-        const objeto = {
-            nome: nome,
-            email: email,
-            telefone: telefone,
-        }
+        alteraUsuario({
+            ...usuario,
+            email: novoEmail
+        });
+        alteraEditandoEmail(false);
+    }
+
+    function salvarTelefone(e) {
+        e.preventDefault();
+        alteraUsuario({
+            ...usuario,
+            telefone: novoTelefone
+        });
+        alteraEditandoTelefone(false);
+    }
+
+    function cancelarEdicaoNome() {
+        alteraNovoNome(nomeOriginal);
+        alteraEditandoNome(false);
+    }
+
+    function cancelarEdicaoEmail() {
+        alteraNovoEmail(emailOriginal);
+        alteraEditandoEmail(false);
+    }
+
+    function cancelarEdicaoTelefone() {
+        alteraNovoTelefone(telefoneOriginal);
+        alteraEditandoTelefone(false);
+    }
+
     
-}
-
-
     return ( 
-    <div className=" justify-center flex my-24">
-        <div className="justify-items-center w-48 rounded-xl shadow-md p-8 ">
-
-    
+        <div className="justify-center flex my-24">
+            <div className="justify-items-center w-48 rounded-xl shadow-md p-8 ">
                 <h1 className="text-red-600 text-3xl">Seu Perfil</h1>
+                <div className="flex gap-5 flex text-center">
+                    <img 
+                        width="100" 
+                        height="100" 
+                        src="https://placehold.co/1000" 
+                        className="size-24 rounded-full bg-conic from-blue-600 to-sky-400 to-50% items-center"
+                    />
+                </div>    
 
-        
-            <div className="flex gap-5 flex text-center">
-                <img width="100" height="100" src="https://placehold.co/1000" className="size-24 rounded-full bg-conic from-blue-600 to-sky-400 to-50% items-center"></img>
+                <div className="text-center">
+                    {editandoNome ? 
+                        <input 
+                            type="text" 
+                            placeholder="Digite seu nome" 
+                            value={novoNome} 
+                            onChange={(e) => alteraNovoNome(e.target.value)} 
+                        /> : 
+                        <p><strong>{usuario.nome}</strong></p>
+                    }
+                    <button 
+                        onClick={editandoNome ? salvarNome : manipulaEdicaoNome} 
+                        className={`mt-5 ${editandoNome ? `bg-blue-500` : `bg-green-500 flex`}`}
+                    >
+                        {editandoNome ? <span>Concluído</span> : <span>Alterar</span>}
+                    </button>
+                    {editandoNome && 
+                        <button 
+                            onClick={cancelarEdicaoNome} 
+                            className="mt-3 bg-red-500 ml-2"
+                        >
+                            Cancelar
+                        </button>
+                    }
 
-            </div>    
-                    
-            <div className="text-center">
+                    {editandoEmail ? 
+                        <input 
+                            type="email" 
+                            placeholder="Digite seu email" 
+                            value={novoEmail} 
+                            onChange={(e) => alteraNovoEmail(e.target.value)} 
+                        /> : 
+                        <p><strong>{usuario.email}</strong></p>
+                    }
+                    <button 
+                        onClick={editandoEmail ? salvarEmail : manipulaEdicaoEmail} 
+                        className={`mt-5 ${editandoEmail ? `bg-blue-500` : `bg-green-500`}`}
+                    >
+                        {editandoEmail ? <span>Concluído</span> : <span>Alterar</span>}
+                    </button>
+                    {editandoEmail && 
+                        <button 
+                            onClick={cancelarEdicaoEmail} 
+                            className="mt-3 bg-red-500 ml-2"
+                        >
+                            Cancelar
+                        </button>
+                    }
 
-
-                {
-                    editando == true ?
-                    <input type="text" placeholder="Digite seu nome"></input>
-                    :
-                    <p><strong>{ usuario.nome }</strong></p>
-                    
-                }
-
-                <button onClick={()=>manipulaEdicao(true)}  className={`mt-5 ${editando == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
-
-                {
-                    editando2 == true ?
-                    <input type="number" placeholder="Digite seu telefone"></input> 
-                    :
-                    <p><strong>{ usuario.telefone }</strong></p>
-                    
-                }
-
-                <button onClick={()=>manipulaEdicao2(true)}  className={`mt-5 ${editando2 == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando2 == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
-
-                {
-                    editando3 == true ?
-                    <input className="mt-3" type="email" placeholder="Digite seu email"></input>
-                    :
-                    <p><strong>{ usuario.email }</strong></p>
-                }
-                
-                <button onClick={()=>manipulaEdicao3(true)}  className={`m-5 ${editando3 == true  ? `bg-blue-500` : `bg-green-500`}`}>{ editando3 == true ? <span>Concluído</span> : <span>Alterar</span> }</button>
-                
-            </div>
-
-                
-                
+                    {editandoTelefone ? 
+                        <input 
+                            className="mt-3" 
+                            type="tel" 
+                            placeholder="Digite seu telefone" 
+                            value={novoTelefone} 
+                            onChange={(e) => alteraNovoTelefone(e.target.value)} 
+                        /> : 
+                        <p><strong>{usuario.telefone}</strong></p>
+                    }
+                    <button 
+                        onClick={editandoTelefone ? salvarTelefone : manipulaEdicaoTelefone} 
+                        className={`mt-5 ${editandoTelefone ? `bg-blue-500` : `bg-green-500`}`}
+                    >
+                        {editandoTelefone ? <span>Concluído</span> : <span>Alterar</span>}
+                    </button>
+                    {editandoTelefone && 
+                        <button 
+                            onClick={cancelarEdicaoTelefone} 
+                            className="mt-3 bg-red-500 ml-2"
+                        >
+                            Cancelar
+                        </button>
+                    }
+                </div>
 
                 <div className="justify-between rounded-xl">
-                    <button className="bg-green-500 transition delay-100 duration-100 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 mt-3">Salvar</button>
-                    <button onClick={()=>mostrarHistorico(true)}  className={`mt-3 ${historico == true ? `bg-green-500` : `bg-green-500`} ml-3`}>{ historico == true ? <span>Concluído</span> : <span>Mostrar histórico</span> }.</button>
-                    
-                    { 
+                    <button 
+                        onClick={() => alteraHistorico(!historico)}  
+                        className={`mt-3 ${historico ? `bg-green-500` : `bg-green-500`} ml-3`}
+                    >
+                        {historico ? <span>Concluído</span> : <span>Mostrar histórico</span>}
+                    </button>
 
-                    historico == true ?
+                    {historico ? 
                         <div>
-                            <h2 className="">Histórico</h2>
+                            <h2>Histórico</h2>
                             <ul>
-
-                                {
-                                    compras.map( (i)=>
-                                        <Compra   imagem={i.imagem} nome={i.nome} tipo={i.tipo} preco={i.preco} quantidade={i.quantidade} data_da_compra={i.data_da_compra}/>
-                                    )
-                                }
-
+                                {compras.map((i) => 
+                                    <Compra   
+                                        imagem={i.imagem} 
+                                        nome={i.nome} 
+                                        tipo={i.tipo} 
+                                        preco={i.preco} 
+                                        quantidade={i.quantidade} 
+                                        data_da_compra={i.data_da_compra} 
+                                    />
+                                )}
                             </ul>
                             <br/>
                         </div>
-                    :
-                    <div></div>                         
-
+                        : 
+                        <div></div>
                     }
-                    
                 </div>
-            
-                <br/>
-
+            </div>
         </div>
-
-    </div>
-     );
+    );
 }
 
-export default components ;
-
-
-
-
+export default components;

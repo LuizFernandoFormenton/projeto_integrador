@@ -187,6 +187,10 @@ function Login () {
         {
             if (email == i.email && senha == i.senha ){
                 console.log("Usário encontrado!")
+                usuario.senha = ""
+                usuario.cep = ""
+                usuario.cpf = ""
+                localStorage.setItem( "usuário", JSON.stringify(i) )
                 fazendeiro = true
             }
         }
@@ -247,7 +251,7 @@ function Login () {
 
            <Botoes botoes="Entrar" Salvar={salvar} />
 
-           <p className="text-center" > Não tem uma conta? <a href="./cadastro.html"> Cadastre-se </a> </p>
+           <p className="text-center" > Não tem uma conta? <a href="./cadastro"> Cadastre-se </a> </p>
            
         </div>
             
