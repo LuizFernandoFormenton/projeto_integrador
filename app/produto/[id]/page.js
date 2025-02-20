@@ -11,6 +11,9 @@ import "../reviews.css"
 export default 
 function reviews (attr) {
 
+
+
+
     const [produto, alteraProduto] = useState({});
     const [produtos, alteraProdutos] = useState([
         {
@@ -134,12 +137,24 @@ function reviews (attr) {
         })
     }, [])
     
-    
+    function adicionarCarrinho(){
+        if(localStorage.getItem ("carrinho") == null ){
+            const carrinho = [produto]
+            localStorage.setItem("carrinho", JSON.stringify(carrinho)) 
+        }else{
+            let carrinho = localStorage.getItem ("carrinho")
+            carrinho = JSON.parse(carrinho)
+            carrinho.push(produto)
+            carrinho = JSON.stringify (carrinho)
+            localStorage.setItem("carrinho", carrinho)
+        }
+
+    }
 
     return (
         <div>
         
-            <Informacoes nome={produto.nome} preco={produto.preco} desconto={produto.desconto} tamanho={produto.tamanho} cor={produto.cor}/>
+            <Informacoes adicionarCarrinho={adicionarCarrinho} nome={produto.nome} preco={produto.preco} desconto={produto.desconto} tamanho={produto.tamanho} cor={produto.cor}/>
             <Devolucao/>
             <Frete/>
             <Avaliacoes avaliacoes={produto.avaliacoes}/>

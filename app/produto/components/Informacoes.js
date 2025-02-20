@@ -40,7 +40,7 @@ function Informacoes(attr) {
                 )}
             </ul>
 
-            <p><button>ADICIONAR À SACOLA</button></p>
+            <p><button className="bg-green-800 text-white" onClick={()=> attr.adicionarCarrinho()} >ADICIONAR À SACOLA</button></p>
 
 
             <details>
