@@ -1,3 +1,6 @@
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function Produtos (attr) {
 
 function redirecionar (){
@@ -10,7 +13,7 @@ return (
 
     <div className="text-gray-700 ">
       <p className="uppercase text-sm font-light tracking-tighter  tracking-wide">
-        {attr.nome}
+        {attr.nome} 
       </p>
       <p className="font-bold text-xs">
         {attr.preco}
