@@ -194,7 +194,7 @@ function Login () {
 
         if(fazendeiro == false){
             alteraErroUsuario(true)
-            
+            console.log("Usuário não econtrado")
         }
         
         if( senha == "" ){
@@ -219,6 +219,16 @@ function Login () {
 
                 <div className="bg-red-500 texg-white" >
                   <p> Por favor digite sua senha </p>
+                </div>
+                :
+                    
+                    <div></div>
+            }
+            {
+                erroUsuario == true ?
+
+                <div className="bg-red-500 texg-white" >
+                  <p> Usuário não encontrado </p>
                 </div>
                 :
                     
