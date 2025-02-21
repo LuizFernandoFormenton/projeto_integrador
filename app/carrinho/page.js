@@ -1,8 +1,47 @@
+'use client'
+
 import Produto from "./components/Produto";
 import Quantidade from "./components/Quantidade";
 import "./carrinho.css"
+import { useEffect, useState } from "react";
+import { unstable_rethrow } from "next/navigation";
+
+
+
 
 function carrinho(){
+
+    
+
+    const [produtos, alteraProdutos] = useState([]);
+
+        function calculaTotal(lista){
+            let conta = 0
+            lista.map((i)=>{
+                conta += i.preco
+            })
+            alteraTotal(conta)
+        }
+        const [total, alteraTotal] = useState(0)
+        function removerProduto(produto){
+           const novoCarrinho = produtos.filter(i => produto != i)
+           localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+            calculaTotal(novoCarrinho)
+            alteraProdutos(novoCarrinho)
+        }
+    
+        useEffect(()=> {
+            
+            let produtos = []
+            if( localStorage.getItem("carrinho") != null ){
+                produtos = JSON.parse( localStorage.getItem("carrinho") )
+                alteraProdutos( produtos )
+            }
+            calculaTotal(produtos)
+
+        },[] )
+    
+    
     
     return(
 
@@ -12,18 +51,34 @@ function carrinho(){
 
             <hr/>
 
-            <div className="quadrado">
-                <Produto/>
-                <Quantidade/>
+            <div className="flex flex-wrap justify-around">
+            {
+                produtos.map((i)=>
+                <div className="quadrado">
+                        <Produto nome={i.nome} tamanho={i.tamanho} preco={i.preco} />
+                        {/* <Quantidade quantidade={i.quantidade}/> */}
+                        <button className="botaoremover"  onClick={()=>removerProduto(i) }>Remover</button>
+                    </div>
+                )
+            }
             </div>
 
-            <p><strong>Total ValorR$ 99,99</strong></p>    
+            <hr/>
 
-            <button class="buttonfinalizarcompras"> Finalizar Compra </button>            
+            <div className="w-[300px] m-auto text-center " >
+                        
+
+                        <p> Total: R${total.toFixed(2)} </p>
+
+                        <br/>
+
+                        <button className="bg-lime-500 text-white p-4 boder"> Finalizar Compra </button>            
+
+            </div>
             <hr/>
 
         </div>
     );
 }
 
-export default carrinho
+export default carrinho;
