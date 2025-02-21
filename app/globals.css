@@ -44,3 +44,7 @@ main {
 .crescer:hover{
   transform: scale(1.3);
 }
+
+.crescer-menos:hover{
+  transform: scale(1.1);
+}
