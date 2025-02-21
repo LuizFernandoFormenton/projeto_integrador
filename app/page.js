@@ -67,7 +67,7 @@ export default function Home() {
 
         {
           produtos.map( (i)=> (
-          <Produtos id={i.id}  nome={i.nome} preco={i.preco} tamanho={i.tamanho} cor={i.cor} img={i.img} avaliacao={i.avaliacao}/>
+          <Produtos produto = {i} />
         ))
         }
 

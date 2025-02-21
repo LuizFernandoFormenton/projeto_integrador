@@ -186,11 +186,11 @@ function Login () {
         usuario.map ((i)=>
         {
             if (email == i.email && senha == i.senha ){
-                console.log("Usário encontrado!")
+                console.log("Usuario encontrado!")
                 usuario.senha = ""
                 usuario.cep = ""
                 usuario.cpf = ""
-                localStorage.setItem( "usuário", JSON.stringify(i) )
+                localStorage.setItem( "usuario", JSON.stringify(i) )
                 fazendeiro = true
             }
         }
