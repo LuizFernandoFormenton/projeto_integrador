@@ -24,14 +24,18 @@ function adicionarCarrinho(){
 
 
 return ( 
-<div>
-    <img onClick={()=>redirecionar()}  className="w-[300px] bg-[#E8E8E8] mr-6 cursor-pointer -mb-3" src={"imagens/imagens_tela_inicial/"+attr.produto.img}/>
+<div className="relative w-[300px] overflow-hidden bg-[#E8E8E8] rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4">
+  
+    <img onClick={()=>redirecionar()}  
+    className= "w-full h-auto cursor-pointer transition-transform duration-500 ease-in-out hover:scale-110 " 
+    src={"imagens/imagens_tela_inicial/"+attr.produto.img}
+    />
 
-    <div className="text-gray-700 ">
-      <p className="uppercase text-sm font-light tracking-tighter  tracking-wide">
+    <div className="text-gray-700 mt-2 p-2">
+      <p className="uppercase text-sm font-light tracking-wide">
         {attr.produto.nome} 
       </p>
-      <p className="font-bold text-xs"  onClick={()=> adicionarCarrinho()}  >
+      <p className="font-bold text-xs cursor-pointer"  onClick={()=> adicionarCarrinho()}  >
         {attr.produto.preco}
       </p>
     </div>
