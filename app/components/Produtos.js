@@ -24,22 +24,36 @@ function adicionarCarrinho(){
 
 
 return ( 
-<div className="relative w-[300px] overflow-hidden bg-[#E8E8E8] rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4">
-  
-    <img onClick={()=>redirecionar()}  
-    className= "w-full h-auto cursor-pointer transition-transform duration-500 ease-in-out crescer-menos" 
-    src={"imagens/imagens_tela_inicial/"+attr.produto.img}
-    />
+  <div className="relative w-[300px] overflow-hidden bg-[#E8E8E8] rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4">
+      
+  {/* Imagem do Produto */}
+  <img 
+    onClick={() => redirecionar()} 
+    className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos " 
+    src={"imagens/imagens_tela_inicial/" + attr.produto.img} 
+  />
 
-    <div className="text-gray-700 mt-2 p-2">
-      <p className="uppercase text-sm font-light tracking-wide">
-        {attr.produto.nome} 
-      </p>
-      <p className="font-bold text-xs cursor-pointer"  onClick={()=> adicionarCarrinho()}  >
-        {attr.produto.preco}
-      </p>
-    </div>
-    
+  {/* Informações do Produto */}
+  <div className="p-4 text-gray-700 relative group">
+    <p className="uppercase text-sm font-light tracking-wide">
+      {attr.produto.nome} 
+    </p>
+
+    {/* Preço do Produto (onde o botão será ativado no hover) */}
+    <p className="font-bold text-md cursor-pointer relative group">
+      R$ {attr.produto.preco}
+    </p>
+
+    <p>{attr.produto.avaliacao}</p>
+
+    {/* Botão de Comprar que aparece no Hover */}
+    <button 
+      onClick={() => adicionarCarrinho()}  
+      className="absolute bottom-0 left-0 w-full h-12 bg-green-600 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      COMPRAR
+    </button>
+  </div>
+
 </div>
 );
 }
