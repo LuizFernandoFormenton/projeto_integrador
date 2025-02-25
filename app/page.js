@@ -14,7 +14,7 @@ export default function Home() {
       desconto: 5,
       nome: "Camisa Básica",
       preco: "23,99",
-      tamanho: ["PP", "P", "M", "G", "GG"],
+      tamanho: "PP, P, M, G, GG",
       cor: ["Preto", "Rosa", "Verde"],
       img: "camisetas_png/Mockup - Camiseta 2 (1).png",
       avaliacao: "⭐⭐⭐"
@@ -24,7 +24,7 @@ export default function Home() {
       desconto: 10,
       nome: "Camisa Street",
       preco: "35,90",
-      tamanho: ["P", "M", "G"],
+      tamanho: "P, M, G",
       cor: ["Branco", "Azul", "Cinza"],
       img: "camisetas_png/Mockup - Camiseta 3 (1).png",
       avaliacao: "⭐⭐⭐⭐⭐"
@@ -34,7 +34,7 @@ export default function Home() {
       desconto: 15,
       nome: "Camisa Oversized",
       preco: "49,99",
-      tamanho: ["M", "G", "GG"],
+      tamanho: "M, G, GG",
       cor: ["Preto", "Branco"],
       img: "camisetas_png/Mockup - Camiseta 4 (1).png",
       avaliacao: "⭐⭐⭐⭐⭐"
@@ -44,7 +44,7 @@ export default function Home() {
       desconto: 5,
       nome: "Camisa Retrô",
       preco: "29,90",
-      tamanho: ["PP", "P", "M", "G"],
+      tamanho: "PP, P, M, G",
       cor: ["Vermelho", "Amarelo", "Azul"],
       img: "camisetas_png/Mockup - Camiseta 5 (1).png",
       avaliacao: "⭐⭐⭐⭐"
@@ -54,7 +54,7 @@ export default function Home() {
       desconto: 20,
       nome: "Camisa Esportiva",
       preco: "55,00",
-      tamanho: ["P", "M", "G", "GG"],
+      tamanho: "P, M, G, GG",
       cor: ["Preto", "Azul"],
       img: "camisetas_png/Mockup - Camiseta 6.png",
       avaliacao: "⭐⭐⭐⭐⭐"
