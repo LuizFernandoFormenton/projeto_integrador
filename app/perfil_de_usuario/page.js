@@ -4,46 +4,47 @@ import { useState } from "react"
 import Compra from "./Compra";
 
 function components () {
-
     const [usuario, alteraUsuario] = useState({
-        id: 0,
-        nome: "Helena",
-        email: "helenasiqueira48@gmail.com",
-        telefone: "(16) 9 9324-5129"
+        id: 11,
+        nome: "Mariana Santos",
+        dataNascimento: "09/04/2002",
+        sexo: "Feminino",
+        email: "mariana.santos@gmail.com",
+        senha: "mariana2002",
+        cpf: "568.943.220-11",
+        telefone: "61 99123-4567",
+        cep: "72540-270"
     });
 
     const [novoNome, alteraNovoNome] = useState(usuario.nome);
     const [novoEmail, alteraNovoEmail] = useState(usuario.email);
     const [novoTelefone, alteraNovoTelefone] = useState(usuario.telefone);
 
-
     const [nomeOriginal, alteraNomeOriginal] = useState(usuario.nome);
     const [emailOriginal, alteraEmailOriginal] = useState(usuario.email);
     const [telefoneOriginal, alteraTelefoneOriginal] = useState(usuario.telefone);
-
 
     const [editando, alteraEditando] = useState(false);
     const [editando2, alteraEditando2] = useState(false);
     const [editando3, alteraEditando3] = useState(false);
     const [historico, historicoCompras] = useState(false);
 
-    
     function manipulaEdicao() {
-        alteraEditando(editando);
+        alteraEditando(!editando);
         if (editando) { 
             alteraNomeOriginal(usuario.nome);
         }
     }
 
     function manipulaEdicao2() {
-        alteraEditando2(editando2);
+        alteraEditando2(!editando2);
         if (editando2) {
             alteraEmailOriginal(usuario.email);
         }
     }
 
     function manipulaEdicao3() {
-        alteraEditando3(editando3);
+        alteraEditando3(!editando3);
         if (editando3) {
             alteraTelefoneOriginal(usuario.telefone);
         }
@@ -91,8 +92,11 @@ function components () {
         alteraEditando3(false);
     }
 
-    const [compras, alteraCompras] = useState([
-    ]);
+    function mostrarHistorico() {
+        historicoCompras(!historico);
+    }
+
+    const [compras, alteraCompras] = useState([]);
 
     return ( 
         <div className="justify-center flex my-24">
@@ -109,50 +113,54 @@ function components () {
                     />
                 </div>    
 
-                <div className="text-center">
+                <div className="text-center items-center gap-3">
                     {editando ? 
-                        <input 
+                        <input
+                            className="mt-2 mb-2" 
                             type="text" 
                             placeholder="Digite seu nome" 
                             value={novoNome} 
                             onChange={(e) => alteraNovoNome(e.target.value)} 
                         /> : 
-                        <p><strong>{usuario.nome}</strong></p>
+                        <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.nome}</strong></p>
                     }
+                    {/* <p>{usuario.dataNascimento}</p> */}
                     <button 
                         onClick={editando ? salvarNome : manipulaEdicao} 
-                        className={`mt-5 ${editando ? `bg-blue-500` : `bg-green-500`}`}
+                        className={`px-3 py-1 rounded-md crescer-menos border-none ${editando ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
                     >
                         {editando ? <span>Concluído</span> : <span>Alterar</span>}
                     </button>
                     {editando && 
                         <button 
                             onClick={cancelarEdicaoNome} 
-                            className="mt-3 bg-red-500 ml-2"
+                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none "
                         >
                             Cancelar
                         </button>
                     }
 
                     {editando2 ? 
-                        <input 
-                            type="number" 
-                            placeholder="Digite seu telefone" 
+                        <input
+                            className="mt-2 mb-2" 
+                            type="email" 
+                            placeholder="Digite seu email" 
                             value={novoEmail} 
                             onChange={(e) => alteraNovoEmail(e.target.value)} 
                         /> : 
-                        <p><strong>{usuario.email}</strong></p>
+                        <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.email}</strong></p>
                     }
+                    {/* <p>{usuario.sexo}</p> */}
                     <button 
                         onClick={editando2 ? salvarEmail : manipulaEdicao2} 
-                        className={`mt-5 ${editando2 ? `bg-blue-500` : `bg-green-500`}`}
+                        className={`px-3 py-1 rounded-md crescer-menos border-none mb-2 ${editando2 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
                     >
                         {editando2 ? <span>Concluído</span> : <span>Alterar</span>}
                     </button>
                     {editando2 && 
                         <button 
                             onClick={cancelarEdicaoEmail} 
-                            className="mt-3 bg-red-500 ml-2"
+                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none"
                         >
                             Cancelar
                         </button>
@@ -161,33 +169,34 @@ function components () {
                     {editando3 ? 
                         <input 
                             className="mt-3" 
-                            type="email" 
-                            placeholder="Digite seu email" 
+                            type="tel" 
+                            placeholder="Digite seu telefone" 
                             value={novoTelefone} 
                             onChange={(e) => alteraNovoTelefone(e.target.value)} 
                         /> : 
-                        <p><strong>{usuario.telefone}</strong></p>
+                        <p><strong className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800">{usuario.telefone}</strong></p>
                     }
+                    {/* <p>{usuario.cpf}</p> */}
                     <button 
                         onClick={editando3 ? salvarTelefone : manipulaEdicao3} 
-                        className={`mt-5 ${editando3 ? `bg-blue-500` : `bg-green-500`}`}
+                        className={`px-3 py-1 rounded-md crescer-menos border-none mt-2 ${editando3 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
                     >
                         {editando3 ? <span>Concluído</span> : <span>Alterar</span>}
                     </button>
                     {editando3 && 
                         <button 
                             onClick={cancelarEdicaoTelefone} 
-                            className="mt-3 bg-red-500 ml-2"
+                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none"
                         >
                             Cancelar
                         </button>
                     }
                 </div>
 
-                <div className="justify-between rounded-xl">
+                <div className="text-center items-center mr-2">
                     <button 
-                        onClick={() => mostrarHistorico()}  
-                        className={`mt-3 ${historico ? `bg-green-500` : `bg-green-500`} ml-3`}
+                        onClick={mostrarHistorico}  
+                        className={`mt-5 px-3 py-1 rounded-md crescer-menos border-none ${historico ? `bg-green-500 text-black` : `bg-red-700`} ml-3 text-white`}
                     >
                         {historico ? <span>Concluído</span> : <span>Mostrar histórico</span>}
                     </button>
@@ -211,8 +220,6 @@ function components () {
                         </div>
                         : 
                         <div></div>
-                    
-                    
                     }
                 </div>
             
