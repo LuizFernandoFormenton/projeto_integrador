@@ -16,7 +16,6 @@ export default function RootLayout({ children }) {
         <Rodape/>
       </body>
 
-
       
     </html>
   );

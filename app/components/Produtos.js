@@ -22,47 +22,61 @@ function adicionarCarrinho(){
 
 }
 
+function calcularDesconto(preco, desconto) {
+  let precoComDesconto = (preco - (preco * desconto / 100)).toFixed(2); 
+  return precoComDesconto.toString().replace(".", ",");
+}
+
+
+
 
 return ( 
-<div className="relative rounded-sm w-[300px] overflow-hidden bg-[#E8E8E8] shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
+<div className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
       
- {/* Imagem do Produto */}
- <div>
-      <img 
-        onClick={() => redirecionar()} 
-        className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos" 
-        src={"imagens/imagens_tela_inicial/" + attr.produto.img} 
-      />
+    {/* Imagem do Produto */}
+    <div>
+        <img onClick={() => redirecionar()} 
+        className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
+        src={"imagens/imagens_tela_inicial/" + attr.produto.img}/>
     </div>
 
     {/* Informações do Produto */}
-    <div className="pr-2 pl-2 relative bg-white">
-      <p>{attr.produto.avaliacao}</p>
-      <p className="uppercase text-sm font-bold tracking-wide font-serif">
-        {attr.produto.nome} 
-      </p>
-      
-      {/* Preço do Produto*/}
+    <div className="pr-2 pl-2 relative bg-white ">
+
+      {/* avaliação */}
       <div>
-        <p className="font-bold text-md relative group text-xl font-bold text-green-500"> 
-          <span className="font-xs text-black"> de </span> R$ {attr.produto.preco}
-        </p>
+        <p>{attr.produto.avaliacao}</p>
       </div>
 
-      {/* Tamanhos Disponíveis */}
+      {/* nome */}
+      <div>
+        <p className="uppercase text-sm font-bold tracking-wide font-serif">
+        {attr.produto.nome}
+        </p>
+      </div>
+      
+      {/* Preço*/}
+      <div className="flex flex-col items-start leading-tight gap-0">
+        <p className="text-gray-500 line-through text-sm m-0 p-0">De R$ {attr.produto.preco.toString().replace(".", ",")}</p>
+        <p className="text-green-600 font-bold text-xl m-0 p-0">Por R$ {calcularDesconto(attr.produto.preco, attr.produto.desconto)}</p>
+      </div>
+
+      {/* Tamanhos*/}
       <div>  
-        <p className="">
+        <p>
           <span className="font-bold">Tamanhos disponíveis:</span> {attr.produto.tamanho}
         </p>
       </div>
 
       {/* Botão de Comprar */}
-      <div className="mt-4">  
+
+      <div>  
         <button
-          onClick={() => adicionarCarrinho()}  
-          className="w-full cursor-pointer h-12 bg-green-600 text-white text-sm font-semibold rounded-full mb-2"> COMPRAR
-        </button>
+          onClick={() => {adicionarCarrinho(); window.location.href = "/carrinho";}}
+          className="w-full cursor-pointer h-10 bg-green-600 text-white text-sm font-semibold rounded-full mb-2 border-none"> COMPRAR
+        </button> 
       </div>
+
     </div>
 </div>
 );
