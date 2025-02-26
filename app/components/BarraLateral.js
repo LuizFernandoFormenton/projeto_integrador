@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function BarraLateral() {
     return ( 
 
-    <div className="fixed right-0 top-20 h-48 w-12 bg-white rounded-bl-lg border-none justify-items-center z-20">
+    <div className="fixed right-0 top-20 h-48 w-12 bg-white rounded-bl-lg border-solid border-gray-200 border justify-items-center z-20">
 
         <button className="bg-transparent border-none my-8 cursor-pointer" onClick={()=> window.location.href="/login"}>
             <FontAwesomeIcon icon={faUser} className="text-3xl m-2" />
