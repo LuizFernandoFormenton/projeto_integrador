@@ -14,6 +14,7 @@ function carrinho(){
     
 
     const [produtos, alteraProdutos] = useState([]);
+    const [total, alteraTotal] = useState(0)
 
         function calculaTotal(lista){
             let conta = 0
@@ -22,7 +23,7 @@ function carrinho(){
             })
             alteraTotal(conta)
         }
-        const [total, alteraTotal] = useState(0)
+
         function removerProduto(produto){
            const novoCarrinho = produtos.filter(i => produto != i)
            localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
@@ -68,7 +69,7 @@ function carrinho(){
             <div className="w-[300px] m-auto text-center " >
                         
 
-                        <p> Total: R${total.toFixed(2)} </p>
+                        <p> Total: R${total ? total.toFixed(2) : 0} </p>
 
                         <br/>
 
