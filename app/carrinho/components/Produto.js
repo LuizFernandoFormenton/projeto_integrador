@@ -1,11 +1,9 @@
 'use client'
 import { useState } from "react";
 
-function Produto() {
+function Produto(attr) {
+    
 
-    const [ nome, alteraNome ] = useState("CROPPED 75775757")
-    const [ tamanho, alteraTamanho] = useState("P")
-    const [preco, alteraPreco] = useState("R$ 19,99")
 
     return ( 
 
@@ -13,9 +11,9 @@ function Produto() {
         <div>
     <img src="https://placehold.co/200"/> 
   
-        <h2>{nome}</h2>
-        <p>Tamanho: <strong> {tamanho} </strong></p>
-        <p>Total <strong> {preco} </strong></p>
+        <h2>{attr.nome}</h2>
+        <p>Tamanho: <strong> {attr.tamanho} </strong></p>
+        <p>Total <strong> {attr.preco} </strong></p>
         </div>
 
 

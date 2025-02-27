@@ -69,7 +69,7 @@ function carrinho(){
             <div className="w-[300px] m-auto text-center " >
                         
 
-                        <p> Total: R${total ? total.toFixed(2) : 0} </p>
+                        <p> Total: R${ !isNaN(total) ? Number(total).toFixed(2) : 0} </p>
 
                         <br/>
 
