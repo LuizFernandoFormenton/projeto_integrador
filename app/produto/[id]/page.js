@@ -5,14 +5,11 @@ import Devolucao from "../components/Devolucao";
 import Frete from "../components/Frete";
 import Informacoes from "../components/Informacoes";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../reviews.css"
 
 export default 
 function reviews (attr) {
-
-
-
 
     const [produto, alteraProduto] = useState({});
     const [produtos, alteraProdutos] = useState([
@@ -128,7 +125,7 @@ function reviews (attr) {
         }
     ]);
 
-    useState(() =>{
+    useEffect(() =>{
         const id_produtos = attr.params.id
         produtos.map( (i) =>{
             if(i.id == id_produtos){
@@ -152,9 +149,10 @@ function reviews (attr) {
     }
 
     return (
+        produto.id &&
         <div>
         
-            <Informacoes adicionarCarrinho={adicionarCarrinho} nome={produto.nome} preco={produto.preco} desconto={produto.desconto} tamanho={produto.tamanho} cor={produto.cor}/>
+            <Informacoes alteraProduto={alteraProduto} adicionarCarrinho={adicionarCarrinho} produto={produto} />
             <Devolucao/>
             <Frete/>
             <Avaliacoes avaliacoes={produto.avaliacoes}/>

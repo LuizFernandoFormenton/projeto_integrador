@@ -8,18 +8,18 @@ function Informacoes(attr) {
         <div>
             <div >
                     <img width="300" height="450" src="https://bawclothing.vtexassets.com/arquivos/ids/336819-1240-1860/0094002035_01.jpg?v=638663473337600000" />
-                    <p><b> { attr.nome } </b></p>
+                    <p><b> { attr.produto.nome } </b></p>
             </div>
 
             <div >
                 
-                    <p><del> R$ { attr.preco } </del></p>
-                    <p>R$ {( attr.preco - attr.preco*attr.desconto/100 ).toFixed(2)} <strong>{ attr.desconto }% OFF</strong></p>
+                    <p><del> R$ { attr.produto.preco } </del></p>
+                    <p>R$ {( attr.produto.preco - attr.produto.preco*attr.produto.desconto/100 ).toFixed(2)} <strong>{ attr.produto.desconto }% OFF</strong></p>
 
                     <ul> 
-                        {attr.cor.map((i) =>
+                        {attr.produto.cor.map((i) =>
 
-                                <li>
+                                <li onClick={ ()=> { attr.alteraProduto( {...attr.produto, cor: [i] } ) } } >
                                     <p> {i}  </p>
                                 </li>
                         )}
@@ -30,9 +30,9 @@ function Informacoes(attr) {
 
             
             <ul>
-                {attr.tamanho.map((i) => 
+                {attr.produto.tamanho.map((i) => 
 
-                    <li>
+                    <li onClick={ ()=> { attr.alteraProduto( {...attr.produto, tamanho: [i] } ) } } >
 
                         <p>{i}</p>
                         

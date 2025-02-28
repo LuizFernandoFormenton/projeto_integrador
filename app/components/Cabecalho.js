@@ -16,7 +16,7 @@ function Cabecalho () {
     <main>
         <BarraLateral/>
         <div style={{ background: "linear-gradient(to right, white, #e5e5e5)"}} className="flex h-20 w-full items-center fixed gap-20 px-8 text-[15px] z-50">
-        <img onClick={()=> window.location.href="/"}  className="w-20  cursor-pointer" src="./imagens/logo.png"/>
+        <img onClick={()=> window.location.href="/"}  className="w-20  cursor-pointer" src="/imagens/logo.png"/>
         <p> CAMISETAS FEMININAS</p>
         <p> CAMISETAS MASCULINAS </p>
         <p> CAMISETAS UNISEX </p>
