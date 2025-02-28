@@ -15,7 +15,7 @@ function Cabecalho () {
 
     <main>
         <BarraLateral/>
-        <div style={{ background: "linear-gradient(to right, white, #e5e5e5)"}} className="flex h-20 w-full items-center fixed gap-20 px-8 text-[15px] z-50">
+        <div style={{ background: "linear-gradient(to right, white, #e5e5e5)"}} className="flex h-20 w-full items-center fixed gap-20 px-8 text-[13px] z-50">
         <img onClick={()=> window.location.href="/"}  className="w-20  cursor-pointer" src="./imagens/logo.png"/>
         <p> CAMISETAS FEMININAS</p>
         <p> CAMISETAS MASCULINAS </p>
@@ -24,10 +24,11 @@ function Cabecalho () {
         <p> PROMOÇÕES </p>
 
         <form onSubmit={(e)=>pesquisar(e)}>
+
         <label>
-            <input className="rounded-xl p-2" type="text" placeholder="🔍 O que você está procurando?" 
+            <input className=" h-[64px] border-none p-2 w-[250px] bg-gray-300" type="text" placeholder="🔍 O que você está procurando?" 
             onChange={ (e)=> alteraPesquisa(e.target.value)} value={pesquisa} />           
-        <button  className=" hidden   ml-2"></button>
+            <button  className=" hidden ml-2"></button>
         </label>
         </form>
         

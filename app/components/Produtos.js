@@ -64,7 +64,7 @@ return (
       {/* Tamanhos*/}
       <div>  
         <p>
-          <span className="font-bold">Tamanhos disponíveis:</span> {attr.produto.tamanho}
+          <span className="font-bold">Tamanho :</span> {attr.produto.tamanho}
         </p>
       </div>
 
