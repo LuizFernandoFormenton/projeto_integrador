@@ -14,7 +14,6 @@ function carrinho(){
     
 
     const [produtos, alteraProdutos] = useState([]);
-    const [total, alteraTotal] = useState(0)
 
         function calculaTotal(lista){
             let conta = 0
@@ -23,7 +22,7 @@ function carrinho(){
             })
             alteraTotal(conta)
         }
-
+        const [total, alteraTotal] = useState(0)
         function removerProduto(produto){
            const novoCarrinho = produtos.filter(i => produto != i)
            localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
@@ -32,15 +31,13 @@ function carrinho(){
         }
     
         useEffect(()=> {
-            if (typeof window !== "undefined"){
-                
-                let produtos = []
-                if( localStorage.getItem("carrinho") != null ){
-                    produtos = JSON.parse( localStorage.getItem("carrinho") )
-                    alteraProdutos( produtos )
-                }
-                calculaTotal(produtos)
+            
+            let produtos = []
+            if( localStorage.getItem("carrinho") != null ){
+                produtos = JSON.parse( localStorage.getItem("carrinho") )
+                alteraProdutos( produtos )
             }
+            calculaTotal(produtos)
 
         },[] )
     
@@ -56,11 +53,12 @@ function carrinho(){
 
             <div className="flex flex-wrap justify-around">
             {
-                produtos != 0 && produtos.map((i)=>
+                produtos.map((i)=>
                 <div className="quadrado">
                         <Produto nome={i.nome} tamanho={i.tamanho} preco={i.preco} />
                         {/* <Quantidade quantidade={i.quantidade}/> */}
                         <button className="botaoremover"  onClick={()=>removerProduto(i) }>Remover</button>
+                        
                     </div>
                 )
             }
@@ -71,11 +69,18 @@ function carrinho(){
             <div className="w-[300px] m-auto text-center " >
                         
 
-                        <p> Total: R${ !isNaN(total) ? Number(total).toFixed(2) : 0} </p>
+                        <p> Total: R${total.toFixed(2)} </p>
 
                         <br/>
 
-                        <button className="bg-lime-500 text-white p-4 boder"> Finalizar Compra </button>            
+                        <div className="flex">
+
+                         <button className="bg-lime-500 text-white p-4 boder"> Finalizar Compra </button> 
+                         <button className="bg-lime-500 text-white p-4 boder"> Continuar Comprando </button>      
+
+                        </div>
+
+
 
             </div>
             <hr/>
