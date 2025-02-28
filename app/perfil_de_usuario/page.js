@@ -17,16 +17,25 @@ function components () {
     });
 
     const [novoNome, alteraNovoNome] = useState(usuario.nome);
+    const [novoSexo, alteraNovoSexo] = useState(usuario.sexo)
     const [novoEmail, alteraNovoEmail] = useState(usuario.email);
     const [novoTelefone, alteraNovoTelefone] = useState(usuario.telefone);
+    const [novoCep, alteraNovoCep] = useState(usuario.cep)
 
     const [nomeOriginal, alteraNomeOriginal] = useState(usuario.nome);
+    const [dataNascimentoOriginal, alteraDataNascimentoOriginal] = useState(usuario.dataNascimento)
+    const [sexoOriginal, alteraSexoOriginal] = useState(usuario.sexo)
     const [emailOriginal, alteraEmailOriginal] = useState(usuario.email);
+    const [senhaOriginal, alteraSenhaOriginal] = useState(usuario.senha)
+    const [cpfOriginal, alteraCpfOriginal] = useState(usuario.cpf)
     const [telefoneOriginal, alteraTelefoneOriginal] = useState(usuario.telefone);
+    const [cepOriginal, alteraCepOriginal] = useState (usuario.cep)
 
     const [editando, alteraEditando] = useState(false);
     const [editando2, alteraEditando2] = useState(false);
     const [editando3, alteraEditando3] = useState(false);
+    const [editando4, alteraEditando4] = useState(false);
+    const [editando5, alteraEditando5] = useState(false);
     const [historico, historicoCompras] = useState(false);
 
     function manipulaEdicao() {
@@ -47,6 +56,20 @@ function components () {
         alteraEditando3(!editando3);
         if (editando3) {
             alteraTelefoneOriginal(usuario.telefone);
+        }
+    }
+
+    function manipulaEdicao4() {
+        alteraEditando4 (!editando4);
+        if (editando4) {
+            alteraSexoOriginal(usuario.sexo);
+        }
+    }
+
+    function manipulaEdicao5() {
+        alteraEditando5 (!editando5);
+        if (editando5) {
+            alteraCepOriginal (usuario.dataNascimento)
         }
     }
 
@@ -77,6 +100,25 @@ function components () {
         alteraEditando3(false);
     }
 
+
+    function salvarSexo(e) {
+        e.preventDefault();
+        alteraUsuario({
+            ...usuario,
+            telefone: novoSexo
+        });
+        alteraEditando4(false);
+    }
+
+    function salvarCep(e) {
+        e.preventDefault();
+        alteraUsuario({
+            ...usuario,
+            telefone: novoCep
+        });
+        alteraEditando5(false);
+    }
+
     function cancelarEdicaoNome() {
         alteraNovoNome(nomeOriginal);
         alteraEditando(false);
@@ -90,6 +132,16 @@ function components () {
     function cancelarEdicaoTelefone() {
         alteraNovoTelefone(telefoneOriginal);
         alteraEditando3(false);
+    }
+
+    function cancelarEdicaoSexo() {
+        alteraNovoSexo(sexoOriginal);
+        alteraEditando4(false);
+    }
+
+    function cancelarEdicaoCep() {
+        alteraNovoCep(cepOriginal);
+        alteraEditando5(false);
     }
 
     function mostrarHistorico() {
@@ -124,7 +176,6 @@ function components () {
                         /> : 
                         <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.nome}</strong></p>
                     }
-                    {/* <p>{usuario.dataNascimento}</p> */}
                     <button 
                         onClick={editando ? salvarNome : manipulaEdicao} 
                         className={`px-3 py-1 rounded-md crescer-menos border-none ${editando ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
@@ -140,6 +191,38 @@ function components () {
                         </button>
                     }
 
+
+
+                    {editando4 ?
+                        <input
+                        className="mt-2 mb-2"
+                        type=""
+                        placeholder="Digite sua data de nascimento"
+                        value={novoSexo}
+                        onChange={(e) => alteraNovoSexo(e.target.value)}
+                        /> :
+                        <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.sexo}</strong></p>
+                    }
+                    <button 
+                        onClick={editando ? salvarSexo : manipulaEdicao4} 
+                        className={`px-3 py-1 rounded-md crescer-menos border-none ${editando4 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
+                    >
+                        {editando ? <span>Concluído</span> : <span>Alterar</span>}
+                    </button>
+                    {editando && 
+                        <button 
+                            onClick={cancelarEdicaoSexo} 
+                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none "
+                        >
+                            Cancelar
+                        </button>
+                    }
+
+
+
+
+
+
                     {editando2 ? 
                         <input
                             className="mt-2 mb-2" 
@@ -150,7 +233,6 @@ function components () {
                         /> : 
                         <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.email}</strong></p>
                     }
-                    {/* <p>{usuario.sexo}</p> */}
                     <button 
                         onClick={editando2 ? salvarEmail : manipulaEdicao2} 
                         className={`px-3 py-1 rounded-md crescer-menos border-none mb-2 ${editando2 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
@@ -165,6 +247,10 @@ function components () {
                             Cancelar
                         </button>
                     }
+
+
+
+
 
                     {editando3 ? 
                         <input 
@@ -192,6 +278,10 @@ function components () {
                         </button>
                     }
                 </div>
+
+
+
+
 
                 <div className="text-center items-center mr-2">
                     <button 

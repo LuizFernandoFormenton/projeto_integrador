@@ -32,13 +32,15 @@ function carrinho(){
         }
     
         useEffect(()=> {
-            
-            let produtos = []
-            if( localStorage.getItem("carrinho") != null ){
-                produtos = JSON.parse( localStorage.getItem("carrinho") )
-                alteraProdutos( produtos )
+            if (typeof window !== "undefined"){
+                
+                let produtos = []
+                if( localStorage.getItem("carrinho") != null ){
+                    produtos = JSON.parse( localStorage.getItem("carrinho") )
+                    alteraProdutos( produtos )
+                }
+                calculaTotal(produtos)
             }
-            calculaTotal(produtos)
 
         },[] )
     
@@ -54,7 +56,7 @@ function carrinho(){
 
             <div className="flex flex-wrap justify-around">
             {
-                produtos.map((i)=>
+                produtos != 0 && produtos.map((i)=>
                 <div className="quadrado">
                         <Produto nome={i.nome} tamanho={i.tamanho} preco={i.preco} />
                         {/* <Quantidade quantidade={i.quantidade}/> */}
