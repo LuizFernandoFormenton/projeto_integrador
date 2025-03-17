@@ -13,8 +13,8 @@ function Informacoes(attr) {
 
             <div >
                 
-                    <p><del> R$ { attr.produto.preco } </del></p>
-                    <p>R$ {( attr.produto.preco - attr.produto.preco*attr.produto.desconto/100 ).toFixed(2)} <strong>{ attr.produto.desconto }% OFF</strong></p>
+                    <p><del className="text-black" > R$ { attr.produto.preco } </del></p>
+                    <p className="text-red-600">R$ {( attr.produto.preco - attr.produto.preco*attr.produto.desconto/100 ).toFixed(2)} <strong className="bg-black text-white rounded-full" >{ attr.produto.desconto }% OFF</strong></p>
 
                     <ul> 
                         {attr.produto.cor.map((i) =>
@@ -40,7 +40,7 @@ function Informacoes(attr) {
                 )}
             </ul>
 
-            <p><button className="bg-green-800 text-white" onClick={()=> attr.adicionarCarrinho()} >ADICIONAR À SACOLA</button></p>
+            <p><button className="bg-green-800 text-white " onClick={()=> attr.adicionarCarrinho()} >ADICIONAR À SACOLA</button></p>
 
 
             <details>
