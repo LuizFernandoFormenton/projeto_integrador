@@ -1,7 +1,8 @@
 'use client'
-
-import { useState } from "react"
+import axios from 'axios';
 import Compra from "./Compra";
+import { useEffect, useState } from "react";
+
 
 function components () {
     const [usuario, alteraUsuario] = useState({
@@ -37,6 +38,8 @@ function components () {
     const [editando4, alteraEditando4] = useState(false);
     const [editando5, alteraEditando5] = useState(false);
     const [historico, historicoCompras] = useState(false);
+
+    
 
     function manipulaEdicao() {
         alteraEditando(!editando);
