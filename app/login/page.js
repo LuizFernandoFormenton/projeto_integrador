@@ -12,7 +12,7 @@ function Login () {
     const [usuario, AlteraUsuario] = useState([]);
     
     async function buscaTodos(){
-        const response = await axios.get("http://localhost:4000/usuarios")
+        const response = await axios.get("http://10.60.44.65:4000/usuarios")
         console.log(response.data)
         AlteraUsuario(response.data)
     }
@@ -35,8 +35,6 @@ function Login () {
             if (email == i.email && senha == i.senha ){
                 console.log("Usuario encontrado!")
                 usuario.senha = ""
-                usuario.cep = ""
-                usuario.cpf = ""
                 localStorage.setItem( "usuario", JSON.stringify(i) )
                 fazendeiro = true
             }
@@ -46,9 +44,15 @@ function Login () {
         if(fazendeiro == false){
             alteraErroUsuario(true)
             console.log("Usuário não econtrado")
-        }else{
-            
+        } else {
+            alteraErroUsuario(false)
+            console.log("Login realizado com sucesso")
+
+             window.location.href="/"
         }
+
+     
+        
         
         if( senha == "" ){
             alteraErroSenha(true);

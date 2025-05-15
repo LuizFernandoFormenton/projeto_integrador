@@ -5,17 +5,15 @@ import { useEffect, useState } from "react";
 
 
 function components () {
-    const [usuario, alteraUsuario] = useState({
-        id: 11,
-        nome: "Mariana Santos",
-        dataNascimento: "09/04/2002",
-        sexo: "Feminino",
-        email: "mariana.santos@gmail.com",
-        senha: "mariana2002",
-        cpf: "568.943.220-11",
-        telefone: "61 99123-4567",
-        cep: "72540-270"
-    });
+    const [usuario, alteraUsuario] = useState({});
+
+    useEffect(() => {
+        const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
+
+        if (usuarioLocal && usuarioLocal.id) {
+            alteraUsuario(usuarioLocal)
+        }
+    }, []);
 
     const [novoNome, alteraNovoNome] = useState(usuario.nome);
     const [novoSexo, alteraNovoSexo] = useState(usuario.sexo)
