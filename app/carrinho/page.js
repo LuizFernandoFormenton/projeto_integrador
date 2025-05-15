@@ -2,16 +2,15 @@
 
 import Produto from "./components/Produto";
 import Quantidade from "./components/Quantidade";
-import "./carrinho.css"
+import "./carrinho.css";
 import { useEffect, useState } from "react";
 import { unstable_rethrow } from "next/navigation";
+import axios from "axios";
 
 
 
 
 function carrinho(){
-
-    
 
     const [produtos, alteraProdutos] = useState([]);
 
@@ -31,6 +30,29 @@ function carrinho(){
         }
     
         useEffect(()=> {
+
+
+
+           const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+            if (!usuario || !usuario.id) {
+            
+            window.location.href = "/login"; 
+            } else {
+            const usuario_id = usuario.id;
+            
+            }
+
+
+            const hoje = new Date().toISOString().split('T')[0];
+
+            axios.post(
+                'http://10.60.44.65:4000/venda',
+                {
+                    data: hoje ,
+                    usuario_id: usuario_id
+                }
+            )
             
             let produtos = []
             if( localStorage.getItem("carrinho") != null ){
