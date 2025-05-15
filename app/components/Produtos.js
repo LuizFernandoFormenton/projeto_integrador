@@ -37,7 +37,7 @@ return (
     <div>
         <img onClick={() => redirecionar()} 
         className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
-        src={"imagens/imagens_tela_inicial/" + attr.produto.img}/>
+        href={ attr.produto.imagem}/>
     </div>
 
     {/* Informações do Produto */}

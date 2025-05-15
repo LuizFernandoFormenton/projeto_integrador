@@ -14,6 +14,7 @@ export default function Home() {
   async function buscarCamisas(){
     const response = await axios.get("http://localhost:4000/produtos")
     console.log(response.data)
+    alteraProdutos(response.data)
   }
 
 
@@ -29,7 +30,7 @@ export default function Home() {
 
         {
           produtos.map( (i)=> (
-          <Produtos produto = {i} />
+          <Produtos key= {i.id}  produto = {i} />
         ))
         }
 
