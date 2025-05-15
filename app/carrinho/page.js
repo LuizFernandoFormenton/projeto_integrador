@@ -30,19 +30,11 @@ function carrinho(){
         }
     
         useEffect(()=> {
-
-
-
            const usuario = JSON.parse(localStorage.getItem("usuario"));
 
             if (!usuario || !usuario.id) {
-            
-            window.location.href = "/login"; 
-            } else {
-            const usuario_id = usuario.id;
-            
-            }
-
+                window.location.href = "/login"; 
+            } 
 
             const hoje = new Date().toISOString().split('T')[0];
 
@@ -50,7 +42,7 @@ function carrinho(){
                 'http://10.60.44.65:4000/venda',
                 {
                     data: hoje ,
-                    usuario_id: usuario_id
+                    usuario_id:  usuario.id
                 }
             )
             

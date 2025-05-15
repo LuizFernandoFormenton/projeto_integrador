@@ -7,7 +7,7 @@ function BarraLateral() {
 
     <div className="fixed right-0 top-20 h-48 w-12 bg-white rounded-bl-lg border-none border-gray-200 justify-items-center z-20">
 
-        <button className="bg-transparent border-none my-8 cursor-pointer" onClick={()=> window.location.href="/login"}>
+        <button className="bg-transparent border-none my-8 cursor-pointer" onClick={()=> window.location.href="/perfil_de_usuario"}>
             <FontAwesomeIcon icon={faUser} className="text-3xl m-2" />
         </button>
         <br/>
