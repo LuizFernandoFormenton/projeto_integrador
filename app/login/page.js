@@ -35,8 +35,6 @@ function Login () {
             if (email == i.email && senha == i.senha ){
                 console.log("Usuario encontrado!")
                 usuario.senha = ""
-                usuario.cep = ""
-                usuario.cpf = ""
                 localStorage.setItem( "usuario", JSON.stringify(i) )
                 fazendeiro = true
             }
@@ -46,10 +44,15 @@ function Login () {
         if(fazendeiro == false){
             alteraErroUsuario(true)
             console.log("Usuário não econtrado")
-        }else{
-            window.location.href = "/"; 
+        } else {
+            alteraErroUsuario(false)
+            console.log("Login realizado com sucesso")
 
+             window.location.href="/"
         }
+
+     
+        
         
         if( senha == "" ){
             alteraErroSenha(true);
