@@ -33,7 +33,7 @@ async function adicionarCarrinho(id){
           window.location.href = "/login"; 
       } 
 
-      const hoje = new Date().toISOString().split('T')[0];
+      const hoje = new Date().toISOString();
 
       const res = await axios.post(
           'http://localhost:4000/venda',
