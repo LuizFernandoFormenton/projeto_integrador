@@ -44,7 +44,7 @@ function carrinho(){
             const hoje = new Date().toISOString().split('T')[0];
 
             const res = await axios.post(
-                'http://10.60.44.65:4000/venda',
+                'http://localhost:4000/venda',
                 {
                     data: hoje ,
                     usuario_id:  usuario.id

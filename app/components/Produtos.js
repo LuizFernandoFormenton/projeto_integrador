@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+
 
 function Produtos (attr) {
   const [produtos, alteraProdutos] = useState([]);
@@ -10,24 +12,15 @@ function Produtos (attr) {
       window.location.href="produto/"+attr.produto.id
   }
 
-function adicionarCarrinho(){
-  if(localStorage.getItem ("carrinho") == null ){
-      const carrinho = [attr.produto]
-      localStorage.setItem("carrinho", JSON.stringify(carrinho)) 
-  }else{
-      let carrinho = localStorage.getItem ("carrinho")
-      carrinho = JSON.parse(carrinho)
-      carrinho.push(attr.produto)
-      carrinho = JSON.stringify (carrinho)
-      localStorage.setItem("carrinho", carrinho)
-  }
-
-  }
-
 function calcularDesconto(preco) {
   let precoComDesconto = (preco - (preco * 10 / 100)).toFixed(2); 
   return precoComDesconto.toString().replace(".", ",");
 }
+
+async function adicionarCarrinho(id){
+
+  console.log("passo aqui")
+
     let id_carrinho = -1
 
     const carrinhoSalvo = localStorage.getItem("carrinho");
@@ -43,7 +36,7 @@ function calcularDesconto(preco) {
       const hoje = new Date().toISOString().split('T')[0];
 
       const res = await axios.post(
-          'http://10.60.44.65:4000/venda',
+          'http://localhost:4000/venda',
           {
               data: hoje ,
               usuario_id:  usuario.id
@@ -74,17 +67,13 @@ function calcularDesconto(preco) {
     id_carrinho = carrinhoSalvo.id;
 
     try {
-      const response = await fetch("http://10.60.44.65:4000/transacao", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
+      const response = await axios.post("http://localhost:4000/transacao", 
+       {
           venda_id: id_carrinho,
           produto_id: id, 
           quantidade: 1, 
-        },
-      });
+        }
+      );
 
       if (response.ok) {
         alert("Produto adicionado com sucesso");
@@ -115,32 +104,6 @@ return (
     <div className="pr-2 pl-2 relative bg-white ">
 
       {/* avaliação */}
-  return ( 
-  <div className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
-        
-      {/* Imagem do Produto */}
-      <div>
-          <img onClick={() => redirecionar()} 
-          className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
-          src={"imagens/imagens_tela_inicial/" + attr.produto.img}/>
-      </div>
-
-      {/* nome */}
-      <div>
-        <p className="uppercase text-sm font-bold tracking-wide font-serif">
-        {attr.produto.nome}
-        </p>
-      </div>
-      
-      {/* Preço*/}
-      <div className="flex flex-col items-start leading-tight gap-0">
-        <p className="text-gray-500 line-through text-sm m-0 p-0">De R$ {attr.produto.preco.toString().replace(".", ",")}</p>
-        <p className="text-green-600 font-bold text-xl m-0 p-0">Por R$ {calcularDesconto(attr.produto.preco)}</p>
-      </div>
-      {/* Informações do Produto */}
-      <div className="pr-2 pl-2 relative bg-white ">
-
-        {/* avaliação */}
         <div>
           <p>{attr.produto.avaliacao}</p>
         </div>

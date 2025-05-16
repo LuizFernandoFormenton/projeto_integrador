@@ -12,7 +12,7 @@ function Login () {
     const [usuario, AlteraUsuario] = useState([]);
     
     async function buscaTodos(){
-        const response = await axios.get("http://10.60.44.65:4000/usuarios")
+        const response = await axios.get("http://localhost:4000/usuarios")
         console.log(response.data)
         AlteraUsuario(response.data)
     }
