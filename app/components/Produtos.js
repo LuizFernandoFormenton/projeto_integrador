@@ -22,8 +22,8 @@ function adicionarCarrinho(){
 
 }
 
-function calcularDesconto(preco, desconto) {
-  let precoComDesconto = (preco - (preco * desconto / 100)).toFixed(2); 
+function calcularDesconto(preco) {
+  let precoComDesconto = (preco - (preco * 10 / 100)).toFixed(2); 
   return precoComDesconto.toString().replace(".", ",");
 }
 
@@ -35,9 +35,9 @@ return (
       
     {/* Imagem do Produto */}
     <div>
-        <img onClick={() => redirecionar()} 
-        className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
-        href={ attr.produto.imagem}/>
+      <img onClick={() => redirecionar()} 
+      className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
+      src={attr.produto.imagem}/>
     </div>
 
     {/* Informações do Produto */}
@@ -58,7 +58,7 @@ return (
       {/* Preço*/}
       <div className="flex flex-col items-start leading-tight gap-0">
         <p className="text-gray-500 line-through text-sm m-0 p-0">De R$ {attr.produto.preco.toString().replace(".", ",")}</p>
-        <p className="text-green-600 font-bold text-xl m-0 p-0">Por R$ {calcularDesconto(attr.produto.preco, attr.produto.desconto)}</p>
+        <p className="text-green-600 font-bold text-xl m-0 p-0">Por R$ {calcularDesconto(attr.produto.preco)}</p>
       </div>
 
       {/* Tamanhos*/}
