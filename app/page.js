@@ -17,8 +17,6 @@ export default function Home() {
     alteraProdutos(response.data)
   }
 
-
-
   useEffect (()=>{
     buscarCamisas()
   }, [])
