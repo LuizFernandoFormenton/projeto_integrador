@@ -91,11 +91,11 @@ async function adicionarCarrinho(id){
 
 
 return ( 
-<div className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
+<div onClick={() => redirecionar()} className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
       
     {/* Imagem do Produto */}
     <div>
-        <img onClick={() => redirecionar()} 
+        <img  
         className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
         src={ attr.produto.imagem}/>
     </div>
