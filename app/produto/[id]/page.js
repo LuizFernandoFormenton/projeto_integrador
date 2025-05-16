@@ -155,7 +155,7 @@ function reviews (attr) {
             <Informacoes alteraProduto={alteraProduto} adicionarCarrinho={adicionarCarrinho} produto={produto} />
             <Devolucao/>
             <Frete/>
-            <Avaliacoes avaliacoes={produto.avaliacoes}/>
+            <Avaliacoes produto_id={produto.id}/>
 
                     
         </div>
