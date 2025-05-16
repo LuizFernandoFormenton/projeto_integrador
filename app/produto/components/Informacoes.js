@@ -17,12 +17,12 @@ function Informacoes(attr) {
                     <p className="text-red-600">R$ {( attr.produto.preco - attr.produto.preco*attr.produto.desconto/100 ).toFixed(2)} <strong className="bg-black text-white rounded-full" >{ attr.produto.desconto }% OFF</strong></p>
 
                     <ul> 
-                        {attr.produto.cor.map((i) =>
+                        {/*attr.produto.cor.map((i) =>
 
                                 <li onClick={ ()=> { attr.alteraProduto( {...attr.produto, cor: [i] } ) } } >
                                     <p> {i}  </p>
                                 </li>
-                        )}
+                        )*/}
                     </ul>    
 
 
@@ -30,14 +30,14 @@ function Informacoes(attr) {
 
             
             <ul>
-                {attr.produto.tamanho.map((i) => 
+                {/*attr.produto.tamanho.map((i) => 
 
                     <li onClick={ ()=> { attr.alteraProduto( {...attr.produto, tamanho: [i] } ) } } >
 
                         <p>{i}</p>
                         
                     </li>
-                )}
+                )*/}
             </ul>
 
             <p><button className="bg-green-800 text-white " onClick={()=> attr.adicionarCarrinho()} >ADICIONAR À SACOLA</button></p>

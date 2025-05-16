@@ -4,18 +4,20 @@ import Avaliacoes from "../components/Avaliacoes";
 import Devolucao from "../components/Devolucao";
 import Frete from "../components/Frete";
 import Informacoes from "../components/Informacoes";
-
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from "react";
 import "../reviews.css"
 import axios from "axios";
 
 export default 
-function reviews (attr) {
+function reviews () {
+  const params = useParams();
+  const id = params.id;
 
     const [produto, alteraProduto] = useState({});
 
     async function buscaUmProduto(id) {
-        const res = await axios.get("https://localhost:4000/produtos/" + id)  
+        const res = await axios.get("http://localhost:4000/produtos/" + id)  
 
         if (res.data){
             alteraProduto(res.data)
@@ -24,7 +26,7 @@ function reviews (attr) {
     }
 
     useEffect(() =>{
-        buscaUmProduto( attr.params.id)
+        buscaUmProduto( id)
     }, [])
     
  
