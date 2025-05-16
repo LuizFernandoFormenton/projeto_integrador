@@ -14,23 +14,28 @@ function carrinho(){
 
     const [produtos, alteraProdutos] = useState([]);
 
-        function calculaTotal(lista){
-            let conta = 0
-            lista.map((i)=>{
-                conta += i.preco
-            })
-            alteraTotal(conta)
-        }
-        const [total, alteraTotal] = useState(0)
-        function removerProduto(produto){
-           const novoCarrinho = produtos.filter(i => produto != i)
-           localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-            calculaTotal(novoCarrinho)
-            alteraProdutos(novoCarrinho)
-        }
-    
-        useEffect(()=> {
-           const usuario = JSON.parse(localStorage.getItem("usuario"));
+    function calculaTotal(lista){
+        let conta = 0
+        lista.map((i)=>{
+            conta += i.preco
+        })
+        alteraTotal(conta)
+    }
+
+    const [total, alteraTotal] = useState(0)
+
+    function removerProduto(produto){
+        const novoCarrinho = produtos.filter(i => produto != i)
+        localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+        calculaTotal(novoCarrinho)
+        alteraProdutos(novoCarrinho)
+    }
+
+    async function criarCarrinho() {
+        const carrinhoSalvo = localStorage.getItem("carrinho");
+
+        if (!carrinhoSalvo) {
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
 
             if (!usuario || !usuario.id) {
                 window.location.href = "/login"; 
@@ -38,22 +43,33 @@ function carrinho(){
 
             const hoje = new Date().toISOString().split('T')[0];
 
-            axios.post(
+            const res = await axios.post(
                 'http://10.60.44.65:4000/venda',
                 {
                     data: hoje ,
                     usuario_id:  usuario.id
                 }
             )
+                    
+        
+            // Salva no localStorage
+            localStorage.setItem("carrinho", JSON.stringify(res.data));
+        
             
-            let produtos = []
-            if( localStorage.getItem("carrinho") != null ){
-                produtos = JSON.parse( localStorage.getItem("carrinho") )
-                alteraProdutos( produtos )
-            }
-            calculaTotal(produtos)
+           
+        } 
+        
+        let produtos = []
+        if( localStorage.getItem("produtos") != null ){
+            produtos = JSON.parse( localStorage.getItem("produtos") )
+            alteraProdutos( produtos )
+        }
+        calculaTotal(produtos)
+    }
 
-        },[] )
+    useEffect(()=> {
+        criarCarrinho()
+    },[] )
     
     
     
