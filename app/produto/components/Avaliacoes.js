@@ -1,11 +1,22 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Avaliacoes(attr) {
 
     const [estrelas, alteraEstrelas] = useState(0);
+
+    async function buscaAvaliacoes(){
+        console.log(attr)
+        const res = await axios.get ("http://localhost:4000/avaliacao")
+        console.log(res)
+
+    }
     
+    useEffect(()=>{
+        buscaAvaliacoes()
+    }, [])
 
     return ( 
         <div>
@@ -19,7 +30,7 @@ function Avaliacoes(attr) {
             <button onClick={()=> alteraEstrelas (5)}> ⭐ </button>
             
 
-            <p> Classificação Média: {estrelas} ({attr.avaliacoes} avaliações) </p>
+            <p> Classificação Média: {estrelas} (avaliações) </p>
             <p><strong> Nenhuma Avaliação </strong></p>
             <p>Seja o primeiro a avaliar este produto</p>
             <button><strong> FAÇA LOGIN PARA ESCREVER UMA AVALIAÇÃO </strong></button>
