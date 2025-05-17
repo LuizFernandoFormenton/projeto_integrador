@@ -23,7 +23,7 @@ async function adicionarCarrinho(id){
 
     let id_carrinho = -1
 
-    const carrinhoSalvo = localStorage.getItem("carrinho");
+    let carrinhoSalvo = localStorage.getItem("carrinho");
 
     if (!carrinhoSalvo) {
       // Se não existir, cria um novo carrinho
@@ -42,14 +42,20 @@ async function adicionarCarrinho(id){
               usuario_id:  usuario.id
           }
       )
+
+
+      console.log("passo aqui 2")
+      console.log(res.data)
               
 
+      console.log("passo aqui 3")
       // Salva no localStorage
       localStorage.setItem("carrinho", JSON.stringify(res.data));
 
       // Atribui o novo id_carrinho
       id_carrinho = res.data.id;
-      console.log("Carrinho criado:", novoCarrinho);
+      console.log("Carrinho criado:", res.data);
+      carrinhoSalvo =  res.data
     } 
 
     if( localStorage.getItem("produtos") != null ){
@@ -67,7 +73,7 @@ async function adicionarCarrinho(id){
     id_carrinho = carrinhoSalvo.id;
 
     try {
-      const response = await axios.post("http://localhost:4000/transacao", 
+      const response = await axios.post('http://localhost:4000/transacao', 
        {
           venda_id: id_carrinho,
           produto_id: id, 
@@ -91,13 +97,13 @@ async function adicionarCarrinho(id){
 
 
 return ( 
-<div onClick={() => redirecionar()} className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
-      
+<div  className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
+      <div onClick={() => redirecionar()}>
     {/* Imagem do Produto */}
     <div>
         <img  
         className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]" 
-        href={ attr.produto.imagem}/>
+        src={ attr.produto.imagem}/>
     </div>
 
     {/* Informações do Produto */}
@@ -128,7 +134,12 @@ return (
           </p>
         </div>
 
-        {/* Botão de Comprar */}
+        
+
+      </div>
+      
+      </div>
+      {/* Botão de Comprar */}
 
         <div>  
           <button
@@ -136,8 +147,6 @@ return (
             className="w-full cursor-pointer h-10 bg-green-600 text-white text-sm font-semibold rounded-full mb-2 border-none"> COMPRAR
           </button> 
         </div>
-
-      </div>
   </div>
   );
 }
