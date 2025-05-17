@@ -3,13 +3,11 @@ import axios from 'axios';
 import Compra from "./Compra";
 import { useEffect, useState } from "react";
 
-
 function components () {
     const [usuario, alteraUsuario] = useState({});
 
     useEffect(() => {
         const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
-
         if (usuarioLocal && usuarioLocal.id) {
             alteraUsuario(usuarioLocal)
         }
@@ -36,8 +34,6 @@ function components () {
     const [editando4, alteraEditando4] = useState(false);
     const [editando5, alteraEditando5] = useState(false);
     const [historico, historicoCompras] = useState(false);
-
-    
 
     function manipulaEdicao() {
         alteraEditando(!editando);
@@ -101,12 +97,11 @@ function components () {
         alteraEditando3(false);
     }
 
-
     function salvarSexo(e) {
         e.preventDefault();
         alteraUsuario({
             ...usuario,
-            telefone: novoSexo
+            sexo: novoSexo
         });
         alteraEditando4(false);
     }
@@ -115,7 +110,7 @@ function components () {
         e.preventDefault();
         alteraUsuario({
             ...usuario,
-            telefone: novoCep
+            cep: novoCep
         });
         alteraEditando5(false);
     }
@@ -153,11 +148,11 @@ function components () {
 
     return ( 
         <div className="justify-center flex my-24">
-            <div className="justify-items-center w-48 rounded-xl shadow-md p-8 ">
+            <div className="justify-items-center w-50 rounded-xl shadow-md p-8 ">
 
-                <h1 className="text-red-600 text-3xl">Seu Perfil</h1>
+                <h1 className="text-red-600 text-3xl font-bold text-center mb-4">Seu perfil</h1>
 
-                <div className="flex gap-5 flex text-center">
+                <div className="flex gap-5 flex text-center justify-center mb-3">
                     <img 
                         width="100" 
                         height="100" 
@@ -167,153 +162,137 @@ function components () {
                 </div>    
 
                 <div className="text-center items-center gap-3">
-                    {editando ? 
-                        <input
-                            className="mt-2 mb-2" 
-                            type="text" 
-                            placeholder="Digite seu nome" 
-                            value={novoNome} 
-                            onChange={(e) => alteraNovoNome(e.target.value)} 
-                        /> : 
-                        <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.nome}</strong></p>
-                    }
-                    <button 
-                        onClick={editando ? salvarNome : manipulaEdicao} 
-                        className={`px-3 py-1 rounded-md crescer-menos border-none ${editando ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
-                    >
-                        {editando ? <span>Concluído</span> : <span>Alterar</span>}
-                    </button>
-                    {editando && 
-                        <button 
-                            onClick={cancelarEdicaoNome} 
-                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none "
-                        >
-                            Cancelar
-                        </button>
-                    }
 
+                    {/* Nome */}
+                    <div className="flex flex-col items-center mb-4">
+                        {editando ? 
+                            <input type="text" placeholder="Digite seu nome" value={novoNome} onChange={(e) => alteraNovoNome(e.target.value)} /> : 
+                            <p className="bg-gray-50 py-1.5 px-2 rounded text-lg font-semibold text-black-800 border-2 border-gray-300"><strong>{usuario.nome}</strong></p>
+                        }
+                        <div className="mt-2 flex gap-2">
+                            <button onClick={editando ? salvarNome : manipulaEdicao} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
+                                {editando ? "Concluído" : "Alterar"}
+                            </button>
+                            {editando && 
+                                <button onClick={cancelarEdicaoNome} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
+                                    Cancelar
+                                </button>
+                            }
+                        </div>
+                    </div>
 
+                    {/* Sexo */}
+                    <div className="flex flex-col items-center mb-4">
+                        {editando4 ? (
+                            <select
+                                value={novoSexo}
+                                onChange={(e) => alteraNovoSexo(e.target.value)}
+                                className="mt-2 mb-2 px-3 py-1 border rounded"
+                            >
+                                <option value="">Selecione...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Prefiro não me identificar">Prefiro não me identificar</option>
+                            </select>
+                        ) : (
+                            <p className="bg-gray-200 px-2 py-1.5 rounded text-lg font-semibold text-gray-800">
+                                <strong>{usuario.sexo}</strong>
+                            </p>
+                        )}
+                        <div className="mt-2 flex gap-2">
+                            <button
+                                onClick={editando4 ? salvarSexo : manipulaEdicao4}
+                                className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600"
+                            >
+                                {editando4 ? "Concluído" : "Alterar"}
+                            </button>
+                            {editando4 && (
+                                <button
+                                    onClick={cancelarEdicaoSexo}
+                                    className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600"
+                                >
+                                    Cancelar
+                                </button>
+                            )}
+                        </div>
+                    </div>
 
-                    {editando4 ?
-                        <input
-                        className="mt-2 mb-2"
-                        type=""
-                        placeholder="Digite sua data de nascimento"
-                        value={novoSexo}
-                        onChange={(e) => alteraNovoSexo(e.target.value)}
-                        /> :
-                        <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.sexo}</strong></p>
-                    }
-                    <button 
-                        onClick={editando ? salvarSexo : manipulaEdicao4} 
-                        className={`px-3 py-1 rounded-md crescer-menos border-none ${editando4 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
-                    >
-                        {editando ? <span>Concluído</span> : <span>Alterar</span>}
-                    </button>
-                    {editando && 
-                        <button 
-                            onClick={cancelarEdicaoSexo} 
-                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none "
-                        >
-                            Cancelar
-                        </button>
-                    }
+                    {/* Email */}
+                    <div className="flex flex-col items-center mb-4">
+                        {editando2 ? 
+                            <input type="email" placeholder="Digite seu email" value={novoEmail} onChange={(e) => alteraNovoEmail(e.target.value)} /> : 
+                            <p className="bg-gray-50 px-2 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.email}</strong></p>
+                        }
+                        <div className="mt-2 flex gap-2">
+                            <button onClick={editando2 ? salvarEmail : manipulaEdicao2} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
+                                {editando2 ? "Concluído" : "Alterar"}
+                            </button>
+                            {editando2 && 
+                                <button onClick={cancelarEdicaoEmail} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
+                                    Cancelar
+                                </button>
+                            }
+                        </div>
+                    </div>
 
+                    {/* Telefone */}
+                    <div className="flex flex-col items-center mb-4">
+                        {editando3 ? 
+                            <input type="tel" placeholder="Digite seu telefone" value={novoTelefone} onChange={(e) => alteraNovoTelefone(e.target.value)} /> : 
+                            <p className="bg-gray-200 px-2 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.telefone}</strong></p>
+                        }
+                        <div className="mt-2 flex gap-2">
+                            <button onClick={editando3 ? salvarTelefone : manipulaEdicao3} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
+                                {editando3 ? "Concluído" : "Alterar"}
+                            </button>
+                            {editando3 && 
+                                <button onClick={cancelarEdicaoTelefone} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
+                                    Cancelar
+                                </button>
+                            }
+                        </div>
+                    </div>
 
-
-
-
-
-                    {editando2 ? 
-                        <input
-                            className="mt-2 mb-2" 
-                            type="email" 
-                            placeholder="Digite seu email" 
-                            value={novoEmail} 
-                            onChange={(e) => alteraNovoEmail(e.target.value)} 
-                        /> : 
-                        <p className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.email}</strong></p>
-                    }
-                    <button 
-                        onClick={editando2 ? salvarEmail : manipulaEdicao2} 
-                        className={`px-3 py-1 rounded-md crescer-menos border-none mb-2 ${editando2 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
-                    >
-                        {editando2 ? <span>Concluído</span> : <span>Alterar</span>}
-                    </button>
-                    {editando2 && 
-                        <button 
-                            onClick={cancelarEdicaoEmail} 
-                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none"
-                        >
-                            Cancelar
-                        </button>
-                    }
-
-
-
-
-
-                    {editando3 ? 
-                        <input 
-                            className="mt-3" 
-                            type="tel" 
-                            placeholder="Digite seu telefone" 
-                            value={novoTelefone} 
-                            onChange={(e) => alteraNovoTelefone(e.target.value)} 
-                        /> : 
-                        <p><strong className="bg-gray-200 px-1 py-1.5 rounded text-lg font-semibold text-gray-800">{usuario.telefone}</strong></p>
-                    }
-                    {/* <p>{usuario.cpf}</p> */}
-                    <button 
-                        onClick={editando3 ? salvarTelefone : manipulaEdicao3} 
-                        className={`px-3 py-1 rounded-md crescer-menos border-none mt-2 ${editando3 ? `bg-green-500 text-black` : `bg-red-700`} text-white`}
-                    >
-                        {editando3 ? <span>Concluído</span> : <span>Alterar</span>}
-                    </button>
-                    {editando3 && 
-                        <button 
-                            onClick={cancelarEdicaoTelefone} 
-                            className="mt-3 bg-red-700 ml-2 px-3 py-1 rounded-md text-white crescer-menos border-none"
-                        >
-                            Cancelar
-                        </button>
-                    }
                 </div>
 
-
-
-
-
-                <div className="text-center items-center mr-2">
+                <div className="text-center items-center mr-2 flex gap-2 justify-center">
                     <button 
                         onClick={mostrarHistorico}  
-                        className={`mt-5 px-3 py-1 rounded-md crescer-menos border-none ${historico ? `bg-green-500 text-black` : `bg-red-700`} ml-3 text-white`}
+                        className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600" 
                     >
-                        {historico ? <span>Concluído</span> : <span>Mostrar histórico</span>}
+                        {historico ? "Concluído" : "Histórico"}
                     </button>
 
-                    {historico ? 
-                        <div>
-                            <h2>Histórico</h2>
-                            <ul>
-                                {compras.map((i) => 
-                                    <Compra   
-                                        imagem={i.imagem} 
-                                        nome={i.nome} 
-                                        tipo={i.tipo} 
-                                        preco={i.preco} 
-                                        quantidade={i.quantidade} 
-                                        data_da_compra={i.data_da_compra} 
-                                    />
-                                )}
-                            </ul>
-                            <br/>
-                        </div>
-                        : 
-                        <div></div>
-                    }
+                    <button 
+                        onClick={() => {
+                            localStorage.removeItem("usuario");
+                            window.location.href = "/";
+                        }} 
+                        className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600"
+                    >
+                        Sair
+                    </button>
                 </div>
-            
+
+                {historico ? 
+                    <div>
+                        <h2 className="font-semibold text-center mt-6 mb-2">Histórico</h2>
+                        <ul>
+                            {compras.map((i) => 
+                                <Compra   
+                                    imagem={i.imagem} 
+                                    nome={i.nome} 
+                                    tipo={i.tipo} 
+                                    preco={i.preco} 
+                                    quantidade={i.quantidade} 
+                                    data_da_compra={i.data_da_compra} 
+                                />
+                            )}
+                        </ul>
+                        <br/>
+                    </div>
+                    : null
+                }
             </div>
         </div>
     );
