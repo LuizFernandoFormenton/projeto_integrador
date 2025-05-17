@@ -23,7 +23,7 @@ async function adicionarCarrinho(id){
 
     let id_carrinho = -1
 
-    const carrinhoSalvo = localStorage.getItem("carrinho");
+    let carrinhoSalvo = localStorage.getItem("carrinho");
 
     if (!carrinhoSalvo) {
       // Se não existir, cria um novo carrinho
@@ -42,14 +42,20 @@ async function adicionarCarrinho(id){
               usuario_id:  usuario.id
           }
       )
+
+
+      console.log("passo aqui 2")
+      console.log(res.data)
               
 
+      console.log("passo aqui 3")
       // Salva no localStorage
       localStorage.setItem("carrinho", JSON.stringify(res.data));
 
       // Atribui o novo id_carrinho
       id_carrinho = res.data.id;
-      console.log("Carrinho criado:", novoCarrinho);
+      console.log("Carrinho criado:", res.data);
+      carrinhoSalvo =  res.data
     } 
 
     if( localStorage.getItem("produtos") != null ){
@@ -67,7 +73,7 @@ async function adicionarCarrinho(id){
     id_carrinho = carrinhoSalvo.id;
 
     try {
-      const response = await axios.post("http://localhost:4000/transacao", 
+      const response = await axios.post('http://localhost:4000/transacao', 
        {
           venda_id: id_carrinho,
           produto_id: id, 
