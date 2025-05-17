@@ -6,11 +6,15 @@ import axios from "axios";
 function Avaliacoes(attr) {
 
     const [estrelas, alteraEstrelas] = useState(0);
+     const [avaliacao, alteraAvaliacao]  = useState([]);
+
+
 
     async function buscaAvaliacoes(){
         console.log(attr)
         const res = await axios.get ("http://localhost:4000/avaliacao")
-        console.log(res)
+        console.log(res.data)
+        alteraAvaliacao(res.data)
 
     }
     
@@ -52,6 +56,20 @@ function Avaliacoes(attr) {
 
             </select>
 
+            {
+                avaliacao.map(
+                    (i) => (
+                        <div key={i.id}>
+                            {i.nota}
+
+                            <h2 className="text-xl font-semibold text-black-800">Nota: {i.nota}</h2>
+                            <p className="text-black-600 italic mt-2">Comentário: {i.comentario}</p>
+                            <p className="text-sm text-black-500 mt-2">Usuário: {i.usuario?.nome}</p>
+                            
+                        </div>
+                    )
+                )
+            }
 
 
         </div>
