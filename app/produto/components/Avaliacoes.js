@@ -19,14 +19,23 @@ function Avaliacoes(attr) {
     }
     
     useEffect(()=>{
-        buscaAvaliacoes()
+        buscaAvaliacoes();
+
+        const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
+        if (usuarioLocal && usuarioLocal.id) {
+            alteraUsuario(usuarioLocal)
+        }
     }, [])
+
+    const [usuario, alteraUsuario] = useState({});
+
 
     return ( 
         <div>
 
             <h2>Avaliações do Produto</h2>
 
+{/*
             <button onClick={()=> alteraEstrelas (1)}> ⭐ </button>
             <button onClick={()=> alteraEstrelas (2)}> ⭐ </button>
             <button onClick={()=> alteraEstrelas (3)}> ⭐ </button>
@@ -35,16 +44,15 @@ function Avaliacoes(attr) {
             
 
             <p> Classificação Média: {estrelas} (avaliações) </p>
-            <p><strong> Nenhuma Avaliação </strong></p>
-            <p>Seja o primeiro a avaliar este produto</p>
-            <button><strong> FAÇA LOGIN PARA ESCREVER UMA AVALIAÇÃO </strong></button>
-
+            
+           
             <select>
                 <option value="Mais Recentes">Mais Recentes</option>
                 <option value="Mais Antigas">Mais Antigas</option>
                 <option value="Classificação mais alta">Classificação mais alta</option>
                 <option value="Classificação mais baixa">Classificação mais baixa</option>
             </select>
+*/}
 
             <select>
                 <option value="Todos">Todos</option>
@@ -57,18 +65,31 @@ function Avaliacoes(attr) {
             </select>
 
             {
-                avaliacao.map(
-                    (i) => (
-                        <div key={i.id}>
-                            {i.nota}
-
-                            <h2 className="text-xl font-semibold text-black-800">Nota: {i.nota}</h2>
-                            <p className="text-black-600 italic mt-2">Comentário: {i.comentario}</p>
-                            <p className="text-sm text-black-500 mt-2">Usuário: {i.usuario?.nome}</p>
-                            
-                        </div>
+                usuario.id == undefined?           
+                    (
+                        <button><strong> FAÇA LOGIN PARA ESCREVER UMA AVALIAÇÃO </strong></button>
+                    ): (
+                        avaliacao.length > 0 ?
+                        avaliacao.map(
+                            (i) => (
+                                <div key={i.id}>
+                                    {i.nota}
+    
+                                    <h2 className="text-xl font-semibold text-black-800">Nota: {i.nota}</h2>
+                                    <p className="text-black-600 italic mt-2">Comentário: {i.comentario}</p>
+                                    <p className="text-sm text-black-500 mt-2">Usuário: {i.usuario?.nome}</p>
+                                    
+                                </div>
+                            )
+                        ):
+                        (
+                            <>
+                                <p><strong> Nenhuma Avaliação </strong></p>
+                                <p>Seja o primeiro a avaliar este produto</p>
+                            </>
+                        )
+                    
                     )
-                )
             }
 
 
