@@ -31,18 +31,23 @@ function carrinho(){
         alteraProdutos(novoCarrinho)
     }
 
-    async function criarCarrinho() {
-        const carrinhoSalvo = localStorage.getItem("carrinho");
+    async function lerCarrinho() {
+        let id_carrinho = -1
 
-        if (!carrinhoSalvo) {
+        let carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho"));
+        console.log(carrinhoSalvo)
+
+        
+        if (!carrinhoSalvo || carrinhoSalvo.id == undefined) {
+            // Se não existir, cria um novo carrinho
             const usuario = JSON.parse(localStorage.getItem("usuario"));
-
+    
             if (!usuario || !usuario.id) {
                 window.location.href = "/login"; 
             } 
-
-            const hoje = new Date().toISOString().split('T')[0];
-
+    
+            const hoje = new Date().toISOString();
+    
             const res = await axios.post(
                 'http://localhost:4000/venda',
                 {
@@ -50,25 +55,38 @@ function carrinho(){
                     usuario_id:  usuario.id
                 }
             )
+    
+    
+            console.log("passo aqui 2")
+            console.log(res.data)
                     
-        
+    
+            console.log("passo aqui 3")
             // Salva no localStorage
             localStorage.setItem("carrinho", JSON.stringify(res.data));
-        
-            
-           
+    
+            // Atribui o novo id_carrinho
+            id_carrinho = res.data.id;
+            console.log("Carrinho criado:", res.data);
+            carrinhoSalvo =  res.data
         } 
         
+        id_carrinho = carrinhoSalvo.id;
+
+        const res = await axios.get('http://localhost:4000/transacao/'+ id_carrinho)
+        
         let produtos = []
-        if( localStorage.getItem("produtos") != null ){
-            produtos = JSON.parse( localStorage.getItem("produtos") )
-            alteraProdutos( produtos )
-        }
+        res.data.map(
+            (p) => {produtos.push(p.produtos)}
+        )
+      
+        alteraProdutos( produtos )
+
         calculaTotal(produtos)
     }
 
     useEffect(()=> {
-        criarCarrinho()
+        lerCarrinho()
     },[] )
     
     
@@ -105,7 +123,10 @@ function carrinho(){
 
                         <div className="flex">
 
-                         <button className="bg-lime-500 text-white p-4 boder"> Finalizar Compra </button> 
+                         <button onClick={()=>{
+                            localStorage.removeItem("carrinho")
+                            window.location.href = "/"
+                         }} className="bg-lime-500 text-white p-4 boder"> Finalizar Compra </button> 
                          <button className="bg-lime-500 text-white p-4 boder"> Continuar Comprando </button>      
 
                         </div>

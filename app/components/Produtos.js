@@ -26,7 +26,7 @@ async function adicionarCarrinho(id){
     let carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho"));
     console.log(carrinhoSalvo)
 
-    if (!carrinhoSalvo) {
+    if (!carrinhoSalvo || carrinhoSalvo.id == undefined) {
       // Se não existir, cria um novo carrinho
       const usuario = JSON.parse(localStorage.getItem("usuario"));
 
