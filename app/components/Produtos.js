@@ -47,7 +47,6 @@ async function adicionarCarrinho(id){
 
       console.log("passo aqui 2")
       console.log(res.data)
-              
 
       console.log("passo aqui 3")
       // Salva no localStorage
@@ -131,9 +130,6 @@ return (
             <span className="font-bold">Tamanho :</span> {attr.produto.tamanho}
           </p>
         </div>
-
-        
-
       </div>
       
       </div>

@@ -7,7 +7,7 @@ function Informacoes(attr) {
     return (  
         <div>
             <div >
-                    <img width="300" height="450" src="https://bawclothing.vtexassets.com/arquivos/ids/336819-1240-1860/0094002035_01.jpg?v=638663473337600000" />
+                    <img width="300" height="450" src={attr.produto.imagem}/>
                     <p><b> { attr.produto.nome } </b></p>
             </div>
 

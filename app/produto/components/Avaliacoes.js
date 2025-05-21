@@ -4,97 +4,109 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Avaliacoes(attr) {
-
     const [estrelas, alteraEstrelas] = useState(0);
-     const [avaliacao, alteraAvaliacao]  = useState([]);
+    const [hoverEstrelas, setHoverEstrelas] = useState(0);
+    const [avaliacao, alteraAvaliacao] = useState([]);
+    const [usuario, alteraUsuario] = useState({});
+    const [comentario, alteraComentario] = useState("");
 
-
-
-    async function buscaAvaliacoes(){
-        console.log(attr)
-        const res = await axios.get ("http://localhost:4000/avaliacao")
-        console.log(res.data)
-        alteraAvaliacao(res.data)
-
+    async function buscaAvaliacoes() {
+        const res = await axios.get("http://localhost:4000/avaliacao/" + attr.produto_id);
+        alteraAvaliacao(res.data);
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         buscaAvaliacoes();
 
         const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
         if (usuarioLocal && usuarioLocal.id) {
-            alteraUsuario(usuarioLocal)
+            alteraUsuario(usuarioLocal);
         }
-    }, [])
+    }, []);
 
-    const [usuario, alteraUsuario] = useState({});
+    async function enviarAvaliacao() {
+        if (!comentario || estrelas === 0) {
+            alert("Selecione uma nota e escreva um comentário.");
+            return;
+        }
 
+        try {
+            await axios.post("http://localhost:4000/avaliacao", {
+                nota: estrelas,
+                comentario,
+                usuario_id: usuario.id,
+                produto_id: attr.produto_id
+            });
 
-    return ( 
-        <div>
+            alteraComentario("");
+            alteraEstrelas(0);
+            buscaAvaliacoes();
+        } catch (err) {
+            console.error(err);
+            alert("Erro ao enviar avaliação.");
+        }
+    }
 
-            <h2>Avaliações do Produto</h2>
+    return (
+        <div className="mt-6 space-y-4">
+            <h3 className="font-semibold text-lg">Deixe seu comentário:</h3>
 
-{/*
-            <button onClick={()=> alteraEstrelas (1)}> ⭐ </button>
-            <button onClick={()=> alteraEstrelas (2)}> ⭐ </button>
-            <button onClick={()=> alteraEstrelas (3)}> ⭐ </button>
-            <button onClick={()=> alteraEstrelas (4)}> ⭐ </button>
-            <button onClick={()=> alteraEstrelas (5)}> ⭐ </button>
-            
+            <textarea
+                className="w-full p-2 border border-gray-300 rounded"
+                placeholder="Escreva sua opinião aqui..."
+                value={comentario}
+                onChange={(e) => alteraComentario(e.target.value)}
+            />
 
-            <p> Classificação Média: {estrelas} (avaliações) </p>
-            
-           
-            <select>
-                <option value="Mais Recentes">Mais Recentes</option>
-                <option value="Mais Antigas">Mais Antigas</option>
-                <option value="Classificação mais alta">Classificação mais alta</option>
-                <option value="Classificação mais baixa">Classificação mais baixa</option>
-            </select>
-*/}
-
-            <select>
-                <option value="Todos">Todos</option>
-                <option value="1 Estrelas">1 Estrelas</option>
-                <option value="2 Estrelas">2 Estrelas</option>
-                <option value="3 Estrelas">3 Estrelas</option>
-                <option value="4 Estrelas">4 Estrelas</option>
-                <option value="5 Estrelas">4 Estrelas</option>
-
-            </select>
+            <div className="flex space-x-1 text-xl">
+                {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                        key={star}
+                        onClick={() => alteraEstrelas(star)}
+                        onMouseEnter={() => setHoverEstrelas(star)}
+                        onMouseLeave={() => setHoverEstrelas(0)}
+                        className={`
+                            ${star <= (hoverEstrelas || estrelas) ? 'text-yellow-400' : 'text-gray-300'}
+                            transition duration-200
+                        `}
+                    >
+                        ★
+                    </button>
+                ))}
+            </div>
 
             {
-                usuario.id == undefined?           
-                    (
-                        <button><strong> FAÇA LOGIN PARA ESCREVER UMA AVALIAÇÃO </strong></button>
-                    ): (
-                        avaliacao.length > 0 ?
-                        avaliacao.map(
-                            (i) => (
-                                <div key={i.id}>
-                                    {i.nota}
-    
-                                    <h2 className="text-xl font-semibold text-black-800">Nota: {i.nota}</h2>
-                                    <p className="text-black-600 italic mt-2">Comentário: {i.comentario}</p>
-                                    <p className="text-sm text-black-500 mt-2">Usuário: {i.usuario?.nome}</p>
-                                    
-                                </div>
-                            )
-                        ):
-                        (
-                            <>
-                                <p><strong> Nenhuma Avaliação </strong></p>
-                                <p>Seja o primeiro a avaliar este produto</p>
-                            </>
-                        )
-                    
-                    )
+                usuario.id ? (
+                    <button
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        onClick={enviarAvaliacao}
+                    >
+                        Comentar
+                    </button>
+                ) : (
+                    <p className="text-red-500">Faça login para escrever uma avaliação.</p>
+                )
             }
 
+            <hr className="my-6" />
 
+            <h2 className="text-xl font-bold">Avaliações do Produto</h2>
+
+            {avaliacao.length > 0 ? (
+                avaliacao.map((i) => (
+                    <div key={i.id} className="border-b py-4">
+                        <p className="text-yellow-500">
+                            {'★'.repeat(i.nota)}{'☆'.repeat(5 - i.nota)}
+                        </p>
+                        <p className="text-gray-800 mt-1">{i.comentario}</p>
+                        <p className="text-sm text-black-500 mt-2">Usuário: {i.usuario?.nome}</p>
+                    </div>
+                ))
+            ) : (
+                <p className="text-gray-500">Nenhuma avaliação ainda.</p>
+            )}
         </div>
-     );
+    );
 }
 
 export default Avaliacoes;
