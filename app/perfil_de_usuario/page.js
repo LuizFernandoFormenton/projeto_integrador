@@ -167,7 +167,7 @@ function components () {
                     <div className="flex flex-col items-center mb-4">
                         {editando ? 
                             <input type="text" placeholder="Digite seu nome" value={novoNome} onChange={(e) => alteraNovoNome(e.target.value)} /> : 
-                            <p className="bg-gray-50 py-1.5 px-2 rounded text-lg font-semibold text-black-800 border-2 border-gray-300"><strong>{usuario.nome}</strong></p>
+                            <p className="bg-red-100 py-2 px-12 rounded-full text-lg font-semibold text-black-800 border-2 border-gray-300"><strong>{usuario.nome}</strong></p>
                         }
                         <div className="mt-2 flex gap-2">
                             <button onClick={editando ? salvarNome : manipulaEdicao} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
@@ -187,7 +187,7 @@ function components () {
                             <select
                                 value={novoSexo}
                                 onChange={(e) => alteraNovoSexo(e.target.value)}
-                                className="mt-2 mb-2 px-3 py-1 border rounded"
+                                className="mt-2 mb-2 px-3 py-1 border rounded-full"
                             >
                                 <option value="">Selecione...</option>
                                 <option value="Masculino">Masculino</option>
@@ -195,7 +195,7 @@ function components () {
                                 <option value="Prefiro não me identificar">Prefiro não me identificar</option>
                             </select>
                         ) : (
-                            <p className="bg-gray-50 px-20 py-5 rounded text-lg font-semibold text-black">
+                            <p className="bg-red-100 px-20 py-2 rounded-full text-lg font-semibold text-black">
                                 <strong>{usuario.genero}</strong>
                             </p>
                         )}
@@ -221,7 +221,7 @@ function components () {
                     <div className="flex flex-col items-center mb-4">
                         {editando2 ? 
                             <input type="email" placeholder="Digite seu email" value={novoEmail} onChange={(e) => alteraNovoEmail(e.target.value)} /> : 
-                            <p className="bg-gray-50 px-2 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.email}</strong></p>
+                            <p className="bg-red-100 px-4 py-2 rounded-full text-lg font-semibold text-gray-800"><strong>{usuario.email}</strong></p>
                         }
                         <div className="mt-2 flex gap-2">
                             <button onClick={editando2 ? salvarEmail : manipulaEdicao2} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
@@ -239,7 +239,7 @@ function components () {
                     <div className="flex flex-col items-center mb-4">
                         {editando3 ? 
                             <input type="tel" placeholder="Digite seu telefone" value={novoTelefone} onChange={(e) => alteraNovoTelefone(e.target.value)} /> : 
-                            <p className="bg-gray-50 px-2 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.telefone}</strong></p>
+                            <p className="bg-red-100 px-12 py-2 rounded-full text-lg font-semibold text-gray-800"><strong>{usuario.telefone}</strong></p>
                         }
                         <div className="mt-2 flex gap-2">
                             <button onClick={editando3 ? salvarTelefone : manipulaEdicao3} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
