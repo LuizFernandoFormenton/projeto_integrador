@@ -195,8 +195,8 @@ function components () {
                                 <option value="Prefiro não me identificar">Prefiro não me identificar</option>
                             </select>
                         ) : (
-                            <p className="bg-gray-200 px-2 py-1.5 rounded text-lg font-semibold text-gray-800">
-                                <strong>{usuario.sexo}</strong>
+                            <p className="bg-gray-50 px-20 py-5 rounded text-lg font-semibold text-black">
+                                <strong>{usuario.genero}</strong>
                             </p>
                         )}
                         <div className="mt-2 flex gap-2">
@@ -239,7 +239,7 @@ function components () {
                     <div className="flex flex-col items-center mb-4">
                         {editando3 ? 
                             <input type="tel" placeholder="Digite seu telefone" value={novoTelefone} onChange={(e) => alteraNovoTelefone(e.target.value)} /> : 
-                            <p className="bg-gray-200 px-2 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.telefone}</strong></p>
+                            <p className="bg-gray-50 px-2 py-1.5 rounded text-lg font-semibold text-gray-800"><strong>{usuario.telefone}</strong></p>
                         }
                         <div className="mt-2 flex gap-2">
                             <button onClick={editando3 ? salvarTelefone : manipulaEdicao3} className="bg-transparent border-none text-blue-500 underline decoration-1 hover:text-blue-600">
