@@ -125,6 +125,7 @@ function carrinho(){
 
                          <button onClick={()=>{
                             localStorage.removeItem("carrinho")
+                            alert("Compra finalizada com sucesso!");
                             window.location.href = "/"
                          }} className="bg-lime-500 text-white p-4 boder"> Finalizar Compra </button> 
                          <button className="bg-lime-500 text-white p-4 boder"> Continuar Comprando </button>      
