@@ -3,6 +3,7 @@ import { useState } from "react";
 import Botoes from "../login/components/Botoes";
 import InputPersonalizado from "../login/components/InputPersonalizado";
 import axios from "axios";
+import host from "../lib/host";
 
 function Cadrasto () {
 
@@ -196,7 +197,7 @@ function Cadrasto () {
             return
         }
 
-        axios.post('http://localhost:4000/usuarios', {
+        axios.post(host + '/usuarios', {
             nome: usuario.nome,
             data_nascimento: usuario.dataNascimento,
             genero: usuario.sexo,

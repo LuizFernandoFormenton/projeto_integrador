@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import Botoes from "./components/Botoes";
 import InputPersonalizado from "./components/InputPersonalizado";
+import host from "../lib/host";
 
 function Login () {
 
@@ -12,7 +13,7 @@ function Login () {
     const [usuario, AlteraUsuario] = useState([]);
     
     async function buscaTodos(){
-        const response = await axios.get("http://localhost:4000/usuarios")
+        const response = await axios.get(host + '/usuarios')
         console.log(response.data)
         AlteraUsuario(response.data)
     }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import host from "../lib/host";
 
 
 function Produtos (attr) {
@@ -37,7 +38,7 @@ async function adicionarCarrinho(id){
       const hoje = new Date().toISOString();
 
       const res = await axios.post(
-          'http://localhost:4000/venda',
+          host + '/venda',
           {
               data: hoje ,
               usuario_id:  usuario.id
@@ -74,7 +75,7 @@ async function adicionarCarrinho(id){
     console.log(id_carrinho)
 
     try {
-      const response = await axios.post('http://localhost:4000/transacao', 
+      const response = await axios.post(host + '/transacao', 
        {
           venda_id: id_carrinho,
           produto_id: id, 

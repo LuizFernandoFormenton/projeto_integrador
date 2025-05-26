@@ -5,6 +5,7 @@ import Rodape from "./components/Rodape";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Produtos from "./components/Produtos";
+import host from "./lib/host";
 
 export default function Home() {
   const [ precoProduto, alteraPreco] = useState(25);
@@ -12,7 +13,7 @@ export default function Home() {
   const [produtos, alteraProdutos] = useState([]);
 
   async function buscarCamisas(){
-    const response = await axios.get("http://localhost:4000/produtos")
+    const response = await axios.get(host + '/produtos')
     console.log(response.data)
     alteraProdutos(response.data)
   }

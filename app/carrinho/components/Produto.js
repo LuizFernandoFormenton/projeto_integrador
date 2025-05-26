@@ -9,11 +9,11 @@ function Produto(attr) {
 
         
         <div>
-    <img src="https://placehold.co/200"/> 
+         <img src= {attr.produtos.imagem} /> 
   
-        <h2>{attr.nome}</h2>
-        <p>Tamanho: <strong> {attr.tamanho} </strong></p>
-        <p>Total <strong> {attr.preco} </strong></p>
+            <h2>{attr.nome}</h2>
+            <p>Tamanho: <strong> {attr.tamanho} </strong></p>
+            <p>Total <strong> {attr.preco} </strong></p>
         </div>
 
 

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from "react";
 import "../reviews.css"
 import axios from "axios";
+import host from "@/app/lib/host";
 
 export default function Reviews() {
   const params = useParams();
@@ -15,7 +16,7 @@ export default function Reviews() {
 
   async function buscaUmProduto(id) {
     try {
-      const res = await axios.get(`http://localhost:4000/produtos/${id}`);  
+      const res = await axios.get(host + `/produtos/${id}`);  
       if (res.data) {
         alteraProduto(res.data);
       }

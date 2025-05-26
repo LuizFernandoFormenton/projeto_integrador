@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import host from "@/app/lib/host";
 
 function Avaliacoes(attr) {
     const [estrelas, alteraEstrelas] = useState(0);
@@ -11,7 +12,7 @@ function Avaliacoes(attr) {
     const [comentario, alteraComentario] = useState("");
 
     async function buscaAvaliacoes() {
-        const res = await axios.get("http://localhost:4000/avaliacao/" + attr.produto_id);
+        const res = await axios.get(host + '/avaliacao/' + attr.produto_id);
         alteraAvaliacao(res.data);
     }
 
@@ -31,7 +32,7 @@ function Avaliacoes(attr) {
         }
 
         try {
-            await axios.post("http://localhost:4000/avaliacao", {
+            await axios.post(host + '/avaliacao', {
                 nota: estrelas,
                 comentario,
                 usuario_id: usuario.id,

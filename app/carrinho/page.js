@@ -6,6 +6,7 @@ import "./carrinho.css";
 import { useEffect, useState } from "react";
 import { unstable_rethrow } from "next/navigation";
 import axios from "axios";
+import host from "../lib/host";
 
 
 
@@ -49,7 +50,7 @@ function carrinho(){
             const hoje = new Date().toISOString();
     
             const res = await axios.post(
-                'http://localhost:4000/venda',
+                host + ' /venda',
                 {
                     data: hoje ,
                     usuario_id:  usuario.id
@@ -73,7 +74,7 @@ function carrinho(){
         
         id_carrinho = carrinhoSalvo.id;
 
-        const res = await axios.get('http://localhost:4000/transacao/'+ id_carrinho)
+        const res = await axios.get(host + '/transacao/'+ id_carrinho)
         
         let produtos = []
         res.data.map(

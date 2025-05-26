@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import BarraLateral from "./BarraLateral";
 import axios from "axios";
+import host from "../lib/host";
 
 function Cabecalho() {
     const [pesquisa, alteraPesquisa] = useState("");
@@ -14,7 +15,7 @@ function Cabecalho() {
 
     async function buscaCategorias() {
         try {
-            const res = await axios.get("http://localhost:4000/categoria");
+            const res = await axios.get(host + '/categoria');
             alteraCategoria(res.data);
         } catch (error) {
             console.error("Erro ao buscar categorias:", error);
