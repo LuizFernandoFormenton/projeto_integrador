@@ -13,6 +13,7 @@ function Avaliacoes(attr) {
 
     async function buscaAvaliacoes() {
         const res = await axios.get(host + '/avaliacao/' + attr.produto_id);
+        console.log(res)
         alteraAvaliacao(res.data);
     }
 

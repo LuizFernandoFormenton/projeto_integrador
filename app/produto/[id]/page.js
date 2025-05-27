@@ -32,7 +32,37 @@ export default function Reviews() {
   }, [id]);
 
   async function adicionarCarrinho(id) {
-    // ... (mantenha a mesma função que você já tinha)
+    try {
+      const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const index = carrinhoAtual.findIndex(item => item.id === id);
+
+      if (index === -1) {
+        const novoCarrinho = [
+          ...carrinhoAtual,
+          {
+            id: produto.id,
+            nome: produto.nome,
+            preco: produto.preco,
+            imagem: produto.imagem,
+            quantidade: 1
+          }
+        ];
+        localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
+        alert('Produto adicionado à sacola!');
+      } else {
+        const confirmar = window.confirm('Produto já está na sacola. Deseja adicionar mais uma unidade?');
+        if (confirmar) {
+          carrinhoAtual[index].quantidade += 1;
+          localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
+          alert('Mais uma unidade adicionada à sacola!');
+        } else {
+          alert('Nenhuma alteração feita na sacola.');
+        }
+      }
+    } catch (erro) {
+      console.error("Erro ao adicionar ao carrinho:", erro);
+      alert('Erro ao adicionar produto à sacola.');
+    }
   }
 
   if (carregando) {
@@ -47,7 +77,6 @@ export default function Reviews() {
     <div className="flex flex-col md:flex-row gap-8 p-6 max-w-6xl mx-auto w-full">
       {/* LADO ESQUERDO - IMAGEM E DESCRIÇÃO */}
       <div className="md:w-2/3 flex flex-col gap-8">
-        {/* IMAGEM DO PRODUTO */}
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <img
             src={produto.imagem}
@@ -56,7 +85,6 @@ export default function Reviews() {
           />
         </div>
 
-        {/* DESCRIÇÃO */}
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Descrição do Produto</h2>
           <p className="text-gray-600 whitespace-pre-line">
@@ -67,17 +95,16 @@ export default function Reviews() {
 
       {/* LADO DIREITO - INFORMAÇÕES E AVALIAÇÕES */}
       <div className="md:w-1/3 flex flex-col gap-6">
-        {/* CARD DE COMPRA */}
         <div className="bg-white rounded-xl shadow-sm p-6 sticky top-6">
           <h1 className="text-2xl font-bold mb-2 text-gray-800">{produto.nome}</h1>
-          
+
           <div className="mb-6">
             <span className="text-3xl font-bold text-emerald-600">
-              {produto.preco?.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+              {produto.preco?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
             </span>
             {produto.preco_original && produto.preco_original > produto.preco && (
               <span className="ml-2 text-sm text-gray-500 line-through">
-                {produto.preco_original.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
+                {produto.preco_original.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </span>
             )}
           </div>
@@ -87,7 +114,7 @@ export default function Reviews() {
             <span className="text-gray-600">{produto.tamanho || 'Único'}</span>
           </div>
 
-          <button 
+          <button
             onClick={() => adicionarCarrinho(produto.id)}
             className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg mb-6"
           >
@@ -110,7 +137,6 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* AVALIAÇÕES - ÁREA MAIOR */}
         <div className="bg-white rounded-xl shadow-sm p-6 sticky top-[400px] h-[600px] overflow-hidden">
           <h2 className="text-xl font-bold mb-4 text-gray-800">Avaliações</h2>
           <div className="h-[calc(100%-40px)] overflow-y-auto pr-2 custom-scrollbar">
