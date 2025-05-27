@@ -3,115 +3,121 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import Botoes from "./components/Botoes";
 import InputPersonalizado from "./components/InputPersonalizado";
-import host from "../lib/host";
+import { Eye, EyeOff } from 'lucide-react'; // Ícones
 
 function Login () {
 
     const [email, AlteraEmail] = useState("")
     const [senha, AlteraSenha] = useState("")
-
     const [usuario, AlteraUsuario] = useState([]);
     
-    async function buscaTodos(){
-        const response = await axios.get(host + '/usuarios')
+    const [erroSenha, alteraErroSenha] = useState(false);
+    const [erroUsuario, alteraErroUsuario] = useState(false);
+    const [mostrarSenha, setMostrarSenha] = useState(false); // controle do olho
+
+    async function buscaTodos() {
+        const response = await axios.get("http://localhost:4000/usuarios")
         console.log(response.data)
         AlteraUsuario(response.data)
     }
 
-
-    useEffect( ()=> {
+    useEffect(() => {
         buscaTodos();
-    }, [] )
+    }, [])
 
-
-    const [erroSenha, alteraErroSenha] = useState(false);
-    const [erroUsuario, alteraErroUsuario] = useState(false)
-
-    function salvar(){
-
+    function salvar() {
         let fazendeiro = false
 
-        usuario.map ((i)=>
-        {
-            if (email == i.email && senha == i.senha ){
+        usuario.map((i) => {
+            if (email == i.email && senha == i.senha) {
                 console.log("Usuario encontrado!")
                 usuario.senha = ""
-                localStorage.setItem( "usuario", JSON.stringify(i) )
+                localStorage.setItem("usuario", JSON.stringify(i))
                 fazendeiro = true
             }
-        }
-        )
+        })
 
-        if(fazendeiro == false){
+        if (!fazendeiro) {
             alteraErroUsuario(true)
-            console.log("Usuário não econtrado")
+            console.log("Usuário não encontrado")
         } else {
             alteraErroUsuario(false)
             console.log("Login realizado com sucesso")
-
-             window.location.href="/"
+            window.location.href = "/"
         }
 
-     
-        
-        
-        if( senha == "" ){
+        if (senha === "") {
             alteraErroSenha(true);
-        }else{
+        } else {
             alteraErroSenha(false)
         }
     }
 
+    return (
+        <div className="flex items-center justify-center h-screen">
+            <div className="rounded-lg p-10 shadow-[0px_0px_30px] shadow-gray-200 w-full max-w-sm">
+                <h1 className="text-center font-sans text-red-500 text-2xl mb-4">Login</h1>
+                <hr className="mb-4" />
 
-    return ( 
-    <div className=" flex items-center justify-center h-screen  " >
-
-        <div className=" rounded-lg p-10 shadow-[0px_0px_30px] shadow-gray-200"  >
-            <h1 className="text-center font-sans text-red-500 " > Login </h1>
-
-            <hr/>
-            
-            <InputPersonalizado label=" E-mail" AlteraValor={AlteraEmail} />
-            {
-                erroSenha == true ?
-
-                <div className="bg-red-500 texg-white" >
-                  <p> Por favor digite sua senha </p>
+                {/* Campo de e-mail */}
+                <div className="mb-4">
+                    <label className="block mb-1 text-gray-700">E-mail</label>
+                    <input
+                        type="email"
+                        onChange={(e) => AlteraEmail(e.target.value)}
+                        className="border border-black p-2 w-full rounded"
+                        placeholder="E-mail"
+                    />
                 </div>
-                :
-                    
-                    <div></div>
-            }
-            {
-                erroUsuario == true ?
 
-                <div className="bg-red-500 texg-white" >
-                  <p> Usuário não encontrado </p>
+                {/* Mensagens de erro */}
+                {erroSenha && (
+                    <div className="bg-red-500 text-white px-2 py-1 rounded my-2">
+                        <p>Por favor digite sua senha</p>
+                    </div>
+                )}
+
+                {erroUsuario && (
+                    <div className="bg-red-500 text-white px-2 py-1 rounded my-2">
+                        <p>Usuário não encontrado</p>
+                    </div>
+                )}
+
+                {/* Campo de senha com ícone de olho embutido */}
+                <div className="mb-4">
+                    <label className="block mb-1 text-gray-700">Senha</label>
+                    <div className="relative">
+                        <input
+                            type={mostrarSenha ? "text" : "password"}
+                            onChange={(e) => AlteraSenha(e.target.value)}
+                            className="border border-black p-2 w-full rounded pr-10"
+                            placeholder="Senha"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-600"
+                        >
+                            {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+                        </button>
+                    </div>
                 </div>
-                :
-                    
-                    <div></div>
-            }
-            <InputPersonalizado type="password" label=" Senha " AlteraValor={AlteraSenha}/>
-            
-            
-            <a  href="#" > Esqueceu sua senha? </a>
 
-           <br/>
+                {/* Links e botões */}
+                <a href="#" className="text-blue-600 text-sm">Esqueceu sua senha?</a>
 
-           <input type="checkbox" /> Lembrar-me
+                <div className="my-2">
+                    <input type="checkbox" className="mr-2" /> Lembrar-me
+                </div>
 
-           <br/>
+                <Botoes botoes="Entrar" Salvar={salvar} />
 
-           <Botoes botoes="Entrar" Salvar={salvar} />
-
-           <p className="text-center" > Não tem uma conta? <a href="./cadastro"> Cadastre-se </a> </p>
-           
+                <p className="text-center mt-4">
+                    Não tem uma conta? <a href="./cadastro" className="text-purple-600">Cadastre-se</a>
+                </p>
+            </div>
         </div>
-            
-
-      </div>
-     );
+    );
 }
 
-export default Login ;
+export default Login;
