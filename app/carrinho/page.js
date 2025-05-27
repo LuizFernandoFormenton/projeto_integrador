@@ -50,7 +50,7 @@ function carrinho(){
             const hoje = new Date().toISOString();
     
             const res = await axios.post(
-                host + ' /venda',
+                host + '/venda',
                 {
                     data: hoje ,
                     usuario_id:  usuario.id
@@ -75,7 +75,7 @@ function carrinho(){
         id_carrinho = carrinhoSalvo.id;
 
         const res = await axios.get(host + '/transacao/'+ id_carrinho)
-        
+        console.log(res)
         let produtos = []
         res.data.map(
             (p) => {produtos.push(p.produtos)}
@@ -104,7 +104,7 @@ function carrinho(){
             {
                 produtos.map((i)=>
                 <div className="quadrado">
-                        <Produto nome={i.nome} tamanho={i.tamanho} preco={i.preco} />
+                        <Produto produto={i} />
                         {/* <Quantidade quantidade={i.quantidade}/> */}
                         <button className="botaoremover"  onClick={()=>removerProduto(i) }>Remover</button>
                         
