@@ -33,10 +33,14 @@ export default function Reviews() {
 
   async function adicionarCarrinho(id) {
     try {
-      const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
-      const index = carrinhoAtual.findIndex(item => item.id === id);
 
-      if (index === -1) {
+      if(localStorage.getItem("carrinho") == null)
+        localStorage.setItem("carrinho", "[]")
+
+      const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const index = carrinhoAtual.filter(item => item.id == id);
+
+      if (index == 0) {
         const novoCarrinho = [
           ...carrinhoAtual,
           {
@@ -52,7 +56,10 @@ export default function Reviews() {
       } else {
         const confirmar = window.confirm('Produto já está na sacola. Deseja adicionar mais uma unidade?');
         if (confirmar) {
-          carrinhoAtual[index].quantidade += 1;
+          for(let i = 0; i < carrinhoAtual.length; i++){
+            if(carrinhoAtual[i].id == id)
+              carrinhoAtual[i].quantidade++
+          }
           localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
           alert('Mais uma unidade adicionada à sacola!');
         } else {
@@ -139,7 +146,7 @@ export default function Reviews() {
 
         <div className="bg-white rounded-xl shadow-sm p-6 sticky top-[400px] h-[600px] overflow-hidden">
           <h2 className="text-xl font-bold mb-4 text-gray-800">Avaliações</h2>
-          <div className="h-[calc(100%-40px)] overflow-y-auto pr-2 custom-scrollbar">
+          <div className="h-[calc(100%-40px)]  pr-2 custom-scrollbar">  
             <Avaliacoes produto_id={produto.id} limit={2} />
           </div>
         </div>
