@@ -4,6 +4,7 @@ import axios from 'axios';
 import Botoes from "./components/Botoes";
 import InputPersonalizado from "./components/InputPersonalizado";
 import { Eye, EyeOff } from 'lucide-react'; // Ícones
+import host from "../lib/host";
 
 function Login () {
 
@@ -16,7 +17,7 @@ function Login () {
     const [mostrarSenha, setMostrarSenha] = useState(false); // controle do olho
 
     async function buscaTodos() {
-        const response = await axios.get("http://localhost:4000/usuarios")
+        const response = await axios.get(host + "/usuarios")
         console.log(response.data)
         AlteraUsuario(response.data)
     }
