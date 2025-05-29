@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import Botoes from "./components/Botoes";
 import InputPersonalizado from "./components/InputPersonalizado";
-import { Eye, EyeOff } from 'lucide-react'; // Ícones
 import host from "../lib/host";
 
 function Login () {
@@ -90,7 +89,7 @@ function Login () {
                         className="absolute right-[-14px] top-1/4 -translate-y-1/2 text-gray-600 bg-transparent border-none p-0 m-0 cursor-pointer"
                         style={{ outline: "none", boxShadow: "none" }}
                     >
-                        {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+                       
                     </button>
                     </div>
                     </div>

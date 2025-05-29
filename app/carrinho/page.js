@@ -9,8 +9,6 @@ import axios from "axios";
 import host from "../lib/host";
 
 
-
-
 function carrinho(){
 
     const [produtos, alteraProdutos] = useState([]);
