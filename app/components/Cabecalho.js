@@ -5,7 +5,7 @@ import BarraLateral from "./BarraLateral";
 import axios from "axios";
 import host from "../lib/host";
 
-function Cabecalho() {
+function Cabecalho({ produtos, onSearch }) {
     const [pesquisa, alteraPesquisa] = useState("");
     const [categoria, alteraCategoria] = useState([]);
     const [menuAberto, setMenuAberto] = useState(false);
@@ -28,6 +28,7 @@ function Cabecalho() {
 
     function pesquisar(e) {
         e.preventDefault();
+        onSearch(pesquisa); // Chama a função onSearch passando o termo de pesquisa
         console.log("Pesquisa é: " + pesquisa);
     }
 
