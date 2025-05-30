@@ -86,7 +86,13 @@ function Avaliacoes(attr) {
                         Comentar
                     </button>
                 ) : (
-                    <p className="text-red-500">Faça login para escrever uma avaliação.</p>
+                    <a
+                        href="http://10.60.44.28:3000/login"
+                        className="text-red-500 underline hover:text-red-700 block mt-2"
+                    >
+                        Faça login para escrever uma avaliação.
+                    </a>
+
                 )
             }
 

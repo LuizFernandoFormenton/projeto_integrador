@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import Botoes from "./components/Botoes";
 import InputPersonalizado from "./components/InputPersonalizado";
-import { Eye, EyeOff } from 'lucide-react'; // Ícones
 import host from "../lib/host";
 
 function Login () {
@@ -60,64 +59,59 @@ function Login () {
                 <h1 className="text-center font-sans text-red-500 mb-4">Login</h1>
                 <hr className="mb-4" />
 
-                {/* Campo de e-mail */}
-                <div className="mb-4">
-                    <label className="block mb-1 text-gray-700">E-mail</label>
-                    <input
-                        type="email"
-                        onChange={(e) => AlteraEmail(e.target.value)}
-                        className="border border-black p-2 w-full rounded"
-                        placeholder="E-mail"
-                    />
-                </div>
+                {/* Formulário que ativa o salvar ao apertar Enter */}
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    salvar();
+                }}>
 
-
-                {/* Campo de senha com ícone de olho embutido  */}
-                
-
+                    {/* Email */}
                     <div className="mb-4">
-                    <label className=" block mb-1 text-gray-700">Senha</label>
-                    <div className="relative">
-                    <input
-                        type={mostrarSenha ? "text" : "password"}
-                        onChange={(e) => AlteraSenha(e.target.value)}
-                        className="border border-black p-2 w-full rounded "
-                        placeholder="Senha"
+                        <label className="block mb-1 text-gray-700">E-mail</label>
+                        <input
+                            type="email"
+                            onChange={(e) => AlteraEmail(e.target.value)}
+                            className="border border-black p-2 w-full rounded"
+                            placeholder="E-mail"
                         />
-                    <button
-                        type="button"
-                        onClick={() => setMostrarSenha(!mostrarSenha)}
-                        className="absolute right-[-14px] top-1/4 -translate-y-1/2 text-gray-600 bg-transparent border-none p-0 m-0 cursor-pointer"
-                        style={{ outline: "none", boxShadow: "none" }}
-                    >
-                        {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                    </div>
                     </div>
 
-
-                {/* Mensagens de erro */}
-                {erroSenha && (
-                    <div className=" text-red-500   rounded my-2">
-                        <p>Por favor digite sua senha!</p>
+                    {/* Senha */}
+                    <div className="mb-4">
+                        <label className=" block mb-1 text-gray-700">Senha</label>
+                        <div className="relative">
+                            <input
+                                type={mostrarSenha ? "text" : "password"}
+                                onChange={(e) => AlteraSenha(e.target.value)}
+                                className="border border-black p-2 w-full rounded"
+                                placeholder="Senha"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setMostrarSenha(!mostrarSenha)}
+                                className="absolute right-[-14px] top-1/4 -translate-y-1/2 text-gray-600 bg-transparent border-none p-0 m-0 cursor-pointer"
+                                style={{ outline: "none", boxShadow: "none" }}
+                            ></button>
+                        </div>
                     </div>
-                )}
 
-                {erroUsuario && (
-                    <div className=" text-red-500   rounded my-2">
-                        <p>Usuário não encontrado!</p>
-                    </div>
-                )}
+                    {/* Mensagens de erro */}
+                    {erroSenha && (
+                        <div className="text-red-500 rounded my-2">
+                            <p>Por favor digite sua senha!</p>
+                        </div>
+                    )}
+                    {erroUsuario && (
+                        <div className="text-red-500 rounded my-2">
+                            <p>Usuário não encontrado!</p>
+                        </div>
+                    )}
 
-                {/* Links e botões */}
-                <a href="#" className="text-blue-600 text-sm">Esqueceu sua senha?</a>
+                    {/* Botão */}
+                    <Botoes botoes="Entrar" Salvar={salvar} />
+                </form>
 
-                <div className="my-2">
-                    <input type="checkbox" className="mr-2" /> Lembrar-me
-                </div>
-
-                <Botoes botoes="Entrar" Salvar={salvar} />
-
+                {/* Cadastro */}
                 <p className="text-center mt-4">
                     Não tem uma conta? <a href="./cadastro" className="text-purple-600">Cadastre-se</a>
                 </p>

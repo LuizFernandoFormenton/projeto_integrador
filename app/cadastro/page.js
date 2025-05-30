@@ -144,7 +144,7 @@ function Cadrasto () {
     async function salvar(){
         
         if(usuario == 0){
-            alert("Dados incorretos, tente novamente porra")
+            alert("Dados incorretos, tente novamente")
             return
         }
             
@@ -176,6 +176,24 @@ function Cadrasto () {
             alert("Email inválido")
             return
         }
+
+        
+            // Busca usuários existentes
+            const resposta = await axios.get(host + "/usuarios");
+            const usuariosExistentes = resposta.data;
+    
+            const emailJaExiste = usuariosExistentes.some(u => u.email === usuario.email);
+            const cpfJaExiste = usuariosExistentes.some(u => u.cpf === usuario.cpf);
+    
+            if (emailJaExiste) {
+                alert("Este e-mail já está cadastrado");
+                return;
+            }
+    
+            if (cpfJaExiste) {
+                alert("Este CPF já está cadastrado");
+                return;
+            }
 
         if( usuario.senha == null || usuario.senha.length < 3){
             alert("Senha muito curta")
