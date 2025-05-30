@@ -13,6 +13,7 @@ export default function Reviews() {
 
   const [produto, alteraProduto] = useState({});
   const [carregando, alteraCarregando] = useState(true);
+  const [produtos, alteraProdutos] = useState([]);
 
   async function buscaUmProduto(id) {
     try {
@@ -97,6 +98,8 @@ export default function Reviews() {
         );
   
         console.log(response.data)
+
+        alert("Produto adicionado ao carrinho!")
   
         
       } catch (err) {
