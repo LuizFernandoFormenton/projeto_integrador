@@ -31,46 +31,80 @@ export default function Reviews() {
     buscaUmProduto(id);
   }, [id]);
 
-  async function adicionarCarrinho(id) {
-    try {
+  async function adicionarCarrinho(id){
 
-      if(localStorage.getItem("carrinho") == null)
-        localStorage.setItem("carrinho", "[]")
-
-      const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || [];
-      const index = carrinhoAtual.filter(item => item.id == id);
-
-      if (index == 0) {
-        const novoCarrinho = [
-          ...carrinhoAtual,
-          {
-            id: produto.id,
-            nome: produto.nome,
-            preco: produto.preco,
-            imagem: produto.imagem,
-            quantidade: 1
-          }
-        ];
-        localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
-        alert('Produto adicionado à sacola!');
-      } else {
-        const confirmar = window.confirm('Produto já está na sacola. Deseja adicionar mais uma unidade?');
-        if (confirmar) {
-          for(let i = 0; i < carrinhoAtual.length; i++){
-            if(carrinhoAtual[i].id == id)
-              carrinhoAtual[i].quantidade++
-          }
-          localStorage.setItem('carrinho', JSON.stringify(carrinhoAtual));
-          alert('Mais uma unidade adicionada à sacola!');
-        } else {
-          alert('Nenhuma alteração feita na sacola.');
-        }
+    console.log("passo aqui")
+  
+      let id_carrinho = -1
+  
+      let carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho"));
+      console.log(carrinhoSalvo)
+  
+      if (!carrinhoSalvo || carrinhoSalvo.id == undefined) {
+        // Se não existir, cria um novo carrinho
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+  
+        if (!usuario || !usuario.id) {
+            window.location.href = "/login"; 
+        } 
+  
+        const hoje = new Date().toISOString();
+  
+        const res = await axios.post(
+            host + '/venda',
+            {
+                data: hoje ,
+                usuario_id:  usuario.id
+            }
+        )
+  
+  
+        console.log("passo aqui 2")
+        console.log(res.data)
+  
+        console.log("passo aqui 3")
+        // Salva no localStorage
+        localStorage.setItem("carrinho", JSON.stringify(res.data));
+  
+        // Atribui o novo id_carrinho
+        id_carrinho = res.data.id;
+        console.log("Carrinho criado:", res.data);
+        carrinhoSalvo =  res.data
+      } 
+  
+      if( localStorage.getItem("produtos") != null ){
+          let ps = JSON.parse( localStorage.getItem("produtos") )
+          alteraProdutos( ps )
       }
-    } catch (erro) {
-      console.error("Erro ao adicionar ao carrinho:", erro);
-      alert('Erro ao adicionar produto à sacola.');
+      
+      // Adiciona o novo produto
+      alteraProdutos([...produtos, id] )
+  
+      // Salva novamente
+      localStorage.setItem("produtos", JSON.stringify(produtos));
+  
+      // Atualiza o id_carrinho
+      id_carrinho = carrinhoSalvo.id;
+      console.log(id_carrinho)
+  
+      try {
+        const response = await axios.post(host + '/transacao', 
+         {
+            venda_id: id_carrinho,
+            produto_id: id, 
+            quantidade: 1, 
+          }
+        );
+  
+        console.log(response.data)
+  
+        
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao se conectar com o servidor");
+      }
+  
     }
-  }
 
   if (carregando) {
     return <div className="p-6 text-center">Carregando...</div>;
