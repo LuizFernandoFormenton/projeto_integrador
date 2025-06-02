@@ -148,87 +148,44 @@ function components () {
 
     return ( 
         <div className="justify-center flex my-24">
-            <div className="justify-items-center w-50 rounded-xl shadow-md p-8 ">
+            <div className="justify-items-center w-50 rounded-xl shadow-md p-6 pt-0 ">
 
-                <div className="flex flex-col items-center text-center justify-center mb-3 bg-red-100 p-6 rounded-lg">
+                <div className="flex flex-col items-center text-center justify-center mb-3 bg-red-500 p-6 rounded-lg mb-8 w-full ">
                     <h1 className="text-white text-3xl font-bold mb-4">Seu perfil</h1>
-                    <img 
-                        width="100" 
-                        height="100" 
-                        src="https://placehold.co/1000" 
-                        className="size-24 rounded-full bg-gradient-to-br from-blue-600 to-sky-400"
-                    />
                 </div>   
 
                 <div className="text-center items-center gap-3">
 
                     {/* Nome */}
-                    <div className="flex flex-col items-center mb-4">
-                        {editando ? 
-                            <input 
-                                type="text" 
-                                placeholder="Digite seu nome" 
-                                value={novoNome} 
-                                onChange={(e) => alteraNovoNome(e.target.value)} 
-                            /> : 
-                            <p className="bg-gray-50 py-1.5 px-2 rounded text-lg font-semibold text-black-800 border-2 border-gray-300">
+                    <div className="flex flex-row border-solid border-red-500 rounded-full items-center px-8 mb-8 .border-0 p-0 grid grid-cols-1 h-15">
+                        {editando ? (
+                            <input
+                                type="text"
+                                value={novoNome}
+                                onChange={(e) => alteraNovoNome(e.target.value)}
+                                className="bg-transparent text-lg font-semibold text-black"
+                            />
+                        ) : (
+                            <p className="text-lg font-semibold text-black">
                                 <strong>{usuario.nome}</strong>
                             </p>
-                        }
-                        <div className="mt-2 flex gap-2">
-                            <button 
-                                onClick={editando ? salvarNome : manipulaEdicao} 
-                                className={`bg-red-500 text-white font-semibold uppercase px-4 py-2 rounded-full border-none ${
-                                    editando ? "bg-green-500 text-white font-semibold uppercase px-4 py-2 rounded-full shadow-md" : ""
-                                }`}
+                        )}
+
+                        <div className="ml-auto flex gap-2 col-end-4">
+                            <button
+                                onClick={editando ? salvarNome : manipulaEdicao}
+                                className={`${
+                                    editando
+                                        ? "bg-green-500"
+                                        : "bg-red-500"
+                                } text-white font-semibold uppercase px-4 py-2 rounded-full shadow-md border-none m-4`}
                             >
                                 {editando ? "Concluído" : "Alterar"}
                             </button>
-
-                            {editando && 
-                                <button 
-                                    onClick={cancelarEdicaoNome} 
-                                    className="bg-transparent border-none text-red-500 underline decoration-1 hover:text-red-600"
-                                >
-                                    Cancelar
-                                </button>
-                            }
-                        </div>
-                    </div>
-
-
-
-                    {/* Gênero */}
-                    <div className="flex flex-col items-center mb-4">
-                        {editando4 ? (
-                            <select
-                                value={novoSexo}
-                                onChange={(e) => alteraNovoSexo(e.target.value)}
-                                className="mt-2 mb-2 px-3 py-1 border rounded"
-                            >
-                                <option value="">Selecione...</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Feminino">Feminino</option>
-                                <option value="Prefiro não me identificar">Prefiro não me identificar</option>
-                            </select>
-                        ) : (
-                            <p className="bg-gray-50 px-20 py-5 rounded text-lg font-semibold text-black">
-                                <strong>{usuario.genero}</strong>
-                            </p>
-                        )}
-                        <div className="mt-2 flex gap-2">
-                            <button
-                                onClick={editando4 ? salvarSexo : manipulaEdicao4}
-                                className={`bg-transparent border-none underline decoration-1 hover:brightness-110 ${
-                                    editando4 ? "text-green-500 hover:text-green-600" : "text-red-500 hover:text-red-600"
-                                }`}
-                            >
-                                {editando4 ? "Concluído" : "Alterar"}
-                            </button>
-                            {editando4 && (
+                            {editando && (
                                 <button
-                                    onClick={cancelarEdicaoSexo}
-                                    className="bg-transparent border-none text-red-500 underline decoration-1 hover:text-red-600"
+                                    onClick={cancelarEdicaoNome}
+                                    className="bg-red-500 text-white font-semibold uppercase px-4 py-2 rounded-full shadow-m border-none"
                                 >
                                     Cancelar
                                 </button>
@@ -238,69 +195,122 @@ function components () {
 
 
 
-                   {/* Email */}
-                    <div className="flex flex-col items-center mb-4">
-                        {editando2 ? 
-                            <input 
-                                type="email" 
-                                placeholder="Digite seu email" 
-                                value={novoEmail} 
-                                onChange={(e) => alteraNovoEmail(e.target.value)} 
-                            /> : 
-                            <p className="bg-gray-50 px-2 py-1.5 rounded text-lg font-semibold text-gray-800">
-                                <strong>{usuario.email}</strong>
-                            </p>
-                        }
-                        <div className="mt-2 flex gap-2">
-                            <button 
-                                onClick={editando2 ? salvarEmail : manipulaEdicao2} 
-                                className={`bg-transparent border-none underline decoration-1 hover:brightness-110 ${
-                                    editando2 ? "text-green-500 hover:text-green-600" : "text-red-500 hover:text-red-600"
-                                }`}
+
+                    {/* Gênero */}
+                    <div className="flex flex-row border-solid border-red-500 rounded-full items-center px-8 mb-8 .border-0 p-0 grid grid-cols-1 h-15">
+                        {editando4 ? (
+                            <select
+                                value={novoSexo}
+                                onChange={(e) => alteraNovoSexo(e.target.value)}
+                                className="bg-transparent text-lg font-semibold text-black"
                             >
-                                {editando2 ? "Concluído" : "Alterar"}
+                                <option value="">Selecione...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Prefiro não me identificar">Prefiro não me identificar</option>
+                            </select>
+                        ) : (
+                            <p className="text-lg font-semibold text-black">
+                                <strong>{usuario.sexo}</strong>
+                            </p>
+                        )}
+
+                        <div className="ml-auto flex gap-2 col-end-4">
+                            <button
+                                onClick={editando4 ? salvarSexo : manipulaEdicao4}
+                                className={`${
+                                    editando4
+                                        ? "bg-green-500"
+                                        : "bg-red-500"
+                                } text-white font-semibold uppercase px-4 py-2 rounded-full shadow-md border-none`}
+                            >
+                                {editando4 ? "Concluído" : "Alterar"}
                             </button>
-                            {editando2 && 
-                                <button 
-                                    onClick={cancelarEdicaoEmail} 
-                                    className="bg-transparent border-none text-red-500 underline decoration-1 hover:text-red-600"
+                            {editando4 && (
+                                <button
+                                    onClick={cancelarEdicaoSexo}
+                                    className="bg-red-500 text-white font-semibold uppercase px-4 py-2 rounded-full shadow-m border-none"
                                 >
                                     Cancelar
                                 </button>
-                            }
+                            )}
                         </div>
                     </div>
 
-                    {/* Telefone */}
-                    <div className="flex flex-col items-center mb-4">
-                        {editando3 ? 
-                            <input 
-                                type="tel" 
-                                placeholder="Digite seu telefone" 
-                                value={novoTelefone} 
-                                onChange={(e) => alteraNovoTelefone(e.target.value)} 
-                            /> : 
-                            <p className="bg-gray-50 px-2 py-1.5 rounded text-lg font-semibold text-gray-800">
-                                <strong>{usuario.telefone}</strong>
+
+
+                    {/* Email */}
+                    <div className="flex flex-row border-solid border-red-500 rounded-full items-center px-8 mb-8 .border-0 p-0 grid grid-cols-1 h-15">
+                        {editando2 ? (
+                            <input
+                                type="email"
+                                value={novoEmail}
+                                onChange={(e) => alteraNovoEmail(e.target.value)}
+                                className="bg-transparent text-lg font-semibold text-black"
+                            />
+                        ) : (
+                            <p className="text-lg font-semibold text-black">
+                                <strong>{usuario.email}</strong>
                             </p>
-                        }
-                        <div className="mt-2 flex gap-2">
-                            <button 
-                                onClick={editando3 ? salvarTelefone : manipulaEdicao3} 
-                                className={`bg-transparent border-none underline decoration-1 hover:brightness-110 ${
-                                    editando3 ? "text-green-500 hover:text-green-600" : "text-red-500 hover:text-red-600"
-                                }`}
+                        )}
+
+                        <div className="ml-auto flex gap-2 col-end-4">
+                            <button
+                                onClick={editando2 ? salvarEmail : manipulaEdicao2}
+                                className={`${
+                                    editando2
+                                        ? "bg-green-500"
+                                        : "bg-red-500"
+                                } text-white font-semibold uppercase px-4 py-2 rounded-full shadow-md border-none ml-2`}
                             >
-                                {editando3 ? "Concluído" : "Alterar"}
+                                {editando2 ? "Concluído" : "Alterar"}
                             </button>
-                            {editando3 && 
-                                <button 
-                                    onClick={cancelarEdicaoTelefone} 
-                                    className="bg-transparent border-none text-red-500 underline decoration-1 hover:text-red-600"
+                            {editando2 && (
+                                <button
+                                    onClick={cancelarEdicaoEmail}
+                                    className="bg-red-500 text-white font-semibold uppercase px-4 py-2 rounded-full shadow-m border-none"
                                 >
                                     Cancelar
                                 </button>
-                            }
+                            )}
+                        </div>
+                    </div>
+
+
+                    {/* Telefone */}
+                    <div className="flex flex-row border-solid border-red-500 rounded-full items-center px-8 mb-8 .border-0 p-0 grid grid-cols-1 h-15">
+                        {editando3 ? (
+                            <input
+                                type="tel"
+                                value={novoTelefone}
+                                onChange={(e) => alteraNovoTelefone(e.target.value)}
+                                className="bg-transparent text-lg font-semibold text-black"
+                            />
+                        ) : (
+                            <p className="text-lg font-semibold text-black">
+                                <strong>{usuario.telefone}</strong>
+                            </p>
+                        )}
+
+                        <div className="ml-auto flex gap-2 col-end-4">
+                            <button
+                                onClick={editando3 ? salvarTelefone : manipulaEdicao3}
+                                className={`${
+                                    editando3
+                                        ? "bg-green-500"
+                                        : "bg-red-500"
+                                } text-white font-semibold uppercase px-4 py-2 rounded-full shadow-md border-none`}
+                            >
+                                {editando3 ? "Concluído" : "Alterar"}
+                            </button>
+                            {editando3 && (
+                                <button
+                                    onClick={cancelarEdicaoTelefone}
+                                    className="bg-red-500 text-white font-semibold uppercase px-4 py-2 rounded-full shadow-m border-none"
+                                >
+                                    Cancelar
+                                </button>
+                            )}
                         </div>
                     </div>
 
