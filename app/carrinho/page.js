@@ -34,13 +34,17 @@ function Carrinho() {
   function atualizarCarrinho(novoCarrinho) {
     if (novoCarrinho.length === 0) {
       localStorage.removeItem("carrinho");
+      localStorage.removeItem("produtos");
       alteraProdutos([]);
       alteraTotal(0);
+      window.dispatchEvent(new Event("carrinhoAtualizado"));
     } else {
       alteraProdutos(novoCarrinho);
       localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+      localStorage.setItem("produtos", JSON.stringify(novoCarrinho));
       const agrupados = agruparProdutos(novoCarrinho);
       calculaTotal(agrupados);
+      window.dispatchEvent(new Event("carrinhoAtualizado"));
     }
   }
 
@@ -185,9 +189,10 @@ function Carrinho() {
               <button
                 onClick={() => {
                   localStorage.removeItem("carrinho");
+                  localStorage.removeItem("produtos");
                   alteraProdutos([]);
                   alteraTotal(0);
-                  alert("Carrinho limpo com sucesso!");
+                  window.dispatchEvent(new Event("carrinhoAtualizado"));
                 }}
                 className="text-red-600 hover:text-red-800 text-sm font-semibold cursor-pointer self-center"
               >
@@ -199,6 +204,7 @@ function Carrinho() {
               <button
                 onClick={() => {
                   localStorage.removeItem("carrinho");
+                  localStorage.removeItem("produtos");
                   alert("Compra finalizada com sucesso!");
                   window.location.href = "/";
                 }}

@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -69,6 +69,9 @@ export default function AdicionarSacola({
     const novosProdutos = [...produtos, id];
     setProdutos(novosProdutos);
     localStorage.setItem("produtos", JSON.stringify(novosProdutos));
+
+    // Dispara evento customizado para atualizar badge do carrinho em outros componentes
+    window.dispatchEvent(new Event("carrinhoAtualizado"));
 
     try {
       await axios.post(host + '/transacao', {
