@@ -10,7 +10,7 @@ export default function AdicionarSacola({
   textoConfirmar = "Adicionar novamente?",
   mensagemSucesso = "Produto adicionado ao carrinho :)",
   mensagemErroServidor = "Erro ao se conectar com o servidor",
-  exibirToast = false, // Prop para controlar exibição da mensagem
+  exibirToast = false, // "embaixo" ou "emcima"
 }) {
   const [produtos, setProdutos] = useState([]);
   const [mensagem, setMensagem] = useState(null);
@@ -27,8 +27,16 @@ export default function AdicionarSacola({
   }
 
   async function adicionarCarrinho(id) {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario || !usuario.id) {
+      // Redireciona para login com mensagem na query string
+      const mensagemLogin = encodeURIComponent("Você precisa estar logado para comprar");
+      window.location.href = `/login?msg=${mensagemLogin}`;
+      return;
+    }
+
     if (!confirmarAdicionar && produtos.includes(id)) {
-      // Produto já está no carrinho, pedir confirmação
       setConfirmarAdicionar(true);
       return;
     }
@@ -37,13 +45,6 @@ export default function AdicionarSacola({
     let carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho"));
 
     if (!carrinhoSalvo || carrinhoSalvo.id === undefined) {
-      const usuario = JSON.parse(localStorage.getItem("usuario"));
-
-      if (!usuario || !usuario.id) {
-        window.location.href = "/login";
-        return;
-      }
-
       const hoje = new Date().toISOString();
 
       try {

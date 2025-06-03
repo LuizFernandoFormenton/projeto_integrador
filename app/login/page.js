@@ -1,11 +1,15 @@
 'use client'
+
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import axios from 'axios';
 import Botoes from "./components/Botoes";
 import InputPersonalizado from "./components/InputPersonalizado";
 import host from "../lib/host";
 
 function Login () {
+    const searchParams = useSearchParams();
+    const msg = searchParams.get("msg");
 
     const [email, AlteraEmail] = useState("")
     const [senha, AlteraSenha] = useState("")
@@ -54,10 +58,17 @@ function Login () {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center">
             <div className="rounded-lg p-10 shadow-[0px_0px_30px] shadow-gray-200 w-full max-w-sm">
                 <h1 className="text-center font-sans text-red-500 mb-4">Login</h1>
                 <hr className="mb-4" />
+
+                {/* Mensagem da query string */}
+                {msg && (
+                    <div className="bg-red-500 text-white p-3 rounded mb-4 text-center">
+                        {msg}
+                    </div>
+                )}
 
                 {/* Formulário que ativa o salvar ao apertar Enter */}
                 <form onSubmit={(e) => {
