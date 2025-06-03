@@ -1,7 +1,7 @@
 export default function DuvidasFrequentes() {
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Dúvidas Frequentes</h1>
+    <div className="p-6 pb-32 mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-red-500">Dúvidas Frequentes</h1>
       <h2 className="font-semibold mb-2">Como faço para trocar um produto?</h2>
       <p className="mb-4">
         Você pode solicitar a troca em até 30 dias após o recebimento, entrando em contato com nossa Central de Atendimento.
