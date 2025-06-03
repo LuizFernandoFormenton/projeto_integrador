@@ -85,6 +85,8 @@ async function adicionarCarrinho(id){
 
       console.log(response.data)
 
+      alert("Produto adicionado ao carrinho!")
+
       
     } catch (err) {
       console.error(err);
