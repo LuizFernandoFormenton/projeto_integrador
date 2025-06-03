@@ -8,10 +8,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body
-        className={`antialiased`} 
+        className={`antialiased flex flex-col min-h-screen`} 
       >
         <Cabecalho/>
-        <div className="mt-32" ></div>
+        <div className="pt-32 flex-grow" ></div>
         {children}
         <Rodape/>
       </body>
