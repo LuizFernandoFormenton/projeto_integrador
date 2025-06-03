@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import host from "@/app/lib/host";
+import Toast from "@/app/components/Toast";
 
 export default function AdicionarSacola({ produtoId }) {
   const [produtos, setProdutos] = useState([]);
@@ -14,15 +15,16 @@ export default function AdicionarSacola({ produtoId }) {
     setProdutos(produtosSalvos);
   }, []);
 
-  // Função para mostrar mensagem por 3 segundos
   function mostrarMensagem(texto) {
     setMensagem(texto);
-    setTimeout(() => setMensagem(null), 5000);
+  }
+
+  function fecharMensagem() {
+    setMensagem(null);
   }
 
   async function adicionarCarrinho(id) {
     if (!confirmarAdicionar && produtos.includes(id)) {
-      // Produto já está no carrinho, pedir confirmação
       setConfirmarAdicionar(true);
       return;
     }
@@ -80,19 +82,15 @@ export default function AdicionarSacola({ produtoId }) {
   }
 
   return (
-    <div className="relative">
+    <>
       <button
         onClick={() => adicionarCarrinho(produtoId)}
-        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg mb-6"
+        className="w-full cursor-pointer h-10 bg-green-600 text-white text-sm font-semibold rounded-full mb-2 border-none"
       >
         {confirmarAdicionar ? "Adicionar novamente?" : "Adicionar à Sacola"}
       </button>
 
-      {mensagem && (
-        <div className="absolute top-full mt-2 w-full bg-emerald-100 text-emerald-800 rounded-md p-2 text-center shadow">
-          {mensagem}
-        </div>
-      )}
-    </div>
+      <Toast message={mensagem} onClose={fecharMensagem} />
+    </>
   );
 }

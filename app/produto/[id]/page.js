@@ -81,7 +81,7 @@ export default function Reviews() {
             <span className="text-gray-600">{produto.tamanho || 'Único'}</span>
           </div>
 
-          {/* Usando o componente do botão */}
+          {/* Componente do botão */}
           <AdicionarSacola produtoId={produto.id} />
 
           <div className="space-y-3">
