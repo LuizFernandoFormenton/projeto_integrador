@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import "../reviews.css"
 import axios from "axios";
 import host from "@/app/lib/host";
+import AdicionarSacola from "../components/AdicionarSacola";
 
 export default function Reviews() {
   const params = useParams();
@@ -13,7 +14,6 @@ export default function Reviews() {
 
   const [produto, alteraProduto] = useState({});
   const [carregando, alteraCarregando] = useState(true);
-  const [produtos, alteraProdutos] = useState([]);
 
   async function buscaUmProduto(id) {
     try {
@@ -31,83 +31,6 @@ export default function Reviews() {
   useEffect(() => {
     buscaUmProduto(id);
   }, [id]);
-
-  async function adicionarCarrinho(id){
-
-    console.log("passo aqui")
-  
-      let id_carrinho = -1
-  
-      let carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho"));
-      console.log(carrinhoSalvo)
-  
-      if (!carrinhoSalvo || carrinhoSalvo.id == undefined) {
-        // Se não existir, cria um novo carrinho
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
-  
-        if (!usuario || !usuario.id) {
-            window.location.href = "/login"; 
-        } 
-  
-        const hoje = new Date().toISOString();
-  
-        const res = await axios.post(
-            host + '/venda',
-            {
-                data: hoje ,
-                usuario_id:  usuario.id
-            }
-        )
-  
-  
-        console.log("passo aqui 2")
-        console.log(res.data)
-  
-        console.log("passo aqui 3")
-        // Salva no localStorage
-        localStorage.setItem("carrinho", JSON.stringify(res.data));
-  
-        // Atribui o novo id_carrinho
-        id_carrinho = res.data.id;
-        console.log("Carrinho criado:", res.data);
-        carrinhoSalvo =  res.data
-      } 
-  
-      if( localStorage.getItem("produtos") != null ){
-          let ps = JSON.parse( localStorage.getItem("produtos") )
-          alteraProdutos( ps )
-      }
-      
-      // Adiciona o novo produto
-      alteraProdutos([...produtos, id] )
-  
-      // Salva novamente
-      localStorage.setItem("produtos", JSON.stringify(produtos));
-  
-      // Atualiza o id_carrinho
-      id_carrinho = carrinhoSalvo.id;
-      console.log(id_carrinho)
-  
-      try {
-        const response = await axios.post(host + '/transacao', 
-         {
-            venda_id: id_carrinho,
-            produto_id: id, 
-            quantidade: 1, 
-          }
-        );
-  
-        console.log(response.data)
-
-        alert("Produto adicionado ao carrinho!")
-  
-        
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao se conectar com o servidor");
-      }
-  
-    }
 
   if (carregando) {
     return <div className="p-6 text-center">Carregando...</div>;
@@ -158,12 +81,8 @@ export default function Reviews() {
             <span className="text-gray-600">{produto.tamanho || 'Único'}</span>
           </div>
 
-          <button
-            onClick={() => adicionarCarrinho(produto.id)}
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg mb-6"
-          >
-            Adicionar à Sacola
-          </button>
+          {/* Usando o componente do botão */}
+          <AdicionarSacola produtoId={produto.id} />
 
           <div className="space-y-3">
             <div className="flex items-center text-gray-600">
