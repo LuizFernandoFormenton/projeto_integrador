@@ -52,8 +52,10 @@ function Produtos(attr) {
         </div>
       </div>
 
-      {/* Usando o componente AdicionarSacola */}
-      <AdicionarSacola produtoId={attr.produto.id} />
+    <div>
+      {/* Outros elementos */}
+      <AdicionarSacola produtoId={attr.produto.id} exibirToast="emcima" />
+    </div>
     </div>
   );
 }

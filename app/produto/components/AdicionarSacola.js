@@ -3,9 +3,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import host from "@/app/lib/host";
-import Toast from "@/app/components/Toast";
 
-export default function AdicionarSacola({ produtoId }) {
+export default function AdicionarSacola({
+  produtoId,
+  textoBotao = "Adicionar à Sacola",
+  textoConfirmar = "Adicionar novamente?",
+  mensagemSucesso = "Produto adicionado ao carrinho :)",
+  mensagemErroServidor = "Erro ao se conectar com o servidor",
+  exibirToast = false, // Prop para controlar exibição da mensagem
+}) {
   const [produtos, setProdutos] = useState([]);
   const [mensagem, setMensagem] = useState(null);
   const [confirmarAdicionar, setConfirmarAdicionar] = useState(false);
@@ -17,14 +23,12 @@ export default function AdicionarSacola({ produtoId }) {
 
   function mostrarMensagem(texto) {
     setMensagem(texto);
-  }
-
-  function fecharMensagem() {
-    setMensagem(null);
+    setTimeout(() => setMensagem(null), 3000);
   }
 
   async function adicionarCarrinho(id) {
     if (!confirmarAdicionar && produtos.includes(id)) {
+      // Produto já está no carrinho, pedir confirmação
       setConfirmarAdicionar(true);
       return;
     }
@@ -72,25 +76,37 @@ export default function AdicionarSacola({ produtoId }) {
         quantidade: 1,
       });
 
-      mostrarMensagem("Produto adicionado ao carrinho :)");
+      mostrarMensagem(mensagemSucesso);
     } catch (err) {
       console.error(err);
-      mostrarMensagem("Erro ao se conectar com o servidor");
+      mostrarMensagem(mensagemErroServidor);
     }
 
     setConfirmarAdicionar(false);
   }
 
   return (
-    <>
+    <div className="relative">
       <button
         onClick={() => adicionarCarrinho(produtoId)}
         className="w-full cursor-pointer h-10 bg-green-600 text-white text-sm font-semibold rounded-full mb-2 border-none"
       >
-        {confirmarAdicionar ? "Adicionar novamente?" : "Adicionar à Sacola"}
+        {confirmarAdicionar ? textoConfirmar : textoBotao}
       </button>
 
-      <Toast message={mensagem} onClose={fecharMensagem} />
-    </>
+      {/* Toast embaixo */}
+      {exibirToast === "embaixo" && mensagem && (
+        <div className="absolute top-full mt-2 w-full bg-emerald-100 text-emerald-800 rounded-md p-2 text-center shadow">
+          {mensagem}
+        </div>
+      )}
+
+      {/* Toast em cima */}
+      {exibirToast === "emcima" && mensagem && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded shadow-lg z-50">
+          {mensagem}
+        </div>
+      )}
+    </div>
   );
 }

@@ -8,6 +8,7 @@ import axios from "axios";
 import host from "@/app/lib/host";
 import AdicionarSacola from "../components/AdicionarSacola";
 
+
 export default function Reviews() {
   const params = useParams();
   const id = params.id;
@@ -41,6 +42,7 @@ export default function Reviews() {
   }
 
   return (
+
     <div className="flex flex-col md:flex-row gap-8 p-6 max-w-6xl mx-auto w-full">
       {/* LADO ESQUERDO - IMAGEM E DESCRIÇÃO */}
       <div className="md:w-2/3 flex flex-col gap-8">
@@ -81,8 +83,10 @@ export default function Reviews() {
             <span className="text-gray-600">{produto.tamanho || 'Único'}</span>
           </div>
 
-          {/* Componente do botão */}
-          <AdicionarSacola produtoId={produto.id} />
+            <div>
+              {/* Outros elementos */}
+              <AdicionarSacola produtoId={produto.id} exibirToast="embaixo" />
+            </div>
 
           <div className="space-y-3">
             <div className="flex items-center text-gray-600">
