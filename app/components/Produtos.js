@@ -18,11 +18,11 @@ function Produtos(attr) {
   }
 
   return (
-    <div className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 ">
-      <div onClick={() => redirecionar()}>
+    <div className="relative rounded-sm w-[320px] overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-500 ease-in-out mr-4 flex flex-col">
+      <div onClick={() => redirecionar()} className="cursor-pointer">
         <div>
           <img
-            className="w-full h-auto cursor-pointer transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]"
+            className="w-full h-auto transition-transform duration-300 ease-out crescer-menos bg-[#E8E8E8]"
             src={attr.produto.imagem}
             alt={attr.produto.nome}
           />
@@ -40,8 +40,12 @@ function Produtos(attr) {
           </div>
 
           <div className="flex flex-col items-start leading-tight gap-0">
-            <p className="text-gray-500 line-through text-sm m-0 p-0">De R$ {attr.produto.preco.toString().replace(".", ",")}</p>
-            <p className="text-green-600 font-bold text-xl m-0 p-0">Por R$ {calcularDesconto(attr.produto.preco, attr.produto.desconto)}</p>
+            <p className="text-gray-500 line-through text-sm m-0 p-0">
+              De R$ {attr.produto.preco.toString().replace(".", ",")}
+            </p>
+            <p className="text-green-600 font-bold text-xl m-0 p-0">
+              Por R$ {calcularDesconto(attr.produto.preco, attr.produto.desconto)}
+            </p>
           </div>
 
           <div>
@@ -52,10 +56,9 @@ function Produtos(attr) {
         </div>
       </div>
 
-    <div>
-      {/* Outros elementos */}
-      <AdicionarSacola produtoId={attr.produto.id} exibirToast="emcima" />
-    </div>
+      <div className="mt-auto">
+        <AdicionarSacola produtoId={attr.produto.id} exibirToast="emcima" />
+      </div>
     </div>
   );
 }
