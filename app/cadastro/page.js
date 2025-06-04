@@ -142,11 +142,14 @@ function Cadrasto () {
     const [erroNome, alteraErroNome] = useState(false);
 
     async function salvar(){
+
+        
         
         if(usuario == 0){
             alert("Dados incorretos, tente novamente")
             return
         }
+        
             
       
         if( usuario.nome.length < 5 ){
@@ -164,6 +167,9 @@ function Cadrasto () {
             return
         }
 
+        
+
+
         if(usuario.email == null){
             alert("Email inválido")
             return
@@ -176,12 +182,22 @@ function Cadrasto () {
             alert("Email inválido")
             return
         }
+        
 
         
             // Busca usuários existentes
-            const resposta = await axios.get(host + "/usuarios");
-            const usuariosExistentes = resposta.data;
-    
+            let usuariosExistentes
+            try {
+                const resposta = await axios.get(host + "/usuarios");
+                usuariosExistentes = resposta.data;            
+            } catch (error) {
+                console.log(error)
+            }
+
+            if(!usuariosExistentes){
+                alert("Não buscou os usuarios")
+                return
+            }
             const emailJaExiste = usuariosExistentes.some(u => u.email === usuario.email);
             const cpfJaExiste = usuariosExistentes.some(u => u.cpf === usuario.cpf);
     
@@ -189,11 +205,13 @@ function Cadrasto () {
                 alert("Este e-mail já está cadastrado");
                 return;
             }
+            
     
             if (cpfJaExiste) {
                 alert("Este CPF já está cadastrado");
                 return;
             }
+            
 
         if( usuario.senha == null || usuario.senha.length < 3){
             alert("Senha muito curta")
@@ -209,11 +227,13 @@ function Cadrasto () {
             alert("Telefone inválido")
             return
         }
+        
 
         if(usuario.cep == null || usuario.cep.length != 9){
             alert("CEP Inválido, insira com 9 digitos")
             return
         }
+        console.log("Passou memo?")
 
         axios.post(host + '/usuarios', {
             nome: usuario.nome,
@@ -275,7 +295,7 @@ function Cadrasto () {
                     
                     
                     {/* <button onClick={()=>salvar()} className="crescer bg-blue-500 transition duration-300 ease-in-out hover:bg-indigo-500" > Salvar </button> */}
-                     <Botoes botoes = "Concluído" Salvar={salvar} /> 
+                     <Botoes botoes = "Concluído" Salvar={salvar} />
             </div>
             
 

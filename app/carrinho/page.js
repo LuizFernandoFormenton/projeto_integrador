@@ -104,8 +104,8 @@ function Carrinho() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10 font-rubik">
-      <h1 className="text-2xl font-bold text-purple-700 mb-6 text-center">
-        Seu Carrinho
+      <h1 className=" underline text-3xl font-bold text-red-500 mb-6 text-center">
+        Seu Carrinho:
       </h1>
 
       {produtosAgrupados.length === 0 ? (
@@ -113,7 +113,7 @@ function Carrinho() {
       ) : (
         <>
           <div className="mb-8 text-center">
-            <p className="text-3xl font-extrabold text-purple-700">
+            <p className="text-xl font-extrabold text-black-700">
               Total: R$ {total.toFixed(2)}
             </p>
           </div>
@@ -140,7 +140,7 @@ function Carrinho() {
                   <div className="flex items-center border rounded-md overflow-hidden">
                     <button
                       onClick={() => diminuirQuantidade(produto.id)}
-                      className="px-3 py-1 bg-gray-200 hover:bg-gray-300 transition"
+                      className=" cursor-pointer border-solid border-red-500 rounded-lg px-3 py-1 bg-gray-200 hover:bg-gray-300 transition"
                       aria-label={`Diminuir quantidade de ${produto.nome}`}
                     >
                       -
@@ -148,7 +148,7 @@ function Carrinho() {
                     <span className="px-4 py-1">{produto.quantidade}</span>
                     <button
                       onClick={() => aumentarQuantidade(produto.id)}
-                      className="px-3 py-1 bg-gray-200 hover:bg-gray-300 transition"
+                      className=" cursor-pointer rounded-lg border-solid border-green-500 px-3 py-1 bg-gray-200 hover:bg-gray-300 transition"
                       aria-label={`Aumentar quantidade de ${produto.nome}`}
                     >
                       +
@@ -162,7 +162,7 @@ function Carrinho() {
                   <button
                     onClick={() => removerProduto(produto.id)}
                     aria-label={`Remover ${produto.nome} do carrinho`}
-                    className="text-red-600 hover:text-red-800 transition"
+                    className=" cursor-pointer text-red-600 hover:text-red-800 transition"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -185,20 +185,7 @@ function Carrinho() {
           </div>
 
           <div className="flex flex-col items-center gap-4">
-            <div className="flex gap-4">
-              <button
-                onClick={() => {
-                  localStorage.removeItem("carrinho");
-                  localStorage.removeItem("produtos");
-                  alteraProdutos([]);
-                  alteraTotal(0);
-                  window.dispatchEvent(new Event("carrinhoAtualizado"));
-                }}
-                className="text-red-600 hover:text-red-800 text-sm font-semibold cursor-pointer self-center"
-              >
-                Limpar Carrinho
-              </button>
-            </div>
+            
 
             <div className="flex gap-4">
               <button
@@ -208,16 +195,31 @@ function Carrinho() {
                   alert("Compra finalizada com sucesso!");
                   window.location.href = "/";
                 }}
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-semibold transition"
+                className=" cursor-pointer bg-green-600 border-none hover:bg-green-700 text-white px-6 py-2 rounded-xl font-semibold transition"
               >
                 Finalizar Compra
               </button>
 
               <button
                 onClick={() => (window.location.href = "/")}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-md font-semibold transition"
+                className=" cursor-pointer rounded-xl border-none bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 font-semibold transition"
               >
                 Continuar Comprando
+              </button>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => {
+                  localStorage.removeItem("carrinho");
+                  localStorage.removeItem("produtos");
+                  alteraProdutos([]);
+                  alteraTotal(0);
+                  window.dispatchEvent(new Event("carrinhoAtualizado"));
+                }}
+                className="text-white border-none rounded-lg bg-red-500 shadow-lg hover:text-black text-sm font-semibold cursor-pointer self-center"
+              >
+                Limpar Carrinho
               </button>
             </div>
           </div>
