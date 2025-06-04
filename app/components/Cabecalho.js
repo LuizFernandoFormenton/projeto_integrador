@@ -74,62 +74,36 @@ function Cabecalho({ produtos, onSearch }) {
     return (
         <>
             <BarraLateral />
-            <div style={{ background: "linear-gradient(to right, white, #e5e5e5)" }} className="flex h-20 w-full items-center fixed px-8 text-[15px] z-50 justify-between">
-                <div className="flex items-center gap-20">
+            <div style={{ background: "linear-gradient(to right, white, #e5e5e5)" }} className="flex h-20 w-full items-center fixed px-8 text-[15px] z-50 ">
+
                     <img 
                         onClick={() => window.location.href="/"} 
                         className="w-20 cursor-pointer" 
                         src="https://i.postimg.cc/ydcx1CKX/logo.png" 
                         alt="Logo" 
-                    />
+                    />  
+                <div className="flex items-center gap-6 flex-1 max-w-[900px] mr-[50px] mx-auto px-4">
 
-                    <div className="relative" ref={menuRef}>
 
-                        {menuAberto && (
-                            <div
-                                className="absolute top-full left-0 mt-2 w-60 max-h-64 overflow-y-auto rounded-md shadow-xl
-                                        bg-white border border-gray-200 z-50"
-                                onMouseEnter={() => clearTimeout(timeoutRef.current)}
-                                onMouseLeave={() => timeoutRef.current = setTimeout(() => setMenuAberto(false), 300)}
-                            >
-                                <div className="p-4 border-b border-gray-200">
-                                    <h3 className="font-semibold text-gray-800">Filtrar por:</h3>
-                                </div>
-                                <ul className="p-2 space-y-2 text-sm text-gray-800 list-none">
-                                    {categoria.map((i) => (
-                                        <li key={i.id} className="hover:bg-gray-100 px-3 py-2 rounded transition">
-                                            <label className="flex items-center space-x-2 cursor-pointer">
-                                                <input 
-                                                    type="checkbox" 
-                                                    className="rounded text-blue-500" 
-                                                    checked={!!filtrosSelecionados[i.id]}
-                                                    onChange={() => toggleFiltro(i.id)}
-                                                />
-                                                <span>{i.nome}</span>
-                                            </label>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div className="p-3 border-t border-gray-200 flex justify-between">
-                                    <button 
-                                        onClick={limparFiltros}
-                                        className="text-gray-500 hover:text-gray-700 text-sm"
-                                    >
-                                        Limpar
-                                    </button>
-                                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
-                                        Aplicar
-                                    </button>
-                                </div>
-                            </div>
-                        )}
+                    <div className="flex-1 flex justify-center mr-[200px]">
+                        <h2
+                            className="font-bold text-2xl"
+                            style={{
+                                background: "linear-gradient(to right, black, red)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                fontFamily: "Graveblade-regular, sans-serif",
+                                userSelect: "none",
+                                whiteSpace: "nowrap",
+                            }}
+                        >
+                            MAIS DO QUE CAMISETAS
+                        </h2>
                     </div>
-                </div>
 
-                <div className="w-full flex justify-end pr-20">
                     <form 
                         onSubmit={pesquisar}
-                        className="flex items-center w-full max-w-[400px] h-10"
+                        className="flex  items-center w-full max-w-[400px] h-10"
                     >
                         <input
                             type="text"
@@ -147,6 +121,49 @@ function Cabecalho({ produtos, onSearch }) {
                             </svg>
                         </button>
                     </form>
+                </div>
+
+                <div className="relative" ref={menuRef}>
+
+                    {menuAberto && (
+                        <div
+                            className="absolute top-full left-0 mt-2 w-60 max-h-64 overflow-y-auto rounded-md shadow-xl
+                            bg-white border border-gray-200 z-50"
+                            onMouseEnter={() => clearTimeout(timeoutRef.current)}
+                            onMouseLeave={() => timeoutRef.current = setTimeout(() => setMenuAberto(false), 300)}
+                        >
+                            <div className="p-4 border-b border-gray-200">
+                                <h3 className="font-semibold text-gray-800">Filtrar por:</h3>
+                            </div>
+                            <ul className="p-2 space-y-2 text-sm text-gray-800 list-none">
+                                {categoria.map((i) => (
+                                    <li key={i.id} className="hover:bg-gray-100 px-3 py-2 rounded transition">
+                                        <label className="flex items-center space-x-2 cursor-pointer">
+                                            <input 
+                                                type="checkbox" 
+                                                className="rounded text-blue-500" 
+                                                checked={!!filtrosSelecionados[i.id]}
+                                                onChange={() => toggleFiltro(i.id)}
+                                            />
+                                            <span>{i.nome}</span>
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="p-3 border-t border-gray-200 flex justify-between">
+                                <button 
+                                    onClick={limparFiltros}
+                                    className="text-gray-500 hover:text-gray-700 text-sm"
+                                >
+                                    Limpar
+                                </button>
+                                <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
+                                    Aplicar
+                                </button>
+                            </div>
+
+                        </div>
+                    )}
                 </div>
             </div>
         </>
